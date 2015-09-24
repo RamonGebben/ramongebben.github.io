@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >JS Blog</title><link href="undefinedatom.xml" rel="self"> </link><link href="undefined"> </link><updated >2015-09-24T08:30:41+02:00</updated><id >undefined</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >This is the beginning of a beautiful friendship</title><id >athisisthebeginningofabeautifulfriendship2014-02-15t00:00:00+01:00</id><link href="undefinedblog/2015-02-14-first_post"></link><updated >2014-02-15T00:00:00+01:00</updated><content type="html">&lt;p&gt;This is a blog post.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >JS Blog</title><link href="undefinedatom.xml" rel="self"> </link><link href="undefined"> </link><updated >2015-09-24T10:53:09+02:00</updated><id >undefined</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >The start of something new.</title><id >athestartofsomethingnew2014-02-15t00:00:00+01:00</id><link href="undefinedblog/2015-02-14-first_post"></link><updated >2014-02-15T00:00:00+01:00</updated><content type="html">&lt;h1 id=&quot;this-is-a-blog-post-&quot;&gt;This is a blog post.&lt;/h1&gt;
 &lt;p&gt;You can write Markdown in it! More specifically, the kind of Markdown that&amp;apos;s called &lt;a href=&quot;http://commonmark.org/&quot;&gt;Commonmark&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;heading-&quot;&gt;Heading!&lt;/h2&gt;
 &lt;ul&gt;
@@ -17,10 +17,4 @@ pizza&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;eat &lt;span 
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The headerImage in the frontmatter (that&amp;apos;s the part in the beginning of the file) is used by the theme to make your posts look good. It&amp;apos;s optional though.&lt;/p&gt;
-</content></entry><entry ><title >Another post</title><id >aanotherpost2013-12-15t00:00:00+01:00</id><link href="undefinedblog/2015-01-15-second-post"></link><updated >2013-12-15T00:00:00+01:00</updated><content type="html">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </content></entry></feed>
