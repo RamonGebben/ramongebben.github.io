@@ -1,4 +1,80 @@
-<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description"><meta name="keywords" content=""><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li><h1 class="post__heading">Welcome to Daily Javascript!</h1><p>For your daily dose of Javascript libraries.</p></li><li><h2 class="post-list__heading"><a href="blog/2015-11-24-the_start_of_something_new" target="_blank">The start of something new.</a></h2><time>24 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>Since this is the first &quot;blog post&quot; I have ever written it will be a bit rough.
+<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="For you daily dose of Javascript libraries"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li><h1 class="post__heading">Welcome to Daily Javascript!</h1><p>For your daily dose of Javascript libraries.</p></li><li><h2 class="post-list__heading"><a href="blog/2015-11-24-plop-and-selectize" target="_blank">Plop and Selectize</a></h2><time>25 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="plop">Plop</h3>
+<p>Plop (GitHub: <a href="https://github.com/amwmedia/plop">amwmedia/plop</a>, License: MIT, npm: plop)</p>
+<p>Plop is a command line tool that helps you introduce uniformity to your team by generating new modules, files or even documentation pages.
+The problem it tries to solve is one that we all must have. You have a project which is nicely structured. Lets say this is our pages folder;</p>
+<pre><code>|-- Pages
+    |-- HomePage
+        |-- HomePage.jsx
+        |-- config.json
+        |-- styles.css
+</code></pre><p>What we need to do is add a new page. Normally we would do is copy the <code>HomePage</code> folder and walk through the files and what is needed. This will cost you some time and slow you down.</p>
+<h4 id="plop-to-the-rescue">Plop to the rescue</h4>
+<p>By defining how modules, pages or components should look before hand you could write a template for it.
+By using <a href="http://handlebarsjs.com/">handlebars</a> it lets you set the values you would normally change by hand.</p>
+<p>Here is an example template file</p>
+<pre><code>class {{ properCase name }} extends React.Component {
+  render(){
+    return &lt;div className=&#39;{{ name }}&#39;&gt;Newly generated Component {{ name }}&lt;/div&gt;
+  }
+}
+</code></pre><p>To fill up this template I will need a <code>plopfile</code> which would look like this</p>
+<pre><code class="lang-javascript">module.exports = function (plop) {
+    plop.setGenerator(&#39;component&#39;, {
+        description: &#39;Generate a React Component&#39;,
+        prompts: [{
+            type: &#39;input&#39;,
+            name: &#39;name&#39;,
+            message: &#39;What should it be called?&#39;,
+            validate: function (value) {
+                if ((/.+/).test(value)) { return true; }
+                return &#39;name is required&#39;;
+            }
+        }],
+        actions: [{
+            type: &#39;add&#39;,
+            path: &#39;src/Components/{{properCase name}}.jsx&#39;,
+            templateFile: &#39;component.txt&#39;
+        }]
+    });
+}
+</code></pre>
+<p>Now you could call <code>plop</code> to select it from a list of generators or <code>plop &lt;generator&gt;</code> to call it directly.</p>
+<p>What I love about this tool is the size of it. In contrast with Yeoman which is great for initialization of a codebase but after that you are still copying files, Plop is designed to work in throughout the life entire cycle of a project.</p>
+<h3 id="react-selectize">React Selectize</h3>
+<p>React Selectize (GitHub: <a href="https://github.com/furqanZafar/react-selectize">furqanZafar/react-selectize</a>, License: Apache 2.0, npm: react-selectize)</p>
+<p>React Selectize is a stateless Select component for ReactJS, which provides a platform for a more developer friendly SimpleSelect &amp; MultiSelect component.
+<img src="https://camo.githubusercontent.com/251a1a6254a1a1c46074c79d7c68ec4108e0fbbe/687474703a2f2f692e696d6775722e636f6d2f72526d7566786d2e676966" style="max-width: 320px; width: 100%; position:static;"></p>
+<p>Getting it to work was surprisingly simple. Here is my example</p>
+<pre><code class="lang-javascript">import React from &#39;react&#39;;
+import ReactSelectize from &#39;react-selectize&#39;
+const SimpleSelect = React.createFactory(ReactSelectize.SimpleSelect);
+const MultiSelect = React.createFactory(ReactSelectize.MultiSelect);
+
+&lt;SimpleSelect
+    placeholder = &quot;Select a food&quot;
+    onValueChange = {(value, callback) =&gt; {
+        alert(value);
+        callback();
+    }}
+    &gt;
+    &lt;option value = &quot;pizza&quot;&gt;pizza&lt;/option&gt;
+    &lt;option value = &quot;kebab&quot;&gt;kebab&lt;/option&gt;
+    &lt;option value = &quot;donut&quot;&gt;donut&lt;/option&gt;
+&lt;/SimpleSelect&gt;
+
+&lt;MultiSelect
+    placeholder = &quot;Select foods&quot;
+    options = [&quot;pizza&quot;, &quot;kebab&quot;, &quot;donut&quot;].map(function(food){
+        return {label: food, value: food};
+    });
+    onValuesChange = {function(values, callback){
+        alert(values);
+        callback();
+    }}
+/&gt;
+</code></pre>
+<p>What I love about this component is the ease of the setup and the flexibility and compactness of the API.</p>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-11-24-the_start_of_something_new" target="_blank">The start of something new.</a></h2><time>25 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>Since this is the first &quot;blog post&quot; I have ever written it will be a bit rough.
 In it, I will be explaining the reason I started this blog and the goal of it.</p>
 <h3 id="who-am-i-">Who am I?</h3>
 <p>My name is Ramon Gebben. I&#39;m 24 years young and I work as a front-end developer for a Dutch digital media company called <a href="http://touchtribe.nl">TouchTribe</a>.
