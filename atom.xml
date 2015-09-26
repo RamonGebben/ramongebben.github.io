@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.comatom.xml" rel="self"> </link><link href="http://daily-javascript.com"> </link><updated >2015-09-26T17:11:41+02:00</updated><id >http://daily-javascript.com</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >Jets.js and repl&apos;em</title><id >ajetsjsandrepl39em2015-11-26t00:00:00+01:00</id><link href="http://daily-javascript.comblog/2015-11-26-jetsjs-and-replem"></link><updated >2015-11-26T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;jets-js&quot;&gt;Jets.js&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.comatom.xml" rel="self"> </link><link href="http://daily-javascript.com"> </link><updated >2015-09-26T21:25:57+02:00</updated><id >http://daily-javascript.com</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >Jets.js and repl&apos;em</title><id >ajetsjsandrepl39em2015-11-26t00:00:00+01:00</id><link href="http://daily-javascript.comblog/2015-11-26-jetsjs-and-replem"></link><updated >2015-11-26T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;jets-js&quot;&gt;Jets.js&lt;/h3&gt;
 &lt;p&gt;Jets.js (GitHub: &lt;a href=&quot;https://github.com/NeXTs/Jets.js&quot;&gt;NeXTs/Jets.js&lt;/a&gt;, License: MIT, npm: jets, bower: jets)&lt;/p&gt;
 &lt;p&gt;Jets.js is a search engine which utilizes CSS to present the results.
 The main idea is not to affect attributes of each tag in the list while filtering.
@@ -116,6 +116,6 @@ I want to be is the new filter. I spend a large part of my days searching for ne
 &lt;p&gt;In the future I also would like see posts from developers whom in my opinion exceed in the field to give an expertise view on area and subjects that might be unclear to you and me.&lt;/p&gt;
 &lt;h3 id=&quot;contribute&quot;&gt;Contribute&lt;/h3&gt;
 &lt;p&gt;If you have an awesome library or you&amp;apos;re working on something, please let me know. In this message, enclose a Github link and maybe your motivation to start building your project.&lt;/p&gt;
-&lt;p&gt;Because I&amp;apos;m not an experienced writer I welcome all feedback on my writing style, word choose et cetera.
+&lt;p&gt;Because I&amp;apos;m not an experienced writer I welcome all feedback on my writing style, word choice et cetera.
 Tweet to &lt;a href=&quot;https://twitter.com/DailyJavascript&quot;&gt;@DailyJavascript&lt;/a&gt;&lt;/p&gt;
 </content></entry></feed>
