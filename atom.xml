@@ -1,22 +1,30 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="undefinedatom.xml" rel="self"> </link><link href="undefined"> </link><updated >2015-09-25T12:10:20+02:00</updated><id >undefined</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >The start of something new.</title><id >athestartofsomethingnew2015-11-24t00:00:00+01:00</id><link href="undefinedblog/2015-11-24-the_start_of_something_new"></link><updated >2015-11-24T00:00:00+01:00</updated><content type="html">&lt;p&gt;Since this is the first &amp;quot;blog post&amp;quot; I have ever written it will be a bit rough.
-In it, I will be explaining the reason I started this blog and the goal of it.&lt;/p&gt;
-&lt;h3 id=&quot;who-am-i-&quot;&gt;Who am I?&lt;/h3&gt;
-&lt;p&gt;My name is Ramon Gebben. I&amp;apos;m 24 years young and I work as a front-end developer for a Dutch digital media company called &lt;a href=&quot;http://touchtribe.nl&quot;&gt;TouchTribe&lt;/a&gt;.
-On a regular work day my work involves writing a lot of Javascript for web, server and hybrid applications.&lt;/p&gt;
-&lt;h3 id=&quot;dailyjs-part-two&quot;&gt;DailyJS part two&lt;/h3&gt;
-&lt;p&gt;After being a loyal subscriber to &lt;a href=&quot;http://dailyjs.com&quot;&gt;DailyJS&lt;/a&gt; for a long time, I was very disappointed to hear that &lt;a href=&quot;http://alexyoung.org/&quot;&gt;Alex Young&lt;/a&gt; stopped with DailyJS. I started noticing an absence of a similar platform.
-As a front-end developer DailyJS helped me to keep up with updates from the community, such as new version from node/io.js, and to get informed about new libraries, frameworks and reviews of new build tools.&lt;/p&gt;
-&lt;p&gt;Sure, we all look at &lt;a href=&quot;https://news.ycombinator.com/news&quot;&gt;Hackers News&lt;/a&gt;, &lt;a href=&quot;http://echojs.com&quot;&gt;EchoJS&lt;/a&gt; et cetera, but the nice part of DailyJS was that it was filtered and tested. Most libraries look very cool at first sight, but when you try to test them agains &amp;quot;real world&amp;quot; problems, they fail.
-I want to be is the new filter. I spend a large part of my days searching for new libraries and frameworks, because it is wonderful what everybody is doing and everyday the bar is set a little higher. Normally I share the things I notice and experienced with the team I work with. Since this is very well received I thought why not take it further and give this a shot.&lt;/p&gt;
-&lt;h3 id=&quot;daily-updates&quot;&gt;Daily updates&lt;/h3&gt;
-&lt;p&gt;The goal of this page is giving other developers, that enjoy working with Javascript as much as I do, a daily updates about new libraries, frameworks et cetera. I will test each library that I mention and tell you about my experience. I will also try to filter out some of the &amp;quot;gotcha&amp;apos;s&amp;quot; to make your life easier.&lt;/p&gt;
-&lt;p&gt;I will try my best to post at least two libraries a day with a small summery of what it does and what it does great.&lt;/p&gt;
-&lt;p&gt;In the future I also would like see posts from developers whom in my opinion exceed in the field to give an expertise view on area and subjects that might be unclear to you and me.&lt;/p&gt;
-&lt;h3 id=&quot;contribute&quot;&gt;Contribute&lt;/h3&gt;
-&lt;p&gt;If you have an awesome library or you&amp;apos;re working on something, please let me know. In this message, enclose a Github link and maybe your motivation to start building your project.&lt;/p&gt;
-&lt;p&gt;Because I&amp;apos;m not an experienced writer I welcome all feedback on my writing style, word choose et cetera.
-Leave a comment or tweet &lt;a href=&quot;https://twitter.com/DailyJavascript&quot;&gt;@DailyJavascript&lt;/a&gt;&lt;/p&gt;
-</content></entry><entry ><title >Plop and Selectize</title><id >aplopandselectize2015-11-25t00:00:00+01:00</id><link href="undefinedblog/2015-11-24-plop-and-selectize"></link><updated >2015-11-25T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;plop&quot;&gt;Plop&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.comatom.xml" rel="self"> </link><link href="http://daily-javascript.com"> </link><updated >2015-09-26T16:05:03+02:00</updated><id >http://daily-javascript.com</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >Jets.js and repl&apos;em</title><id >ajetsjsandrepl39em2015-11-26t00:00:00+01:00</id><link href="http://daily-javascript.comblog/2015-11-26-jetsjs-and-replem"></link><updated >2015-11-26T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;jets-js&quot;&gt;Jets.js&lt;/h3&gt;
+&lt;p&gt;Jets.js (GitHub: &lt;a href=&quot;https://github.com/NeXTs/Jets.js&quot;&gt;NeXTs/Jets.js&lt;/a&gt;, License: MIT, npm: jets, bower: jets)&lt;/p&gt;
+&lt;p&gt;Jets.js is a search engine which utilizes CSS to present the results.
+The main idea is not to affect attributes of each tag in the list while filtering.
+Instead apply dynamic CSS rule in only &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; tag and browser will decide which item of list to show or hide. Since it&amp;apos;s just CSS - Jets.js may be applied to any tag, whether it&amp;apos;s a table or UL, OL, DIV&amp;#x2026;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://nexts.github.io/Jets.js/img/demo_hover.gif&quot; style=&quot;max-width: 400px;width: 100%;left: 0;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;On the developers &lt;a href=&quot;http://nexts.github.io/Jets.js/&quot;&gt;page&lt;/a&gt; there is a speed test.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://i.imgur.com/SToKoIY.png&quot; style=&quot;left:0; width: 100%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Because I was so amazed by how easy it was to setup I started a small &lt;a href=&quot;http://codepen.io/Dailjs-Javascript/pen/vNyXOr&quot;&gt;codepen&lt;/a&gt; and had some fun with it.&lt;/p&gt;
+&lt;h3 id=&quot;repl-em&quot;&gt;repl&amp;apos;em&lt;/h3&gt;
+&lt;p&gt;repl&amp;apos;em (GitHub: &lt;a href=&quot;https://github.com/raine/replem&quot;&gt;raine/replem&lt;/a&gt;, License: Unknown, npm: replem)&lt;/p&gt;
+&lt;p&gt;If you are a developer like me you shall recognize the pain of trying a lot of different modules to find which one suits your task.
+repl&amp;apos;em let&amp;apos;s you run a list of modules that use specify in a repl context.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/raine/replem/media/term.png&quot; style=&quot;left:0; width: 100%; min-height:200px;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;It also supports custom repl&amp;apos;s such as coffee-script. To use these you must give them as an argument.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;$ npm &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;prefix &lt;span class=&quot;token operator&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;replem coffee&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;script
+$ replem &lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;repl coffee&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;script&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;repl lodash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also get all module properties in the direct context. You do this by providing each module with a bang (!) argument.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;$ replem ramda&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;
+Installed into REPL context&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+ &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; ramda@&lt;span class=&quot;token number&quot;&gt;0.17&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;1 as ramda
+&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; reduce &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; ramda&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;reduce
+&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This tool will certainly make it easier to try out new modules for providing you with new posts everyday.&lt;/p&gt;
+</content></entry><entry ><title >Plop and Selectize</title><id >aplopandselectize2015-11-25t00:00:00+01:00</id><link href="http://daily-javascript.comblog/2015-11-25-plop-and-selectize"></link><updated >2015-11-25T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;plop&quot;&gt;Plop&lt;/h3&gt;
 &lt;p&gt;Plop (GitHub: &lt;a href=&quot;https://github.com/amwmedia/plop&quot;&gt;amwmedia/plop&lt;/a&gt;, License: MIT, npm: plop)&lt;/p&gt;
 &lt;p&gt;Plop is a command line tool that helps you introduce uniformity to your team by generating new modules, files or even documentation pages.
 The problem it tries to solve is one that we all must have. You have a project which is nicely structured. Lets say this is our pages folder;&lt;/p&gt;
@@ -92,4 +100,22 @@ By using &lt;a href=&quot;http://handlebarsjs.com/&quot;&gt;handlebars&lt;/a&gt;
 &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;What I love about this component is the ease of the setup and the flexibility and compactness of the API.&lt;/p&gt;
+</content></entry><entry ><title >The start of something new.</title><id >athestartofsomethingnew2015-11-24t00:00:00+01:00</id><link href="http://daily-javascript.comblog/2015-11-24-the_start_of_something_new"></link><updated >2015-11-24T00:00:00+01:00</updated><content type="html">&lt;p&gt;Since this is the first &amp;quot;blog post&amp;quot; I have ever written it will be a bit rough.
+In it, I will be explaining the reason I started this blog and the goal of it.&lt;/p&gt;
+&lt;h3 id=&quot;who-am-i-&quot;&gt;Who am I?&lt;/h3&gt;
+&lt;p&gt;My name is Ramon Gebben. I&amp;apos;m 24 years young and I work as a front-end developer for a Dutch digital media company called &lt;a href=&quot;http://touchtribe.nl&quot;&gt;TouchTribe&lt;/a&gt;.
+On a regular work day my work involves writing a lot of Javascript for web, server and hybrid applications.&lt;/p&gt;
+&lt;h3 id=&quot;dailyjs-part-two&quot;&gt;DailyJS part two&lt;/h3&gt;
+&lt;p&gt;After being a loyal subscriber to &lt;a href=&quot;http://dailyjs.com&quot;&gt;DailyJS&lt;/a&gt; for a long time, I was very disappointed to hear that &lt;a href=&quot;http://alexyoung.org/&quot;&gt;Alex Young&lt;/a&gt; stopped with DailyJS. I started noticing an absence of a similar platform.
+As a front-end developer DailyJS helped me to keep up with updates from the community, such as new version from node/io.js, and to get informed about new libraries, frameworks and reviews of new build tools.&lt;/p&gt;
+&lt;p&gt;Sure, we all look at &lt;a href=&quot;https://news.ycombinator.com/news&quot;&gt;Hackers News&lt;/a&gt;, &lt;a href=&quot;http://echojs.com&quot;&gt;EchoJS&lt;/a&gt; et cetera, but the nice part of DailyJS was that it was filtered and tested. Most libraries look very cool at first sight, but when you try to test them agains &amp;quot;real world&amp;quot; problems, they fail.
+I want to be is the new filter. I spend a large part of my days searching for new libraries and frameworks, because it is wonderful what everybody is doing and everyday the bar is set a little higher. Normally I share the things I notice and experienced with the team I work with. Since this is very well received I thought why not take it further and give this a shot.&lt;/p&gt;
+&lt;h3 id=&quot;daily-updates&quot;&gt;Daily updates&lt;/h3&gt;
+&lt;p&gt;The goal of this page is giving other developers, that enjoy working with Javascript as much as I do, a daily updates about new libraries, frameworks et cetera. I will test each library that I mention and tell you about my experience. I will also try to filter out some of the &amp;quot;gotcha&amp;apos;s&amp;quot; to make your life easier.&lt;/p&gt;
+&lt;p&gt;I will try my best to post at least two libraries a day with a small summery of what it does and what it does great.&lt;/p&gt;
+&lt;p&gt;In the future I also would like see posts from developers whom in my opinion exceed in the field to give an expertise view on area and subjects that might be unclear to you and me.&lt;/p&gt;
+&lt;h3 id=&quot;contribute&quot;&gt;Contribute&lt;/h3&gt;
+&lt;p&gt;If you have an awesome library or you&amp;apos;re working on something, please let me know. In this message, enclose a Github link and maybe your motivation to start building your project.&lt;/p&gt;
+&lt;p&gt;Because I&amp;apos;m not an experienced writer I welcome all feedback on my writing style, word choose et cetera.
+Tweet to &lt;a href=&quot;https://twitter.com/DailyJavascript&quot;&gt;@DailyJavascript&lt;/a&gt;&lt;/p&gt;
 </content></entry></feed>
