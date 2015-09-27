@@ -1,4 +1,79 @@
-<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="For you daily dose of Javascript libraries"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li class="welcome"><h1 class="post__heading">Welcome to Daily Javascript!</h1><p class="left">For your daily dose of Javascript libraries.</p><div class="follow"><h3>Follow Daily Javascript</h3><div class="follow-item"><a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fdaily-javascript.com%2Fatom.xml" target="blank"><span>via Feedly</span><img id="feedlyFollow" src="http://s3.feedly.com/img/follows/feedly-follow-logo-green_2x.png" alt="follow us in feedly" width="32" height="32"></a></div><div class="follow-item"><a href="http://twitter.com/DailyJavascript" target="blank"><span>via Twitter</span><img id="twitterFollow" src="http://i.imgur.com/p2oVJsS.png" alt="follow me on twitter" width="32" height="32"></a></div><div class="follow-item"><a href="http://eepurl.com/bAAxM9" target="blank"><span>via E-Mail</span><img id="emailFollow" src="http://i.imgur.com/StcMF1f.png" alt="follow me via Email" width="32" height="32"></a></div><div class="follow-item"><a href="http://daily-javascript.com/atom.xml" target="blank"><span>via RSS</span><img id="rssFollow" src="http://i.imgur.com/OOH3rgb.png" alt="follow me via RSS" width="32" height="32"></a></div></div></li><li><h2 class="post-list__heading"><a href="blog/2015-11-26-jetsjs-and-replem" target="_blank">Jets.js and repl&#x27;em</a></h2><time>27 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jets-js">Jets.js</h3>
+<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="For you daily dose of Javascript libraries"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li class="welcome"><h1 class="post__heading">Welcome to Daily Javascript!</h1><p class="left">For your daily dose of Javascript libraries.</p><div class="follow"><h3>Follow Daily Javascript</h3><div class="follow-item"><a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fdaily-javascript.com%2Fatom.xml" target="blank"><span>via Feedly</span><img id="feedlyFollow" src="http://s3.feedly.com/img/follows/feedly-follow-logo-green_2x.png" alt="follow us in feedly" width="32" height="32"></a></div><div class="follow-item"><a href="http://twitter.com/DailyJavascript" target="blank"><span>via Twitter</span><img id="twitterFollow" src="http://i.imgur.com/p2oVJsS.png" alt="follow me on twitter" width="32" height="32"></a></div><div class="follow-item"><a href="http://eepurl.com/bAAxM9" target="blank"><span>via E-Mail</span><img id="emailFollow" src="http://i.imgur.com/StcMF1f.png" alt="follow me via Email" width="32" height="32"></a></div><div class="follow-item"><a href="http://daily-javascript.com/atom.xml" target="blank"><span>via RSS</span><img id="rssFollow" src="http://i.imgur.com/OOH3rgb.png" alt="follow me via RSS" width="32" height="32"></a></div></div></li><li><h2 class="post-list__heading"><a href="blog/2015-11-27-xregexp-and-gun" target="_blank">XRegExp and Gun</a></h2><time>27 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="xregexp">XRegExp</h3>
+<p>XRegExp (GitHub: <a href="https://github.com/slevithan/xregexp">slevithan/xregexp</a>, License: MIT, npm: xregexp)</p>
+<p> XRegExp is a regex utility belt that provides augmented and extensible JavaScript regular expressions.
+ It comes with a new modern syntax and flags beyond what browsers support natively. Furthermore it comes with tools to make client-side grepping and string parsing easier. This will free you from worrying about cross-browser inconsistencies and problems like manually manipulating <code>lastIndex</code> or slicing strings when tokenizing.</p>
+<p> Because XRegExp compiles to native <code>RegExp</code> objects it&#39;s just as fast native regular expressions.
+ The only penalty would be the compiling the pattern the first time.</p>
+<p> Here are two example that the developer posted on Github.</p>
+<pre><code class="lang-javascript"> // Using named capture and flag x (free-spacing and line comments)
+const date = XRegExp(&#39;(?&lt;year&gt;  [0-9]{4} ) -?  # year  \n\
+                    (?&lt;month&gt; [0-9]{2} ) -?  # month \n\
+                    (?&lt;day&gt;   [0-9]{2} )     # day   &#39;, &#39;x&#39;);
+
+// XRegExp.exec gives you named backreferences on the match result
+let match = XRegExp.exec(&#39;2015-02-22&#39;, date);
+match.year; // -&gt; &#39;2015&#39;
+
+// You can also pass forward and return specific backreferences
+const html = &#39;&lt;a href=&quot;http://daily-javascript.com/&quot;&gt;Daily Javascript&lt;/a&gt;&#39; +
+           &#39;&lt;a href=&quot;http://www.google.com/&quot;&gt;Google&lt;/a&gt;&#39;;
+XRegExp.matchChain(html, [
+    {regex: /&lt;a href=&quot;([^&quot;]+)&quot;&gt;/i, backref: 1},
+    {regex: XRegExp(&#39;(?i)^https?://(?&lt;domain&gt;[^/?#]+)&#39;), backref: &#39;domain&#39;}
+]); // -&gt; [&#39;daily-javascript.com&#39;, &#39;www.google.com&#39;]
+
+// Merge strings and regexes into a single pattern, safely rewriting backreferences
+XRegExp.union([&#39;a+b*c&#39;, /(dog)\1/, /(cat)\1/], &#39;i&#39;);
+// -&gt; /a\+b\*c|(dog)\1|(cat)\2/i
+</code></pre>
+<p>You can also enabled some add-ons such as unicode support and then you can do this:</p>
+<pre><code class="lang-javascript">// Test the Unicode category L (Letter)
+const unicodeWord = XRegExp(&#39;^\\pL+$&#39;);
+unicodeWord.test(&#39;Русский&#39;); // -&gt; true
+unicodeWord.test(&#39;日本語&#39;); // -&gt; true
+unicodeWord.test(&#39;العربية&#39;); // -&gt; true
+
+// Test some Unicode scripts
+XRegExp(&#39;^\\p{Hiragana}+$&#39;).test(&#39;ひらがな&#39;); // -&gt; true
+XRegExp(&#39;^[\\p{Latin}\\p{Common}]+$&#39;).test(&#39;Über Café.&#39;); // -&gt; true
+</code></pre>
+<p>When installed via npm all add-ons are always available to use this in the browser. You must include to addons like this:</p>
+<pre><code class="lang-html">&lt;script src=&quot;src/xregexp.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;src/addons/unicode-base.js&quot;&gt;&lt;/script&gt; &lt;!-- This must be include before the other addons --&gt;
+&lt;script src=&quot;src/addons/unicode-categories.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;src/addons/unicode-scripts.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h3 id="gun">GUN</h3>
+<p>GUN (GitHub: <a href="https://github.com/amark/gun">amark/gun</a>, License: Apache 2.0, npm: gun)</p>
+<p>Mark Nadal sent in GUN which is an open source alternative to Firebase.
+Mark tells me that he got tired of dealing with DevOps/SysAdmin work to keep MongoDB running in production. It was making him very unhappy.
+So he took it upon him self to start a DBaaS like Firebase, but one that he could run on his own servers.</p>
+<p>It looks very promising and very easy to setup. Right now it doesn&#39;t have an efficient storage engine yet so it stores all the data in JSON.
+Let&#39;s look at some examples.</p>
+<p>To make a connection we must require it and make a reference to it.</p>
+<pre><code class="lang-javascript">var Gun = require(&#39;gun&#39;);
+var ref = Gun(&#39;http://gunjs.herokuapp.com/gun&#39;).get(&#39;daily/javascript&#39;);
+</code></pre>
+<p>Now we are able to put and get data this way.</p>
+<pre><code class="lang-javascript">
+// Putting data
+gun.put({
+  username: &quot;RamonGebben&quot;,
+  name: &quot;Ramon Gebben&quot;,
+  email: &quot;daily-javascript@ra-ge.net&quot;
+}).key(&#39;usernames/RamonGebben&#39;);
+
+// Getting data
+gun.get(&#39;usernames/RamonGebben&#39;).val((user) =&gt; console.log(user.name));
+</code></pre>
+<p>You can also extend GUN by reacting on events like this:</p>
+<pre><code class="lang-javascript">Gun.on(&#39;opt&#39;).event((gun, opt) =&gt; {
+    /* Your module here! */
+});
+</code></pre>
+<p>If you take a look at what the developers have planned to introduce, you will notice this is something to keep your eye on.</p>
+<p>I would not recommend using this in production just yet, because it feels very young, but for small prototype for which you don&#39;t want to bother setting up an entire infrastructure to load and save this could be a good choice.</p>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-11-26-jetsjs-and-replem" target="_blank">Jets.js and repl&#x27;em</a></h2><time>27 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jets-js">Jets.js</h3>
 <p>Jets.js (GitHub: <a href="https://github.com/NeXTs/Jets.js">NeXTs/Jets.js</a>, License: MIT, npm: jets, bower: jets)</p>
 <p>Jets.js is a search engine which utilizes CSS to present the results.
 The main idea is not to affect attributes of each tag in the list while filtering.
