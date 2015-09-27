@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.comatom.xml" rel="self"> </link><link href="http://daily-javascript.com"> </link><updated >2015-09-27T14:36:04+02:00</updated><id >http://daily-javascript.com</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >XRegExp and Gun</title><id >axregexpandgun2015-09-27t00:00:00+02:00</id><link href="http://daily-javascript.comblog/2015-09-27-xregexp-and-gun"></link><updated >2015-09-27T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;xregexp&quot;&gt;XRegExp&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-09-27T15:18:04+02:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >XRegExp and Gun</title><id >axregexpandgun2015-09-27t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-09-27-xregexp-and-gun"></link><updated >2015-09-27T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;xregexp&quot;&gt;XRegExp&lt;/h3&gt;
 &lt;p&gt;XRegExp (GitHub: &lt;a href=&quot;https://github.com/slevithan/xregexp&quot;&gt;slevithan/xregexp&lt;/a&gt;, License: MIT, npm: xregexp)&lt;/p&gt;
 &lt;p&gt; XRegExp is a regex utility belt that provides augmented and extensible JavaScript regular expressions.
  It comes with a new modern syntax and flags beyond what browsers support natively. Furthermore it comes with tools to make client-side grepping and string parsing easier. This will free you from worrying about cross-browser inconsistencies and problems like manually manipulating &lt;code&gt;lastIndex&lt;/code&gt; or slicing strings when tokenizing.&lt;/p&gt;
@@ -73,7 +73,7 @@ gun&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you take a look at what the developers have planned to introduce, you will notice this is something to keep your eye on.&lt;/p&gt;
 &lt;p&gt;I would not recommend using this in production just yet, because it feels very young, but for small prototype for which you don&amp;apos;t want to bother setting up an entire infrastructure to load and save this could be a good choice.&lt;/p&gt;
-</content></entry><entry ><title >Jets.js and repl&apos;em</title><id >ajetsjsandrepl39em2015-09-26t00:00:00+02:00</id><link href="http://daily-javascript.comblog/2015-09-26-jetsjs-and-replem"></link><updated >2015-09-26T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;jets-js&quot;&gt;Jets.js&lt;/h3&gt;
+</content></entry><entry ><title >Jets.js and repl&apos;em</title><id >ajetsjsandrepl39em2015-09-26t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-09-26-jetsjs-and-replem"></link><updated >2015-09-26T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;jets-js&quot;&gt;Jets.js&lt;/h3&gt;
 &lt;p&gt;Jets.js (GitHub: &lt;a href=&quot;https://github.com/NeXTs/Jets.js&quot;&gt;NeXTs/Jets.js&lt;/a&gt;, License: MIT, npm: jets, bower: jets)&lt;/p&gt;
 &lt;p&gt;Jets.js is a search engine which utilizes CSS to present the results.
 The main idea is not to affect attributes of each tag in the list while filtering.
@@ -99,7 +99,7 @@ Installed into REPL context&lt;span class=&quot;token punctuation&quot;&gt;:&lt;
 &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This tool will certainly make it easier to try out new modules for providing you with new posts everyday.&lt;/p&gt;
-</content></entry><entry ><title >Plop and Selectize</title><id >aplopandselectize2015-09-25t00:00:00+02:00</id><link href="http://daily-javascript.comblog/2015-09-25-plop-and-selectize"></link><updated >2015-09-25T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;plop&quot;&gt;Plop&lt;/h3&gt;
+</content></entry><entry ><title >Plop and Selectize</title><id >aplopandselectize2015-09-25t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-09-25-plop-and-selectize"></link><updated >2015-09-25T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;plop&quot;&gt;Plop&lt;/h3&gt;
 &lt;p&gt;Plop (GitHub: &lt;a href=&quot;https://github.com/amwmedia/plop&quot;&gt;amwmedia/plop&lt;/a&gt;, License: MIT, npm: plop)&lt;/p&gt;
 &lt;p&gt;Plop is a command line tool that helps you introduce uniformity to your team by generating new modules, files or even documentation pages.
 The problem it tries to solve is one that we all must have. You have a project which is nicely structured. Lets say this is our pages folder;&lt;/p&gt;
@@ -175,7 +175,7 @@ By using &lt;a href=&quot;http://handlebarsjs.com/&quot;&gt;handlebars&lt;/a&gt;
 &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;What I love about this component is the ease of the setup and the flexibility and compactness of the API.&lt;/p&gt;
-</content></entry><entry ><title >The start of something new.</title><id >athestartofsomethingnew2015-09-24t00:00:00+02:00</id><link href="http://daily-javascript.comblog/2015-09-24-the_start_of_something_new"></link><updated >2015-09-24T00:00:00+02:00</updated><content type="html">&lt;p&gt;Since this is the first &amp;quot;blog post&amp;quot; I have ever written it will be a bit rough.
+</content></entry><entry ><title >The start of something new.</title><id >athestartofsomethingnew2015-09-24t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-09-24-the_start_of_something_new"></link><updated >2015-09-24T00:00:00+02:00</updated><content type="html">&lt;p&gt;Since this is the first &amp;quot;blog post&amp;quot; I have ever written it will be a bit rough.
 In it, I will be explaining the reason I started this blog and the goal of it.&lt;/p&gt;
 &lt;h3 id=&quot;who-am-i-&quot;&gt;Who am I?&lt;/h3&gt;
 &lt;p&gt;My name is Ramon Gebben. I&amp;apos;m 24 years young and I work as a front-end developer for a Dutch digital media company called &lt;a href=&quot;http://touchtribe.nl&quot;&gt;TouchTribe&lt;/a&gt;.
