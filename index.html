@@ -1,4 +1,81 @@
-<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="For you daily dose of Javascript libraries"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li class="welcome"><h1 class="post__heading">Welcome to Daily Javascript!</h1><p class="left">For your daily dose of Javascript libraries.<br><br>Do you have a library you want mentioned? <a href="mailto:daily-javascript@ra-ge.net">Send it in!</a></p><div class="follow"><h3>Follow Daily Javascript</h3><div class="follow-item"><a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fdaily-javascript.com%2Fatom.xml" target="blank"><span>via Feedly</span><img id="feedlyFollow" src="http://s3.feedly.com/img/follows/feedly-follow-logo-green_2x.png" alt="follow us in feedly" width="32" height="32"></a></div><div class="follow-item"><a href="http://twitter.com/DailyJavascript" target="blank"><span>via Twitter</span><img id="twitterFollow" src="http://i.imgur.com/p2oVJsS.png" alt="follow me on twitter" width="32" height="32"></a></div><div class="follow-item"><a href="http://eepurl.com/bAAxM9" target="blank"><span>via E-Mail</span><img id="emailFollow" src="http://i.imgur.com/StcMF1f.png" alt="follow me via Email" width="32" height="32"></a></div><div class="follow-item"><a href="http://daily-javascript.com/atom.xml" target="blank"><span>via RSS</span><img id="rssFollow" src="http://i.imgur.com/OOH3rgb.png" alt="follow me via RSS" width="32" height="32"></a></div></div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-28-runejs-and-queryl" target="_blank">Rune.js and queryl</a></h2><time>28 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="rune-js">Rune.js</h3>
+<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="For you daily dose of Javascript libraries"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li class="welcome"><h1 class="post__heading">Welcome to Daily Javascript!</h1><p class="left">For your daily dose of Javascript libraries.<br><br>Do you have a library you want mentioned? <a href="mailto:daily-javascript@ra-ge.net">Send it in!</a></p><div class="follow"><h3>Follow Daily Javascript</h3><div class="follow-item"><a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fdaily-javascript.com%2Fatom.xml" target="blank"><span>via Feedly</span><img id="feedlyFollow" src="http://s3.feedly.com/img/follows/feedly-follow-logo-green_2x.png" alt="follow us in feedly" width="32" height="32"></a></div><div class="follow-item"><a href="http://twitter.com/DailyJavascript" target="blank"><span>via Twitter</span><img id="twitterFollow" src="http://i.imgur.com/p2oVJsS.png" alt="follow me on twitter" width="32" height="32"></a></div><div class="follow-item"><a href="http://eepurl.com/bAAxM9" target="blank"><span>via E-Mail</span><img id="emailFollow" src="http://i.imgur.com/StcMF1f.png" alt="follow me via Email" width="32" height="32"></a></div><div class="follow-item"><a href="http://daily-javascript.com/atom.xml" target="blank"><span>via RSS</span><img id="rssFollow" src="http://i.imgur.com/OOH3rgb.png" alt="follow me via RSS" width="32" height="32"></a></div></div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-29-clipboardjs" target="_blank">Clipboard.js</a></h2><time>29 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>After writing this blog for a few days now I noticed that the bar of two libraries a day is hard to do when you have a day job next to it.
+Because I want to give each library a fair shot, I will be reducing it to one library a day on workdays so I can work on updates for the website as well.</p>
+<h3 id="clipboard-js">Clipboard.js</h3>
+<p>Clipboard.js (GitHub: <a href="https://github.com/zenorocha/clipboard.js">zenorocha/clipboard.js</a>, License: MIT, npm: clipboard, bower: clipboard )</p>
+<p>During my daily browse I came across Clipboard.js which is a library to put given content to the users clipboard from Javascript.
+Normally we are used to implementing this behavior using Flash or some bloated framework. Luckley now there is Clipboard.js which is an 2kb implementation of &quot;Copy to clipboard&quot;.</p>
+<p>To use it we need to require it first. If you are using <a href="http://browserify.org/">Browersify</a> or <a href="https://webpack.github.io/">Webpack</a> then use:</p>
+<pre><code class="lang-javascript">import * as Clipboard from &#39;clipboard&#39;;
+
+// Or the old way
+var Clipboard = require(&#39;clipboard&#39;);
+</code></pre>
+<p>When including it in your html do it like this:</p>
+<pre><code class="lang-html">&lt;script src=&quot;dist/clipboard.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Now we can instantiate it using a DOM selector. For instance</p>
+<pre><code class="lang-javascript">new Clipboard(&#39;.btn&#39;);
+</code></pre>
+<p>Internally, it needs to fetch all elements that match the selector and attach event listeners for each one. But what if you have hundreds of matches? Then this operation can consume a lot of memory.
+Because of this it uses event delegation which replaces multiple event listeners with just a single listener.</p>
+<p>The most common usage of this library would be to copy the text value of an <code>input</code> field or <code>textarea</code>. This is how:</p>
+<pre><code class="lang-html">&lt;!-- Target --&gt;
+&lt;input id=&quot;foo&quot; value=&quot;https://github.com/zenorocha/clipboard.js.git&quot;&gt;
+
+&lt;!-- Trigger --&gt;
+&lt;button class=&quot;btn&quot; data-clipboard-target=&quot;#foo&quot;&gt;
+    &lt;img src=&quot;assets/clippy.svg&quot; alt=&quot;Copy to clipboard&quot;&gt;
+&lt;/button&gt;
+</code></pre>
+<p>It also has the ability to cut to clipboard. You would do this by attaching the <code>data-clipboard-action</code> attribute to the trigger element like this:</p>
+<pre><code class="lang-html">&lt;!-- Target --&gt;
+&lt;textarea id=&quot;bar&quot;&gt;Mussum ipsum cacilds...&lt;/textarea&gt;
+
+&lt;!-- Trigger --&gt;
+&lt;button class=&quot;btn&quot; data-clipboard-action=&quot;cut&quot; data-clipboard-target=&quot;#bar&quot;&gt;
+    Cut to clipboard
+&lt;/button&gt;
+</code></pre>
+<p>When you find yourself in a situation where you would like to show some feedback to the user or capture what has been selected after a copy/cut operation, you can make use of the <code>success</code> and <code>error</code> events that are being sent. You would use that like this:</p>
+<pre><code class="lang-javascript">var clipboard = new Clipboard(&#39;.btn&#39;);
+
+clipboard.on(&#39;success&#39;, function(e) {
+    console.info(&#39;Action:&#39;, e.action);
+    console.info(&#39;Text:&#39;, e.text);
+    console.info(&#39;Trigger:&#39;, e.trigger);
+
+    e.clearSelection();
+});
+
+clipboard.on(&#39;error&#39;, function(e) {
+    console.error(&#39;Action:&#39;, e.action);
+    console.error(&#39;Trigger:&#39;, e.trigger);
+});
+</code></pre>
+<p>The browser support on this project superised me, it relies on both Selection and execCommand APIs. The second one is supported in the following browsers.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="http://zenorocha.github.io/clipboard.js/assets/images/chrome.png" style="width:auto; left: auto;" width="48px" height="48px" alt="Chrome logo"></th>
+<th style="text-align:center"><img src="http://zenorocha.github.io/clipboard.js/assets/images/firefox.png" style="width:auto; left: auto;" width="48px" height="48px" alt="Firefox logo"></th>
+<th style="text-align:center"><img src="http://zenorocha.github.io/clipboard.js/assets/images/ie.png" style="width:auto; left: auto;" width="48px" height="48px" alt="Internet Explorer logo"></th>
+<th style="text-align:center"><img src="http://zenorocha.github.io/clipboard.js/assets/images/opera.png" style="width:auto; left: auto;" width="48px" height="48px" alt="Opera logo"></th>
+<th style="text-align:center"><img src="http://zenorocha.github.io/clipboard.js/assets/images/safari.png" style="width:auto; left: auto;" width="48px" height="48px" alt="Safari logo"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">42+ ✔</td>
+<td style="text-align:center">41+ ✔</td>
+<td style="text-align:center">9+ ✔</td>
+<td style="text-align:center">29+ ✔</td>
+<td style="text-align:center">Nope ✘</td>
+</tr>
+</tbody>
+</table>
+<p>Although copy/cut operations with execCommand aren&#39;t supported in Safari yet (including mobile), it gracefully degrades, because Selection is supported.</p>
+<p>This means you could show a tooltip saying Copied! when success event is called and Press Ctrl+C to copy when error event is called because the text is already selected.</p>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-28-runejs-and-queryl" target="_blank">Rune.js and queryl</a></h2><time>29 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="rune-js">Rune.js</h3>
 <p>Rune.js (GitHub: <a href="https://github.com/runemadsen/rune.js">runemadsen/rune.js</a>, License: MIT )</p>
 <p>Rune.js is a library for programming graphic design systems with SVG. It has a fluent drawing API, an unobtrusive scene graph, and a bunch of features designed specifically for graphic designers, such as: native support for color conversion, grid systems, typography, pixel iteration and an expanding set of computational geometry helpers. What peaked my interest is that it uses a <a href="https://github.com/Matt-Esch/virtual-dom">virtual-dom</a> under the hood.</p>
 <p>If you&#39;re not familiar with the virtual-dom I suggest you take a break to take a look at that first.</p>
@@ -35,7 +112,7 @@ r.path(0, 0).lineTo(100, 0).curveTo(100, 100, 0, 100, 0, 0);
 </code></pre>
 <p>This is just a very basic example of what it can do. The full API docs shows the entire power of this &quot;language&quot;.</p>
 <p>I can see this working very well for matching and parsing certain objects like the ones you would receive from, for instance, the Google spreadsheet API.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-27-xregexp-and-gun" target="_blank">XRegExp and Gun</a></h2><time>28 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="xregexp">XRegExp</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-27-xregexp-and-gun" target="_blank">XRegExp and Gun</a></h2><time>29 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="xregexp">XRegExp</h3>
 <p>XRegExp (GitHub: <a href="https://github.com/slevithan/xregexp">slevithan/xregexp</a>, License: MIT, npm: xregexp)</p>
 <p> XRegExp is a regex utility belt that provides augmented and extensible JavaScript regular expressions.
  It comes with a new modern syntax and flags beyond what browsers support natively. Furthermore it comes with tools to make client-side grepping and string parsing easier. This will free you from worrying about cross-browser inconsistencies and problems like manually manipulating <code>lastIndex</code> or slicing strings when tokenizing.</p>
@@ -110,7 +187,7 @@ gun.get(&#39;usernames/RamonGebben&#39;).val((user) =&gt; console.log(user.name)
 </code></pre>
 <p>If you take a look at what the developers have planned to introduce, you will notice this is something to keep your eye on.</p>
 <p>I would not recommend using this in production just yet, because it feels very young, but for small prototype for which you don&#39;t want to bother setting up an entire infrastructure to load and save this could be a good choice.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-26-jetsjs-and-replem" target="_blank">Jets.js and repl&#x27;em</a></h2><time>28 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jets-js">Jets.js</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-26-jetsjs-and-replem" target="_blank">Jets.js and repl&#x27;em</a></h2><time>29 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jets-js">Jets.js</h3>
 <p>Jets.js (GitHub: <a href="https://github.com/NeXTs/Jets.js">NeXTs/Jets.js</a>, License: MIT, npm: jets, bower: jets)</p>
 <p>Jets.js is a search engine which utilizes CSS to present the results.
 The main idea is not to affect attributes of each tag in the list while filtering.
@@ -136,7 +213,7 @@ Installed into REPL context:
 true
 </code></pre>
 <p>This tool will certainly make it easier to try out new modules for providing you with new posts everyday.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-25-plop-and-selectize" target="_blank">Plop and Selectize</a></h2><time>28 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="plop">Plop</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-25-plop-and-selectize" target="_blank">Plop and Selectize</a></h2><time>29 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="plop">Plop</h3>
 <p>Plop (GitHub: <a href="https://github.com/amwmedia/plop">amwmedia/plop</a>, License: MIT, npm: plop)</p>
 <p>Plop is a command line tool that helps you introduce uniformity to your team by generating new modules, files or even documentation pages.
 The problem it tries to solve is one that we all must have. You have a project which is nicely structured. Lets say this is our pages folder;</p>
@@ -212,7 +289,7 @@ const MultiSelect = React.createFactory(ReactSelectize.MultiSelect);
 /&gt;
 </code></pre>
 <p>What I love about this component is the ease of the setup and the flexibility and compactness of the API.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-24-the_start_of_something_new" target="_blank">The start of something new.</a></h2><time>28 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>Since this is the first &quot;blog post&quot; I have ever written it will be a bit rough.
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-24-the_start_of_something_new" target="_blank">The start of something new.</a></h2><time>29 Sep 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>Since this is the first &quot;blog post&quot; I have ever written it will be a bit rough.
 In it, I will be explaining the reason I started this blog and the goal of it.</p>
 <h3 id="who-am-i-">Who am I?</h3>
 <p>My name is Ramon Gebben. I&#39;m 24 years young and I work as a front-end developer for a Dutch digital media company called <a href="http://touchtribe.nl">TouchTribe</a>.
