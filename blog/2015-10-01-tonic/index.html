@@ -1,0 +1,51 @@
+<html lang="en"><head><title>Tonic / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="
+
+### Tonic
+
+During my browse session at work this morning I came across this post.
+If I understand …"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><div class="post"><div class="post__content"><h1 class="post__heading">Tonic</h1><div><h3 id="tonic">Tonic</h3>
+<p>During my browse session at work this morning I came across <a href="https://tonicdev.com/docs/embed">this post</a>.
+If I understand correctly the easiest way to describe Tonic is as a plugin that let&apos;s you run Node.js in a browser.</p>
+<p>The reason why I write about this today is because of the newley released feature of embedding it on your page.
+This feature can be accessed in two ways. Via HTML markup or by initializing it programatically.
+Lets take a look at some examples.</p>
+<p>When you have access to the document markup we would make it work like this:</p>
+<pre><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://embed.tonicdev.com<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-element-id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>daily-element<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment" spellcheck="true">&lt;!-- anywhere else on your page --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>daily-element<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+var request = require(&apos;request&apos;);
+request(&apos;http://www.google.com&apos;, function (error, response, body) {
+    console.log(body) // Show the HTML for the Google homepage.
+});
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>If this code runs Tonic it will dropdown an element showing the log output.</p>
+<p>If you do not have access to the document markup you can trigger it from Javascript like this:</p>
+<pre><code class="lang-javascript">
+<span class="token keyword">var</span> scriptTag <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;script&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    head <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;head&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    dailyElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&apos;div&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+scriptTag<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">&quot;https://embed.tonicdev.com&quot;</span><span class="token punctuation">;</span>
+dailyElement<span class="token punctuation">.</span>id <span class="token operator">=</span> <span class="token string">&quot;daily-element&quot;</span><span class="token punctuation">;</span>
+head<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span> scriptTag <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span> dailyElement <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> notebook <span class="token operator">=</span> Tonic<span class="token punctuation">.</span><span class="token function">createNotebook</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// the parent element for the new notebook</span>
+    element<span class="token punctuation">:</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;#daily-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token comment" spellcheck="true">// specify the source of the notebook</span>
+    source<span class="token punctuation">:</span> <span class="token string">&quot;\&quot;hello world\&quot;&quot;</span><span class="token punctuation">,</span>
+
+    <span class="token comment" spellcheck="true">// optionally, set the notebook to be read-only</span>
+    readOnly<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+
+    <span class="token comment" spellcheck="true">// optionally, provide a callback to be called when the notebook has finished loading</span>
+    onLoad<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>On of the things I&apos;m still missing is the ability to run ES2015. I hope that the support for that will come very soon.
+This weekend I will be trying to include this within this website so you will be able to run the examples that I post right there in the browser.</p>
+</div><time datetime="2015-10-01" class="post__moment">1 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div></div></div></div></main><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-68072930-1', 'auto');ga('send', 'pageview');</script></div></body></html>
