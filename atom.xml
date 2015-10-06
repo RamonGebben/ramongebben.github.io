@@ -1,4 +1,43 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-05T15:09:41+02:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >Velocity React</title><id >avelocityreact2015-10-05t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-10-05-velocity-react"></link><updated >2015-10-05T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;velocity-react&quot;&gt;Velocity React&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-06T15:27:50+02:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >Speck JS</title><id >aspeckjs2015-10-06t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-10-06"></link><updated >2015-10-06T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;speckjs&quot;&gt;SpeckJS&lt;/h3&gt;
+&lt;p&gt;SpeckJS (GitHub: &lt;a href=&quot;https://github.com/speckjs/speckjs&quot;&gt;speckjs/speckjs&lt;/a&gt;, License: MIT, npm: speckjs)&lt;/p&gt;
+&lt;p&gt;SpeckJS is a library that parses JavaScript comments and outputs unit-tests. SpeckJS currently supports &lt;a href=&quot;https://github.com/substack/tape&quot;&gt;Tape&lt;/a&gt;, &lt;a href=&quot;https://github.com/jasmine/jasmine&quot;&gt;Jasmine&lt;/a&gt;, and &lt;a href=&quot;https://github.com/mochajs/mocha&quot;&gt;Mocha&lt;/a&gt;/&lt;a href=&quot;https://github.com/chaijs/chai&quot;&gt;Chai&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;SpeckJS comes with plugins for &lt;a href=&quot;https://github.com/speckjs/grunt-speckjs&quot;&gt;Grunt&lt;/a&gt;, &lt;a href=&quot;https://github.com/speckjs/gulp-speckjs&quot;&gt;Gulp&lt;/a&gt; and &lt;a href=&quot;https://github.com/speckjs/atom-speckjs&quot;&gt;Atom&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The goal of SpeckJS is to make it as easy as possible to get started using Test-Driven Development on a new project or to quickly add unit-tests to your existing project.&lt;/p&gt;
+&lt;p&gt;Let&amp;apos;s make a test.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/*
+test &amp;gt; sum function
+# sum(1, 2) == 3 (returns the sum of both params)
+# sum(3, 4) == 7 (returns the sum of both params)
+*/&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;SpeckJS supports some basic assertion like: equal, strict equal, not equal.
+Besides relying on all the tools already provided, such as &lt;code&gt;gulp&lt;/code&gt; and atom plugins, you could also script yourself with the API like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; speck &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&amp;apos;speckjs&amp;apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;// file object to be passed as an argument&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; file &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&amp;apos;demo.js&amp;apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  content&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; scriptContent
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;// options hash selecting Jasmine and specifying a callback&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; option &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  testFW&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&amp;apos;jasmine&amp;apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  onBuild&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;// Returns Jasmine test file&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; result &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; speck&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;file&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; option&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We will start using this in my company from now on, because it makes it a lot easier to integrate testing in a long running project that has never being tested just by walking through the files.
+I hope to see other people pick this up aswel.&lt;/p&gt;
+</content></entry><entry ><title >Velocity React</title><id >avelocityreact2015-10-05t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-10-05-velocity-react"></link><updated >2015-10-05T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;velocity-react&quot;&gt;Velocity React&lt;/h3&gt;
 &lt;p&gt;velocity-react (GitHub: &lt;a href=&quot;https://github.com/twitter-fabric/velocity-react&quot;&gt;twitter-fabric/velocity-react&lt;/a&gt;, License: MIT, npm: velocity-react)&lt;/p&gt;
 &lt;p&gt;Today I had some trouble finding something to write about. Then I remembered the awesome work done by the guys at Twitter Fabric. They made a React component for interacting with amazing &lt;a href=&quot;http://julian.com/research/velocity/&quot;&gt;Velocity&lt;/a&gt; animation library.
 Offical introduction can be found &lt;a href=&quot;https://fabric.io/blog/introducing-the-velocityreact-library&quot;&gt;here.&lt;/a&gt;&lt;/p&gt;
