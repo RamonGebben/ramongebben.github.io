@@ -1,0 +1,44 @@
+<html lang="en"><head><title>Read file relative / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="
+
+### Read file relative
+
+read-file-relative (GitHub: inikulin/read-file-relative, License: Unknown,…"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><div class="post"><div class="post__content"><h1 class="post__heading">Read file relative</h1><div><h3 id="read-file-relative">Read file relative</h3>
+<p>read-file-relative (GitHub: <a href="https://github.com/inikulin/read-file-relative">inikulin/read-file-relative</a>, License: Unknown, npm: read-file-relative)</p>
+<p>A problem everybody probably encounters once in a while is relativity of file paths while reading files with Node.js.
+You would do something like this:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> fs   <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;/data-file.txt&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Or like:</span>
+<span class="token keyword">var</span> fs   <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">&apos;/data-file.txt&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Or even like this</span>
+<span class="token keyword">var</span> fs   <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token string">&apos;./data-file.txt&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Now you can easily read out files without all the annoying boilerplate code.
+Imagine a world where you could do this:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token function">readSync</span><span class="token punctuation">(</span><span class="token string">&apos;/data-file.txt&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Well you can stop imagining, because it&apos;s here and it&apos;s called <code>read-file-relative</code>.
+<code>Read-file-relative</code> comes with two main functions on it&apos;s API: read and readSync.
+Let&apos;s take a look.</p>
+<p>To read out the file synchronously this is what you would do.</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> readSync <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;read-file-relative&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>readSync<span class="token punctuation">;</span>
+<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token function">readSync</span><span class="token punctuation">(</span><span class="token string">&apos;/file.txt&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>When you prefer asynchronously reading you just provide a callback like this:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> read <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;read-file-relative&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">;</span>
+<span class="token function">read</span><span class="token punctuation">(</span><span class="token string">&apos;/file.txt&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;utf8&apos;</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> content<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Note that for the <code>read</code> we need to provide the encoding else it will return a buffer.</p>
+<p>Besides reading files you can also just convert a path to an absolute path like this:</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> toAbsPath <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;read-file-relative&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>toAbsPath<span class="token punctuation">;</span>
+<span class="token keyword">var</span> absPath <span class="token operator">=</span> <span class="token function">toAbsPath</span><span class="token punctuation">(</span><span class="token string">&apos;/file.txt&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>This is a nice addition to everybody&apos;s toolbox. It doesn&apos;t do much, but what it does, it does very well.</p>
+</div><time datetime="2015-10-07" class="post__moment">7 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div></div></div></div></main><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-68072930-1', 'auto');ga('send', 'pageview');</script></div></body></html>
