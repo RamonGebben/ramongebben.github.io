@@ -1,4 +1,35 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-07T16:10:04+02:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >Read file relative</title><id >areadfilerelative2015-10-07t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-10-07-read-file-relative"></link><updated >2015-10-07T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;read-file-relative&quot;&gt;Read file relative&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-08T20:24:05+02:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >Generator Nom</title><id >ageneratornom2015-10-08t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-10-08-generator-nom"></link><updated >2015-10-08T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;generator-nom&quot;&gt;Generator Nom&lt;/h3&gt;
+&lt;p&gt;generator-nom (GitHub: &lt;a href=&quot;https://github.com/inikulin/read-file-relative&quot;&gt;ironSource/node-generator-nom&lt;/a&gt;, License: MIT, npm: generator-nom)&lt;/p&gt;
+&lt;p&gt;We all strive to write DRY code, but still while setting up projects and maintaining depenencies we are constantly repeating ourselves.
+I find myself going through the same flow time and time again. &lt;code&gt;git init&lt;/code&gt;, &lt;code&gt;npm init&lt;/code&gt;, &lt;code&gt;touch README.md&lt;/code&gt;, going to Github getting an origin to push to et cetra. This process is a pain every time. What if you could just generate all this stuff with one command.&lt;/p&gt;
+&lt;p&gt;That is where the &lt;code&gt;yo nom&lt;/code&gt; come in.
+Nom is a &lt;a href=&quot;http://yeoman.io&quot;&gt;Yeoman&lt;/a&gt; generator which is a collection of several sub-generators. It includes the following generators;&lt;/p&gt;
+&lt;h4 id=&quot;npm&quot;&gt;npm&lt;/h4&gt;
+&lt;p&gt;Create package.json and prompt to keep dependencies of a previous package.json if any. Create .gitignore, cli.js (optional), install test framework (tape, tap, mocha, grunt, cake, or ava), add LICENSE file (MIT, BSD2 or BSD3).&lt;/p&gt;
+&lt;h4 id=&quot;git&quot;&gt;git&lt;/h4&gt;
+&lt;p&gt;Initialize local git repository, unless .git directory exists&lt;/p&gt;
+&lt;h4 id=&quot;github&quot;&gt;github&lt;/h4&gt;
+&lt;p&gt;Create public or private GitHub project, named &amp;quot;module-name&amp;quot; or &amp;quot;node-module-name&amp;quot;, unless local git already has configured remotes. Asks for access token and repository owner (which defaults to the owner of the token), skips creation if the repository already exists, adds URLs to package.json and adds remote origin.&lt;/p&gt;
+&lt;h4 id=&quot;travis&quot;&gt;travis&lt;/h4&gt;
+&lt;p&gt;Add .travis.yml for node 0.10 and iojs, setup GitHub hook. The travis tool asks for username and password.&lt;/p&gt;
+&lt;h4 id=&quot;appveyor&quot;&gt;appveyor&lt;/h4&gt;
+&lt;p&gt;Add appveyor.yml for node 0.10 and iojs, setup GitHub hook. Asks for access token.&lt;/p&gt;
+&lt;h4 id=&quot;gulp&quot;&gt;gulp&lt;/h4&gt;
+&lt;p&gt;Create an ES6 gulpfile and tasks directory.&lt;/p&gt;
+&lt;h4 id=&quot;style-still-to-come-&quot;&gt;style (still to come)&lt;/h4&gt;
+&lt;p&gt;Add standard or xo as a pretest script&lt;/p&gt;
+&lt;h4 id=&quot;readme&quot;&gt;readme&lt;/h4&gt;
+&lt;p&gt;Add readme.md with common sections and shield.io badges for npm and david. If you did the travis and/or appveyor setup, badges for those services will be added as well.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/ironSource/node-generator-nom/raw/master/demo.gif&quot; style=&quot;max-width: 400px; width: 100%; position:static;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;To use a specific generator you can select it like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;yo nom&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;generator&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To run them all use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;yo nom&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;apos;s it.&lt;/p&gt;
+&lt;p&gt;I&amp;apos;ve tried this out and will probably be using this to make my workflow a bit more DRY and hope that other people will also consider to optimize their workflow with modules like &lt;code&gt;nom&lt;/code&gt;.&lt;/p&gt;
+</content></entry><entry ><title >Read file relative</title><id >areadfilerelative2015-10-07t00:00:00+02:00</id><link href="http://daily-javascript.com/blog/2015-10-07-read-file-relative"></link><updated >2015-10-07T00:00:00+02:00</updated><content type="html">&lt;h3 id=&quot;read-file-relative&quot;&gt;Read file relative&lt;/h3&gt;
 &lt;p&gt;read-file-relative (GitHub: &lt;a href=&quot;https://github.com/inikulin/read-file-relative&quot;&gt;inikulin/read-file-relative&lt;/a&gt;, License: Unknown, npm: read-file-relative)&lt;/p&gt;
 &lt;p&gt;A problem everybody probably encounters once in a while is relativity of file paths while reading files with Node.js.
 You would do something like this:&lt;/p&gt;
