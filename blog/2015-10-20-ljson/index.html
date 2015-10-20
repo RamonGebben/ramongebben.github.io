@@ -1,0 +1,54 @@
+<html lang="en"><head><title>λJSON / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="
+
+### λJSON
+
+λJSON (GitHub: MaiaVictor/LJSON, License: MIT, npm: ljson)
+
+λJSON is a drop-in replacem…"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><div class="post"><div class="post__content"><h1 class="post__heading">λJSON</h1><div><h3 id="-json">&#x3BB;JSON</h3>
+<p>&#x3BB;JSON (GitHub: <a href="https://github.com/MaiaVictor/LJSON">MaiaVictor/LJSON</a>, License: MIT, npm: ljson)</p>
+<p>&#x3BB;JSON is a drop-in replacement for JSON which also allows you to parse and stringify pure functions and their contents. There are good security reasons for functions to be out of the JSON specs, but most of those are only significant when you allow arbitrary, side-effective programs.
+With pure functions, one is able to interchange code while still being as safe as with regular JSON.</p>
+<pre><code class="lang-javascript"><span class="token keyword">var</span> LJSON <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;LJSON&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// `newPlayer` is a function and couldn&apos;t be serialized with JSON.</span>
+<span class="token keyword">function</span> <span class="token function">newPlayer</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        name      <span class="token punctuation">:</span> name<span class="token punctuation">,</span>
+        hp        <span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
+        atk       <span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+        def       <span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+        inventory <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// LJSON has no trouble doing it because `newPlayer` is pure.</span>
+<span class="token keyword">var</span> newPlayerSource <span class="token operator">=</span> LJSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>newPlayer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> John            <span class="token operator">=</span> LJSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>newPlayerSource<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token string">&quot;John&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Serialized &#x3BB;JSON: &quot;</span> <span class="token operator">+</span> newPlayerSource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Parsed and applied: &quot;</span> <span class="token operator">+</span> John<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Outputs:</p>
+<pre><code class="lang-javascript">
+<span class="token comment" spellcheck="true">//Serialized &#x3BB;JSON: (function(v0){return {name:v0,hp:12,atk:5,def:5,inventory:[]}})</span>
+<span class="token comment" spellcheck="true">//Parsed and applied: { name: &apos;John&apos;, hp: 12, atk: 5, def: 5, inventory: [] }</span>
+</code></pre>
+<p>The fact you have to explicitly provide primitives to LJSON functions is what gives you confidence they won&apos;t do any nasty thing such as stealing your password, mining bitcoins or launching missiles. LJSON functions can only do what you give them power to. You are still able to serialize side-effective functions, but the side effects will happen on the act of the serialization and get stripped from the serialized output.</p>
+<pre><code class="lang-javascript"><span class="token keyword">function</span> <span class="token function">nastyPair</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;booom&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        fst <span class="token punctuation">:</span> a<span class="token punctuation">,</span>
+        snd <span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">nastyId</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">3</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;mwahahhahha&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// output:</span>
+<span class="token comment" spellcheck="true">// booom</span>
+<span class="token comment" spellcheck="true">// mwahahhahha</span>
+<span class="token comment" spellcheck="true">// mwahahhahha</span>
+<span class="token comment" spellcheck="true">// mwahahhahha</span>
+<span class="token comment" spellcheck="true">// (function(v0,v1){return {fst:v0,snd:v1})</span>
+</code></pre>
+</div><time datetime="2015-10-20" class="post__moment">20 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div></div></div></div></main><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-68072930-1', 'auto');ga('send', 'pageview');</script></div></body></html>
