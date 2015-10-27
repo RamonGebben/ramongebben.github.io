@@ -1,4 +1,65 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-26T21:53:59+01:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >React DOM Stream</title><id >areactdomstream2015-10-26t00:00:00+01:00</id><link href="http://daily-javascript.com/blog/2015-10-26-react-dom-stream"></link><updated >2015-10-26T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;react-dom-stream&quot;&gt;React DOM Stream&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-27T19:37:13+01:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >jsdoc2diagram</title><id >ajsdoc2diagram2015-10-27t00:00:00+01:00</id><link href="http://daily-javascript.com/blog/2015-10-27-jsdoc2diagram"></link><updated >2015-10-27T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;jsdoc2diagram&quot;&gt;jsdoc2diagram&lt;/h3&gt;
+&lt;p&gt;jsdoc2diagram (GitHub: &lt;a href=&quot;https://github.com/amcmillan01/jsdoc2diagram&quot;&gt;amcmillan01/jsdoc2diagram&lt;/a&gt;, License: MIT, npm: jsdoc2diagram)&lt;/p&gt;
+&lt;p&gt;If your day job looks anything like mine, the problem of sharing knowledge will be a well known issue for you.
+We try our best to keep the docs up to date and inform our co-workers of any changes that would be crucial. But what if a new developer joins the team? He will be spending the next week or 2 getting the know the entire app but mostly how everything hangs together.&lt;/p&gt;
+&lt;p&gt;Since we are probably already using &lt;a href=&quot;http://usejsdoc.org&quot;&gt;JSDoc&lt;/a&gt; there is a great addition available for giving insight on how the application is put together called &lt;code&gt;jsdoc2diagram&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;What jsdoc2diagram does is literally what the name implies it does. It turns JSDocs documentation into graphs using &lt;a href=&quot;d3js.org&quot;&gt;d3.js&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is an example of the kind of graph it would present you with:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/amcmillan01/jsdoc2diagram/raw/master/example/diagram.png&quot; style=&quot;max-width: 756px; width: 100%; position:static;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;The for for this diagram looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/**
+ * @constructor
+ */&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; Garage &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/**
+ * @return {number}
+ */&lt;/span&gt;
+Garage&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;getVehicleCount &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/**
+ *
+ * @constructor
+ * @memberof Garage
+ */&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; Car &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/**
+   *
+   * @type {string}
+   */&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&amp;apos;&amp;apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/**
+   *
+   * @type {string}
+   */&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;color &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&amp;apos;&amp;apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/**
+ * @return {boolean}
+ */&lt;/span&gt;
+Car&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;isOn &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;/**
+ * @return {boolean}
+ */&lt;/span&gt;
+Car&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prototype&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;hasNavigation &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I think this is a great addition to every bit of documentation. It gives a clear overview of how objects and methods are in relation to each other, which is something I was really missing.&lt;/p&gt;
+&lt;p&gt;To get started using this you will need to have &lt;code&gt;jsdoc&lt;/code&gt; installed once you have that you only need to install &lt;code&gt;jsdoc2diagram&lt;/code&gt; via npm and then you could use it like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;jsdoc &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;t PATH&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;TO&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;jsdoc2diagram &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;r JS_SOURCE_DIR&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;FILE &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;d OUTPUT_DIR
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I could imagine that you would call this from an npm run script after your JSDocs are generated.&lt;/p&gt;
+</content></entry><entry ><title >React DOM Stream</title><id >areactdomstream2015-10-26t00:00:00+01:00</id><link href="http://daily-javascript.com/blog/2015-10-26-react-dom-stream"></link><updated >2015-10-26T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;react-dom-stream&quot;&gt;React DOM Stream&lt;/h3&gt;
 &lt;p&gt;React DOM Stream (GitHub: &lt;a href=&quot;https://github.com/aickin/react-dom-stream&quot;&gt;aickin/react-dom-stream&lt;/a&gt;, License: MIT, npm: react-dom-stream)&lt;/p&gt;
 &lt;p&gt;react-dom-stream is a React renderer for generating markup on a NodeJS server. Unlike the built-in ReactDOM.renderToString, this module renders to a stream.
 Streams make this library as much as 47% faster in sending down a full page than ReactDOM.renderToString.&lt;/p&gt;
