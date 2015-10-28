@@ -1,0 +1,118 @@
+<html lang="en"><head><title>vstack-validator / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="
+
+### Vstack Validator
+
+Vstack-validator (GitHub: vslinko/vstack-validator, License: MIT, npm: vstac…"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><div class="post"><div class="post__content"><h1 class="post__heading">vstack-validator</h1><div><h3 id="vstack-validator">Vstack Validator</h3>
+<p>Vstack-validator (GitHub: <a href="https://github.com/vslinko/vstack-validator">vslinko/vstack-validator</a>, License: MIT, npm: vstack-validator)</p>
+<p>When you are working with very complex and deeply nested data structures, validation can become a real pain.
+Vstack-validator tries to solve this problem by providing you with a declarative API which consists of 3 methods: a validator, a constraint and a schema.
+The Validator is a function that receives a value and returns boolean result of validation.
+Constraint is a function that receives a value and returns validation metadata.
+With a Schema we create declarations of the constraints in a tree, which in turn can be used to validate an object, which would look like this:</p>
+<pre><code class="lang-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>schema<span class="token punctuation">}</span> from <span class="token string">&apos;vstack-validator&apos;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> userSchema <span class="token operator">=</span> schema<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">&apos;user&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    email<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        notEmpty<span class="token punctuation">:</span> schema<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>schema<span class="token punctuation">.</span>validators<span class="token punctuation">.</span>isNotEmpty<span class="token punctuation">,</span> <span class="token string">&apos;Email is empty&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        email<span class="token punctuation">:</span> schema<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>schema<span class="token punctuation">.</span>validators<span class="token punctuation">.</span>isEmail<span class="token punctuation">,</span> <span class="token string">&apos;Email is not valid&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    password<span class="token punctuation">:</span> schema<span class="token punctuation">.</span><span class="token function">optional</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        notEmpty<span class="token punctuation">:</span> schema<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>schema<span class="token punctuation">.</span>validators<span class="token punctuation">.</span>isNotEmpty<span class="token punctuation">,</span> <span class="token string">&apos;Password is empty&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        minLength<span class="token punctuation">:</span> schema<span class="token punctuation">.</span><span class="token function">minLength</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">&apos;Password is less than 3&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> itemSchema <span class="token operator">=</span> schema<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">&apos;item&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        notEmpty<span class="token punctuation">:</span> schema<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>schema<span class="token punctuation">.</span>validators<span class="token punctuation">.</span>isNotEmpty<span class="token punctuation">,</span> <span class="token string">&apos;Name is empty&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> cartSchema <span class="token operator">=</span> schema<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">&apos;cart&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    user<span class="token punctuation">:</span> userSchema<span class="token punctuation">,</span>
+    items<span class="token punctuation">:</span> schema<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span>itemSchema<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> validationData <span class="token operator">=</span> <span class="token punctuation">{</span>
+    user<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        email<span class="token punctuation">:</span> <span class="token string">&apos;&apos;</span><span class="token punctuation">,</span>
+        password<span class="token punctuation">:</span> <span class="token string">&apos;&apos;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    items<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">&apos;&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+cartSchema<span class="token punctuation">.</span><span class="token function">check</span><span class="token punctuation">(</span>validationData<span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>constraintResult<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>constraintResult<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>When the <code>check</code> is executed <code>constraintResult</code> it would look something like this:</p>
+<pre><code class="lang-javascript"><span class="token punctuation">{</span>
+    valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">&apos;Objectisnotvalid&apos;</span><span class="token punctuation">,</span>
+    children<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        user<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> <span class="token string">&apos;Objectisnotvalid&apos;</span><span class="token punctuation">,</span>
+            children<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                email<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                    valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                    message<span class="token punctuation">:</span> <span class="token string">&apos;Valueisnotvalid&apos;</span><span class="token punctuation">,</span>
+                    children<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        notEmpty<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                            valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                            message<span class="token punctuation">:</span> <span class="token string">&apos;Emailisempty&apos;</span><span class="token punctuation">,</span>
+                            children<span class="token punctuation">:</span> <span class="token keyword">null</span>
+                        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        email<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                            valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                            message<span class="token punctuation">:</span> <span class="token string">&apos;Emailisnotvalid&apos;</span><span class="token punctuation">,</span>
+                            children<span class="token punctuation">:</span> <span class="token keyword">null</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                password<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                    valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                    message<span class="token punctuation">:</span> <span class="token string">&apos;Valueisnotvalid&apos;</span><span class="token punctuation">,</span>
+                    children<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        notEmpty<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                            valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                            message<span class="token punctuation">:</span> <span class="token string">&apos;Passwordisempty&apos;</span><span class="token punctuation">,</span>
+                            children<span class="token punctuation">:</span> <span class="token keyword">null</span>
+                        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        minLength<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                            valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                            message<span class="token punctuation">:</span> <span class="token string">&apos;Passwordislessthan3&apos;</span><span class="token punctuation">,</span>
+                            children<span class="token punctuation">:</span> <span class="token keyword">null</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        items<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> <span class="token string">&apos;Arrayisnotvalid&apos;</span><span class="token punctuation">,</span>
+            children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                    message<span class="token punctuation">:</span> <span class="token string">&apos;Objectisnotvalid&apos;</span><span class="token punctuation">,</span>
+                    children<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        name<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                            valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                            message<span class="token punctuation">:</span> <span class="token string">&apos;Valueisnotvalid&apos;</span><span class="token punctuation">,</span>
+                            children<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                                notEmpty<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                                    valid<span class="token punctuation">:</span> <span class="token keyword">false</span><span class="token punctuation">,</span>
+                                    message<span class="token punctuation">:</span> <span class="token string">&apos;Nameisempty&apos;</span><span class="token punctuation">,</span>
+                                    children<span class="token punctuation">:</span> <span class="token keyword">null</span>
+                                <span class="token punctuation">}</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><time datetime="2015-10-28" class="post__moment">28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div></div></div></div></main><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-68072930-1', 'auto');ga('send', 'pageview');</script></div></body></html>

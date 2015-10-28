@@ -1,4 +1,117 @@
-<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="For you daily dose of Javascript libraries"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li class="welcome"><h1 class="post__heading">Welcome to Daily Javascript!</h1><p class="left">For your daily dose of Javascript libraries.<br><br>Do you have a library you want mentioned? <a href="mailto:daily-javascript@ra-ge.net">Send it in!</a></p><div class="follow"><h3>Follow Daily Javascript</h3><div class="follow-item"><a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fdaily-javascript.com%2Fatom.xml" target="blank"><span>via Feedly</span><img id="feedlyFollow" src="http://s3.feedly.com/img/follows/feedly-follow-logo-green_2x.png" alt="follow us in feedly" width="32" height="32"></a></div><div class="follow-item"><a href="http://twitter.com/DailyJavascript" target="blank"><span>via Twitter</span><img id="twitterFollow" src="http://i.imgur.com/p2oVJsS.png" alt="follow me on twitter" width="32" height="32"></a></div><div class="follow-item"><a href="http://eepurl.com/bAAxM9" target="blank"><span>via E-Mail</span><img id="emailFollow" src="http://i.imgur.com/StcMF1f.png" alt="follow me via Email" width="32" height="32"></a></div><div class="follow-item"><a href="http://daily-javascript.com/atom.xml" target="blank"><span>via RSS</span><img id="rssFollow" src="http://i.imgur.com/OOH3rgb.png" alt="follow me via RSS" width="32" height="32"></a></div></div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-27-jsdoc2diagram" target="_blank">jsdoc2diagram</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jsdoc2diagram">jsdoc2diagram</h3>
+<html lang="en"><head><title>index / Daily Javascript</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"><meta name="description" content="For you daily dose of Javascript libraries"><meta name="keywords" content="Javascript, React, ES2015, Daily, Updates"><link rel="icon" type="image/png" href="../assets/img/favicon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><link rel="stylesheet" href="../assets/main.css"></head><body><div><div class="nav__wrapper"><input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label><nav class="nav"><div class="nav__link"><a href="/">Home</a></div><div class="nav__link"><a href="/blog">Archive</a></div><div class="logo nav__link"></div></nav></div><main role="main"><div class="grid"><ul class="post-list"><li class="welcome"><h1 class="post__heading">Welcome to Daily Javascript!</h1><p class="left">For your daily dose of Javascript libraries.<br><br>Do you have a library you want mentioned? <a href="mailto:daily-javascript@ra-ge.net">Send it in!</a></p><div class="follow"><h3>Follow Daily Javascript</h3><div class="follow-item"><a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fdaily-javascript.com%2Fatom.xml" target="blank"><span>via Feedly</span><img id="feedlyFollow" src="http://s3.feedly.com/img/follows/feedly-follow-logo-green_2x.png" alt="follow us in feedly" width="32" height="32"></a></div><div class="follow-item"><a href="http://twitter.com/DailyJavascript" target="blank"><span>via Twitter</span><img id="twitterFollow" src="http://i.imgur.com/p2oVJsS.png" alt="follow me on twitter" width="32" height="32"></a></div><div class="follow-item"><a href="http://eepurl.com/bAAxM9" target="blank"><span>via E-Mail</span><img id="emailFollow" src="http://i.imgur.com/StcMF1f.png" alt="follow me via Email" width="32" height="32"></a></div><div class="follow-item"><a href="http://daily-javascript.com/atom.xml" target="blank"><span>via RSS</span><img id="rssFollow" src="http://i.imgur.com/OOH3rgb.png" alt="follow me via RSS" width="32" height="32"></a></div></div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-28-vstack-validator" target="_blank">vstack-validator</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="vstack-validator">Vstack Validator</h3>
+<p>Vstack-validator (GitHub: <a href="https://github.com/vslinko/vstack-validator">vslinko/vstack-validator</a>, License: MIT, npm: vstack-validator)</p>
+<p>When you are working with very complex and deeply nested data structures, validation can become a real pain.
+Vstack-validator tries to solve this problem by providing you with a declarative API which consists of 3 methods: a validator, a constraint and a schema.
+The Validator is a function that receives a value and returns boolean result of validation.
+Constraint is a function that receives a value and returns validation metadata.
+With a Schema we create declarations of the constraints in a tree, which in turn can be used to validate an object, which would look like this:</p>
+<pre><code class="lang-javascript">import {schema} from &#39;vstack-validator&#39;;
+
+const userSchema = schema.type(&#39;user&#39;, {
+    email: {
+        notEmpty: schema.constraint(schema.validators.isNotEmpty, &#39;Email is empty&#39;),
+        email: schema.constraint(schema.validators.isEmail, &#39;Email is not valid&#39;),
+    },
+    password: schema.optional({
+        notEmpty: schema.constraint(schema.validators.isNotEmpty, &#39;Password is empty&#39;),
+        minLength: schema.minLength(3, &#39;Password is less than 3&#39;),
+    }),
+});
+
+const itemSchema = schema.type(&#39;item&#39;, {
+    name: {
+        notEmpty: schema.constraint(schema.validators.isNotEmpty, &#39;Name is empty&#39;),
+    },
+});
+
+const cartSchema = schema.type(&#39;cart&#39;, {
+    user: userSchema,
+    items: schema.list(itemSchema),
+});
+
+let validationData = {
+    user: {
+        email: &#39;&#39;,
+        password: &#39;&#39;,
+    },
+    items: [
+        { name: &#39;&#39; },
+    ],
+};
+
+cartSchema.check(validationData)
+          .then((constraintResult) =&gt; console.log(constraintResult));
+</code></pre>
+<p>When the <code>check</code> is executed <code>constraintResult</code> it would look something like this:</p>
+<pre><code class="lang-javascript">{
+    valid: false,
+    message: &#39;Objectisnotvalid&#39;,
+    children: {
+        user: {
+            valid: false,
+            message: &#39;Objectisnotvalid&#39;,
+            children: {
+                email: {
+                    valid: false,
+                    message: &#39;Valueisnotvalid&#39;,
+                    children: {
+                        notEmpty: {
+                            valid: false,
+                            message: &#39;Emailisempty&#39;,
+                            children: null
+                        },
+                        email: {
+                            valid: false,
+                            message: &#39;Emailisnotvalid&#39;,
+                            children: null
+                        }
+                    }
+                },
+                password: {
+                    valid: false,
+                    message: &#39;Valueisnotvalid&#39;,
+                    children: {
+                        notEmpty: {
+                            valid: false,
+                            message: &#39;Passwordisempty&#39;,
+                            children: null
+                        },
+                        minLength: {
+                            valid: false,
+                            message: &#39;Passwordislessthan3&#39;,
+                            children: null
+                        }
+                    }
+                }
+            }
+        },
+        items: {
+            valid: false,
+            message: &#39;Arrayisnotvalid&#39;,
+            children: [
+                {
+                    valid: false,
+                    message: &#39;Objectisnotvalid&#39;,
+                    children: {
+                        name: {
+                            valid: false,
+                            message: &#39;Valueisnotvalid&#39;,
+                            children: {
+                                notEmpty: {
+                                    valid: false,
+                                    message: &#39;Nameisempty&#39;,
+                                    children: null
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+</code></pre>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-27-jsdoc2diagram" target="_blank">jsdoc2diagram</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jsdoc2diagram">jsdoc2diagram</h3>
 <p>jsdoc2diagram (GitHub: <a href="https://github.com/amcmillan01/jsdoc2diagram">amcmillan01/jsdoc2diagram</a>, License: MIT, npm: jsdoc2diagram)</p>
 <p>If your day job looks anything like mine, the problem of sharing knowledge will be a well known issue for you.
 We try our best to keep the docs up to date and inform our co-workers of any changes that would be crucial. But what if a new developer joins the team? He will be spending the next week or 2 getting the know the entire app but mostly how everything hangs together.</p>
@@ -59,7 +172,7 @@ Car.prototype.hasNavigation = function(){
 <pre><code class="lang-bash">jsdoc -t PATH/TO/jsdoc2diagram -r JS_SOURCE_DIR/FILE -d OUTPUT_DIR
 </code></pre>
 <p>I could imagine that you would call this from an npm run script after your JSDocs are generated.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-26-react-dom-stream" target="_blank">React DOM Stream</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="react-dom-stream">React DOM Stream</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-26-react-dom-stream" target="_blank">React DOM Stream</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="react-dom-stream">React DOM Stream</h3>
 <p>React DOM Stream (GitHub: <a href="https://github.com/aickin/react-dom-stream">aickin/react-dom-stream</a>, License: MIT, npm: react-dom-stream)</p>
 <p>react-dom-stream is a React renderer for generating markup on a NodeJS server. Unlike the built-in ReactDOM.renderToString, this module renders to a stream.
 Streams make this library as much as 47% faster in sending down a full page than ReactDOM.renderToString.</p>
@@ -101,7 +214,7 @@ app.get(&#39;/&#39;, function (req, res) {
 var hash = 1234567890; // returned from renderToString&#39;s promise and read out into the page
 ReactDOMStream.render(&lt;Foo prop={value}/&gt;, document.getElementById(&quot;bar&quot;), hash);
 </code></pre>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-22-observatory" target="_blank">Observatory</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="observatory">Observatory</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-22-observatory" target="_blank">Observatory</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="observatory">Observatory</h3>
 <p>Observatory (GitHub: <a href="https://github.com/mikesizz/observatory">mikesizz/observatory</a>, License: MIT, npm: observatoryjs)</p>
 <p>When you are following the spec proposals or read any other blog you have probably heard about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe">Object.observe</a>, which is used for asynchronously observing the changes to an object.</p>
 <p>Observatory is an attempt to provide javascript developers an interface for Object.observe with mongodb style querying for specificity.</p>
@@ -139,7 +252,7 @@ observer.on( cat , { $update: { &quot;age&quot;: { $gt: 10 } } } , () =&gt; {
 <li>$in - check if the target array contains any of the query values after the event fires</li>
 <li>$all - check if the target array contains all of the query values after the event fires</li>
 </ul>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-21-roll-up" target="_blank">Rollup.js</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="rollup-js">Rollup.js</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-21-roll-up" target="_blank">Rollup.js</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="rollup-js">Rollup.js</h3>
 <p>Rollup.js (GitHub: <a href="https://github.com/rollup/rollup">rollup/rollup</a>, License: MIT, npm: rollup)</p>
 <p>Rollup is a next-generation Javascript module bundler. Build your app or library using ES2015 modules, then efficiently bundle them up into a single file for use in browsers and Node.js.
 This is not an unfamiliar concept to the most of us. What makes Rollup stand out is that fact that it&#39;s using only the functionality that you import.</p>
@@ -173,7 +286,7 @@ rollup -f iife --globals jquery:jQuery,angular:ng \
 <p>Alternatively, you could use rollup command from an npm run script cntext, you can install it as a devDependency using:</p>
 <pre><code class="lang-bash">npm i rollup -D
 </code></pre>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-20-ljson" target="_blank">λJSON</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="-json">λJSON</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-20-ljson" target="_blank">λJSON</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="-json">λJSON</h3>
 <p>λJSON (GitHub: <a href="https://github.com/MaiaVictor/LJSON">MaiaVictor/LJSON</a>, License: MIT, npm: ljson)</p>
 <p>λJSON is a drop-in replacement for JSON which also allows you to parse and stringify pure functions and their contents. There are good security reasons for functions to be out of the JSON specs, but most of those are only significant when you allow arbitrary, side-effective programs.
 With pure functions, one is able to interchange code while still being as safe as with regular JSON.</p>
@@ -220,7 +333,7 @@ console.log(&quot;Parsed and applied: &quot; + John);
 // mwahahhahha
 // (function(v0,v1){return {fst:v0,snd:v1})
 </code></pre>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-19-vorpal" target="_blank">Vorpal.js</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="vorpal-js">Vorpal.js</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-19-vorpal" target="_blank">Vorpal.js</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="vorpal-js">Vorpal.js</h3>
 <p>Vorpal (GitHub: <a href="https://github.com/dthree/vorpal">dthree/vorpal</a>, License: MIT, npm: vorpal)</p>
 <p>Vorpal is a framework for building interactive CLI applications. Inspired and based on <a href="https://www.npmjs.com/package/commander">commander.js</a> which is a port from the wonderful work done on this <a href="https://github.com/commander-rb/commander">Ruby Gem</a>.
 It provides you with an interactive prompt provided by <a href="https://www.npmjs.com/package/inquirer">inquirer</a> and also provides a very extensive API with features such as: piped commands, command history, built-in help menu, tab autocompletion and the list goes on.</p>
@@ -242,7 +355,7 @@ program
   .show();
 </code></pre>
 <p>This creates an instance of Vorpal, adds a command which logs &quot;bar&quot;, sets the prompt delimiter to say &quot;app $&quot;, and shows the prompt.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-15-smart-crop" target="_blank">Smartcrop.js</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="smartcrop-js">Smartcrop.js</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-15-smart-crop" target="_blank">Smartcrop.js</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="smartcrop-js">Smartcrop.js</h3>
 <p>Smartcrop (GitHub: <a href="https://github.com/jwagner/smartcrop.js">jwagner/smartcrop.js</a>, License: MIT, npm: smartcrop, bower: smartcrop)</p>
 <p>Smartcrop.js is not just another image cropping library. It detects the primary region of an image such as faces.
 It does this using the following algorithm.</p>
@@ -284,7 +397,7 @@ SmartCrop.crop(img, options, result =&gt; {
 smartcrop-cli --width 100 --height 100 photo.jpg square-thumbnail.jpg
 </code></pre>
 <p>Smartcrop-cli does requires <a href="https://github.com/Automattic/node-canvas">node-canvas</a> which requires local libraries to be installed. Refer to the <a href="https://github.com/Automattic/node-canvas/wiki/_pages">node-canvas wiki</a> installation instructions.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-14-chiffon" target="_blank">Chiffon</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="chiffon">Chiffon</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-14-chiffon" target="_blank">Chiffon</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="chiffon">Chiffon</h3>
 <p>Chiffon (GitHub: <a href="https://github.com/trueadm/Chiffon">polygonplanet/Chiffon</a>, License: MIT, npm: chiffon, bower: chiffon)</p>
 <p>Chiffon is a very small ECMAScript parser, tokenizer and minifier.
 Sometimes we come across an idea where you will need to parse or tokenize Javascript files for, for instance to do analysis on the code.</p>
@@ -324,7 +437,7 @@ Sometimes we come across an idea where you will need to parse or tokenize Javasc
     return untokenize(tokenize(code, { lineTerminator: true }));
 }
 </code></pre>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-13-t7" target="_blank">t7</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="t7">t7</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-13-t7" target="_blank">t7</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="t7">t7</h3>
 <p>t7 (GitHub: <a href="https://github.com/trueadm/t7">trueadm/t7</a>, License: ISC, npm: t7)</p>
 <p><img src="http://t7js.com/img/screenshot.png" style="max-width: 400px;width: 100%;left: 0;"></p>
 <p>While browsing I came across t7, which is a template library that compiles template strings into virtual DOM objects.
@@ -367,7 +480,7 @@ Universal DOM output should be compatible with most other virtual DOM frameworks
 <li><a href="http://mithril.js.org/">Mithril</a></li>
 <li>Universal</li>
 </ul>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-12-react-image-crop" target="_blank">React Image Crop</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="react-image-crop">React Image Crop</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-12-react-image-crop" target="_blank">React Image Crop</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="react-image-crop">React Image Crop</h3>
 <p>react-image-crop (GitHub: <a href="https://github.com/DominicTobias/react-image-crop">DominicTobias/react-image-crop</a>, License: ISC, npm: react-image-crop)</p>
 <p><img src="https://raw.githubusercontent.com/DominicTobias/react-image-crop/master/crop-demo.gif" style="max-width: 400px;width: 100%;left: 0;"></p>
 <p>React-image-crop is a React component for client side cropping of images. This mainly got my interest because I had several moments where I needed to implement something similar.
@@ -393,7 +506,7 @@ Let&#39;s take a look at the setup for this component.</p>
 </code></pre>
 <p>The <code>crop</code> object also has a property called <code>aspect</code>. With that you can lock the aspect if the cropped area.</p>
 <p>If you want to get the dimensions to where to crop you use the <code>onChange</code> or <code>onComplete</code> props.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-09-gulp-load-subtasks" target="_blank">Gulp load subtasks</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="gulp-load-subtasks">Gulp load subtasks</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-09-gulp-load-subtasks" target="_blank">Gulp load subtasks</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="gulp-load-subtasks">Gulp load subtasks</h3>
 <p>gulp-load-subtasks (GitHub: <a href="https://github.com/skorlir/gulp-load-subtasks">skorlir/gulp-load-subtasks</a>, License: ISC, npm: gulp-load-subtasks)</p>
 <p>gulp-load-subtasks is a gulp &quot;extention&quot; which was long overdue in my opinion. The problem that it solves is that it is reducing the amount of clutter the forms inside a Gulpfile when working on big projects.</p>
 <p>This does require a bit of a shift in contrast of how we are used to writing our Gulpfile.
@@ -440,7 +553,7 @@ $.loadSubtasks(&#39;tasks/**/*.js&#39;, gulp, plugins);
 // refer tasks in a.tasks.js and b.tasks.js
 gulp.task(&#39;default&#39;, [ &#39;subtaskA&#39;, &#39;subtaskB&#39; ])
 </code></pre>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-08-generator-nom" target="_blank">Generator Nom</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="generator-nom">Generator Nom</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-08-generator-nom" target="_blank">Generator Nom</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="generator-nom">Generator Nom</h3>
 <p>generator-nom (GitHub: <a href="https://github.com/inikulin/read-file-relative">ironSource/node-generator-nom</a>, License: MIT, npm: generator-nom)</p>
 <p>We all strive to write DRY code, but still while setting up projects and maintaining depenencies we are constantly repeating ourselves.
 I find myself going through the same flow time and time again. <code>git init</code>, <code>npm init</code>, <code>touch README.md</code>, going to Github getting an origin to push to et cetra. This process is a pain every time. What if you could just generate all this stuff with one command.</p>
@@ -471,7 +584,7 @@ Nom is a <a href="http://yeoman.io">Yeoman</a> generator which is a collection o
 </code></pre>
 <p>That&#39;s it.</p>
 <p>I&#39;ve tried this out and will probably be using this to make my workflow a bit more DRY and hope that other people will also consider to optimize their workflow with modules like <code>nom</code>.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-07-read-file-relative" target="_blank">Read file relative</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="read-file-relative">Read file relative</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-07-read-file-relative" target="_blank">Read file relative</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="read-file-relative">Read file relative</h3>
 <p>read-file-relative (GitHub: <a href="https://github.com/inikulin/read-file-relative">inikulin/read-file-relative</a>, License: Unknown, npm: read-file-relative)</p>
 <p>A problem everybody probably encounters once in a while is relativity of file paths while reading files with Node.js.
 You would do something like this:</p>
@@ -510,7 +623,7 @@ read(&#39;/file.txt&#39;, &#39;utf8&#39;,function(err, content) {
 var absPath = toAbsPath(&#39;/file.txt&#39;);
 </code></pre>
 <p>This is a nice addition to everybody&#39;s toolbox. It doesn&#39;t do much, but what it does, it does very well.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-06" target="_blank">Speck JS</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="speckjs">SpeckJS</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-06" target="_blank">Speck JS</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="speckjs">SpeckJS</h3>
 <p>SpeckJS (GitHub: <a href="https://github.com/speckjs/speckjs">speckjs/speckjs</a>, License: MIT, npm: speckjs)</p>
 <p>SpeckJS is a library that parses JavaScript comments and outputs unit-tests. SpeckJS currently supports <a href="https://github.com/substack/tape">Tape</a>, <a href="https://github.com/jasmine/jasmine">Jasmine</a>, and <a href="https://github.com/mochajs/mocha">Mocha</a>/<a href="https://github.com/chaijs/chai">Chai</a>.</p>
 <p>SpeckJS comes with plugins for <a href="https://github.com/speckjs/grunt-speckjs">Grunt</a>, <a href="https://github.com/speckjs/gulp-speckjs">Gulp</a> and <a href="https://github.com/speckjs/atom-speckjs">Atom</a>.</p>
@@ -549,7 +662,7 @@ var result = speck.build(file, option);
 </code></pre>
 <p>We will start using this in my company from now on, because it makes it a lot easier to integrate testing in a long running project that has never being tested just by walking through the files.
 I hope to see other people pick this up aswel.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-05-velocity-react" target="_blank">Velocity React</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="velocity-react">Velocity React</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-05-velocity-react" target="_blank">Velocity React</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="velocity-react">Velocity React</h3>
 <p>velocity-react (GitHub: <a href="https://github.com/twitter-fabric/velocity-react">twitter-fabric/velocity-react</a>, License: MIT, npm: velocity-react)</p>
 <p>Today I had some trouble finding something to write about. Then I remembered the awesome work done by the guys at Twitter Fabric. They made a React component for interacting with amazing <a href="http://julian.com/research/velocity/">Velocity</a> animation library.
 Offical introduction can be found <a href="https://fabric.io/blog/introducing-the-velocityreact-library">here.</a></p>
@@ -595,7 +708,7 @@ Offical introduction can be found <a href="https://fabric.io/blog/introducing-th
 <p>As the name implies <code>&lt;VelocityTransitionGroup /&gt;</code> can be used to animate a group of element at the same time. In the example on the Fabric blog we can use it being used to animate an input slider, but that&#39;s not all. When you pay close attention you will the the toggle switch animating and a &quot;jawbone&quot; collapse. Al these animation are done at once.</p>
 <p><img src="https://static1.squarespace.com/static/54ac6f9ae4b0cf1d82a4b59e/t/560a9a69e4b0a427e3b70022/1443535503361/?format=750w" tyle="max-width: 320px; width: 100%; position:static;"></p>
 <p>I was very impressed with the work and I&#39;m trying to push this as the new standard for animating React components at the company where I work. And will be the default for all my pet projects.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-02-scroller-friday" target="_blank">Scroller Friday</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="fartscroll-js">Fartscroll.js</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-02-scroller-friday" target="_blank">Scroller Friday</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="fartscroll-js">Fartscroll.js</h3>
 <p>fartscroll.js (GitHub: <a href="https://github.com/theonion/fartscroll.js">theonion/fartscroll.js</a>, License: MIT)</p>
 <p>Since it is Friday today my colleages and me are in a humorous mood. So when I started looking what to write about today I got some real fun suggestions.
 The first one is fartscroll.js.</p>
@@ -639,7 +752,7 @@ Elevator.js is provides you with a &quot;back to top&quot; button that behaves l
   });
 }
 </code></pre>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-01-tonic" target="_blank">Tonic</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="tonic">Tonic</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-10-01-tonic" target="_blank">Tonic</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="tonic">Tonic</h3>
 <p>During my browse session at work this morning I came across <a href="https://tonicdev.com/docs/embed">this post</a>.
 If I understand correctly the easiest way to describe Tonic is as a plugin that let&#39;s you run Node.js in a browser.</p>
 <p>The reason why I write about this today is because of the newley released feature of embedding it on your page.
@@ -684,7 +797,7 @@ var notebook = Tonic.createNotebook({
 </code></pre>
 <p>On of the things I&#39;m still missing is the ability to run ES2015. I hope that the support for that will come very soon.
 This weekend I will be trying to include this within this website so you will be able to run the examples that I post right there in the browser.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-30-levi" target="_blank">Levi</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="levi">Levi</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-30-levi" target="_blank">Levi</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="levi">Levi</h3>
 <p>Levi (GitHub: <a href="https://github.com/cshum/levi">cshum/levi</a>, License: MIT, npm: levi)</p>
 <p>Levi is a streaming full-text search for Node.js and browsers which used LevelDB for storage.
 The search implementation is done by using <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> and <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a>, and it’s provided with configurable text processing pipelines: Tokenizer, Porter Stemmer and Stopwords filter.</p>
@@ -742,7 +855,7 @@ lv.searchStream({
 }).pipe(...)
 </code></pre>
 <p>Because I do not fully understand everything that is going on here, I need to refer you to the extensive documentation on the <a href="https://github.com/cshum/levi">GitHub page</a>. The reason I still mention this library is that I understand from the explanation a colleague gave me that this library will have a significant impact on the speed of your text search.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-29-clipboardjs" target="_blank">Clipboard.js</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>After writing this blog for a few days now I noticed that the bar of two libraries a day is hard to do when you have a day job next to it.
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-29-clipboardjs" target="_blank">Clipboard.js</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>After writing this blog for a few days now I noticed that the bar of two libraries a day is hard to do when you have a day job next to it.
 Because I want to give each library a fair shot, I will be reducing it to one library a day on workdays so I can work on updates for the website as well.</p>
 <h3 id="clipboard-js">Clipboard.js</h3>
 <p>Clipboard.js (GitHub: <a href="https://github.com/zenorocha/clipboard.js">zenorocha/clipboard.js</a>, License: MIT, npm: clipboard, bower: clipboard )</p>
@@ -819,7 +932,7 @@ clipboard.on(&#39;error&#39;, function(e) {
 </table>
 <p>Although copy/cut operations with execCommand aren&#39;t supported in Safari yet (including mobile), it gracefully degrades, because Selection is supported.</p>
 <p>This means you could show a tooltip saying Copied! when success event is called and Press Ctrl+C to copy when error event is called because the text is already selected.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-28-runejs-and-queryl" target="_blank">Rune.js and queryl</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="rune-js">Rune.js</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-28-runejs-and-queryl" target="_blank">Rune.js and queryl</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="rune-js">Rune.js</h3>
 <p>Rune.js (GitHub: <a href="https://github.com/runemadsen/rune.js">runemadsen/rune.js</a>, License: MIT )</p>
 <p>Rune.js is a library for programming graphic design systems with SVG. It has a fluent drawing API, an unobtrusive scene graph, and a bunch of features designed specifically for graphic designers, such as: native support for color conversion, grid systems, typography, pixel iteration and an expanding set of computational geometry helpers. What peaked my interest is that it uses a <a href="https://github.com/Matt-Esch/virtual-dom">virtual-dom</a> under the hood.</p>
 <p>If you&#39;re not familiar with the virtual-dom I suggest you take a break to take a look at that first.</p>
@@ -856,7 +969,7 @@ r.path(0, 0).lineTo(100, 0).curveTo(100, 100, 0, 100, 0, 0);
 </code></pre>
 <p>This is just a very basic example of what it can do. The full API docs shows the entire power of this &quot;language&quot;.</p>
 <p>I can see this working very well for matching and parsing certain objects like the ones you would receive from, for instance, the Google spreadsheet API.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-27-xregexp-and-gun" target="_blank">XRegExp and Gun</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="xregexp">XRegExp</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-27-xregexp-and-gun" target="_blank">XRegExp and Gun</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="xregexp">XRegExp</h3>
 <p>XRegExp (GitHub: <a href="https://github.com/slevithan/xregexp">slevithan/xregexp</a>, License: MIT, npm: xregexp)</p>
 <p> XRegExp is a regex utility belt that provides augmented and extensible JavaScript regular expressions.
  It comes with a new modern syntax and flags beyond what browsers support natively. Furthermore it comes with tools to make client-side grepping and string parsing easier. This will free you from worrying about cross-browser inconsistencies and problems like manually manipulating <code>lastIndex</code> or slicing strings when tokenizing.</p>
@@ -931,7 +1044,7 @@ gun.get(&#39;usernames/RamonGebben&#39;).val((user) =&gt; console.log(user.name)
 </code></pre>
 <p>If you take a look at what the developers have planned to introduce, you will notice this is something to keep your eye on.</p>
 <p>I would not recommend using this in production just yet, because it feels very young, but for small prototype for which you don&#39;t want to bother setting up an entire infrastructure to load and save this could be a good choice.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-26-jetsjs-and-replem" target="_blank">Jets.js and repl&#x27;em</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jets-js">Jets.js</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-26-jetsjs-and-replem" target="_blank">Jets.js and repl&#x27;em</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="jets-js">Jets.js</h3>
 <p>Jets.js (GitHub: <a href="https://github.com/NeXTs/Jets.js">NeXTs/Jets.js</a>, License: MIT, npm: jets, bower: jets)</p>
 <p>Jets.js is a search engine which utilizes CSS to present the results.
 The main idea is not to affect attributes of each tag in the list while filtering.
@@ -957,7 +1070,7 @@ Installed into REPL context:
 true
 </code></pre>
 <p>This tool will certainly make it easier to try out new modules for providing you with new posts everyday.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-25-plop-and-selectize" target="_blank">Plop and Selectize</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="plop">Plop</h3>
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-25-plop-and-selectize" target="_blank">Plop and Selectize</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><h3 id="plop">Plop</h3>
 <p>Plop (GitHub: <a href="https://github.com/amwmedia/plop">amwmedia/plop</a>, License: MIT, npm: plop)</p>
 <p>Plop is a command line tool that helps you introduce uniformity to your team by generating new modules, files or even documentation pages.
 The problem it tries to solve is one that we all must have. You have a project which is nicely structured. Lets say this is our pages folder;</p>
@@ -1033,7 +1146,7 @@ const MultiSelect = React.createFactory(ReactSelectize.MultiSelect);
 /&gt;
 </code></pre>
 <p>What I love about this component is the ease of the setup and the flexibility and compactness of the API.</p>
-</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-24-the_start_of_something_new" target="_blank">The start of something new.</a></h2><time>27 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>Since this is the first &quot;blog post&quot; I have ever written it will be a bit rough.
+</div></li><li><h2 class="post-list__heading"><a href="blog/2015-09-24-the_start_of_something_new" target="_blank">The start of something new.</a></h2><time>28 Oct 2015</time><div class="post__author">Authored by Ramon Gebben</div><div><p>Since this is the first &quot;blog post&quot; I have ever written it will be a bit rough.
 In it, I will be explaining the reason I started this blog and the goal of it.</p>
 <h3 id="who-am-i-">Who am I?</h3>
 <p>My name is Ramon Gebben. I&#39;m 24 years young and I work as a front-end developer for a Dutch digital media company called <a href="http://touchtribe.nl">TouchTribe</a>.
