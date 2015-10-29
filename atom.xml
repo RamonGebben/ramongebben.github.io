@@ -1,4 +1,40 @@
-<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-28T19:25:52+01:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >vstack-validator</title><id >avstackvalidator2015-10-28t00:00:00+01:00</id><link href="http://daily-javascript.com/blog/2015-10-28-vstack-validator"></link><updated >2015-10-28T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;vstack-validator&quot;&gt;Vstack Validator&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title >Daily Javascript</title><link href="http://daily-javascript.com/atom.xml" rel="self"> </link><link href="http://daily-javascript.com/"> </link><updated >2015-10-29T19:42:57+01:00</updated><id >http://daily-javascript.com/</id><author ><name >Ramon Gebben</name><email >ramon@touchtribe.nl</email></author><entry ><title >generator-redux</title><id >ageneratorredux2015-10-29t00:00:00+01:00</id><link href="http://daily-javascript.com/blog/2015-10-29-redux-generator"></link><updated >2015-10-29T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;redux-generator&quot;&gt;Redux generator&lt;/h3&gt;
+&lt;p&gt;generator-redux (GitHub: &lt;a href=&quot;https://github.com/banderson/generator-redux&quot;&gt;banderson/generator-redux&lt;/a&gt;, License: MIT, npm: generator-redux)&lt;/p&gt;
+&lt;p&gt;Today I like to mention a Yeoman generator which I&amp;apos;ve being using a lot lately: generator-redux.
+When you are not familiar with Yeoman please check it out, it will save you a lot of time.&lt;/p&gt;
+&lt;p&gt;You have probably heard about &lt;a href=&quot;facebook.github.io/flux/&quot;&gt;Facebook&amp;apos;s Flux architecture&lt;/a&gt;. Since a few months there is a new kid in town called Redux.
+&lt;a href=&quot;https://github.com/rackt/redux&quot;&gt;Redux&lt;/a&gt; is &lt;a href=&quot;http://youtube.com/watch?v=xsSnOQynTHs&quot;&gt;&amp;quot;Atomic Flux with hot reloading&amp;quot;&lt;/a&gt;. A next-generation take on the Flux pattern with some core design differences such as:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Preserves the benefits of Flux, but adds other nice properties thanks to its functional nature.&lt;/li&gt;
+&lt;li&gt;Prevents some of the anti-patterns common in Flux code.&lt;/li&gt;
+&lt;li&gt;Works great in universal (aka &amp;quot;isomorphic&amp;quot;) apps because it doesn&amp;apos;t use singletons and the data can be rehydrated. ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The features included in this generator are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Redux functional application architecture&lt;/li&gt;
+&lt;li&gt;Redux-DevTools configured and enabled when in dev mode&lt;/li&gt;
+&lt;li&gt;WebPack for build pipeline and dev server awesomeness&lt;/li&gt;
+&lt;li&gt;Babel transpiler so you can use bleeding edge language features&lt;/li&gt;
+&lt;li&gt;PostCSS preprocessor with autoprefixer support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Offcourse this generator depends on &lt;code&gt;yo&lt;/code&gt; being installed globally. Once you have that you can acquire it via:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;npm &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;g generator&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;redux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that the generator is installed you can access it via:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;yo redux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will give you a prompt asking you for an application name, description and a port.
+Description is used in package.json and the generated README.md.
+Port is to run your development server on (defaults to 3000).&lt;/p&gt;
+&lt;p&gt;To start the scaffold app use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;npm run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you wanna run it with the Redux-DevTools enabled use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;DEBUG&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; npm start
+&lt;/code&gt;&lt;/pre&gt;
+</content></entry><entry ><title >vstack-validator</title><id >avstackvalidator2015-10-28t00:00:00+01:00</id><link href="http://daily-javascript.com/blog/2015-10-28-vstack-validator"></link><updated >2015-10-28T00:00:00+01:00</updated><content type="html">&lt;h3 id=&quot;vstack-validator&quot;&gt;Vstack Validator&lt;/h3&gt;
 &lt;p&gt;Vstack-validator (GitHub: &lt;a href=&quot;https://github.com/vslinko/vstack-validator&quot;&gt;vslinko/vstack-validator&lt;/a&gt;, License: MIT, npm: vstack-validator)&lt;/p&gt;
 &lt;p&gt;When you are working with very complex and deeply nested data structures, validation can become a real pain.
 Vstack-validator tries to solve this problem by providing you with a declarative API which consists of 3 methods: a validator, a constraint and a schema.
