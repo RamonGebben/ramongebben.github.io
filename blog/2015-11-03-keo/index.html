@@ -1,0 +1,62 @@
+
+
+<html lang="en">
+    <head>
+        <title>Stream.js / Daily Javascript</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
+        <meta name="description" content="
+            ### Stream.js
+            Stream.js (GitHub: winterbe/streamjs, License: MIT, npm: streamjs, bower: streamjs)…">
+        <meta name="keywords" content="Javascript, React, ES2015, Daily, Updates">
+        <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+        <link rel="stylesheet" href="../../assets/main.css">
+    </head>
+    <body>
+        <div>
+            <div class="nav__wrapper">
+                <input type="checkbox" class="nav__toggle" id="nav__toggle"><label class="nav__toggle-label" for="nav__toggle"></label>
+                <nav class="nav">
+                    <div class="nav__link"><a href="/">Home</a></div>
+                    <div class="nav__link"><a href="/blog">Archive</a></div>
+                    <div class="logo nav__link"></div>
+                </nav>
+            </div>
+            <main role="main">
+                <div class="grid">
+                    <div class="post">
+                        <div class="post__content">
+                            <h1 class="post__heading">Stream.js</h1>
+                            <div>
+                                <h3 id="keo">Keo</h3>
+                                <p>Keo (GitHub: <a href="https://github.com/Wildhoney/Keo">Wildhoney/Keo</a>, License: MIT, npm: keo)</p>
+                                <p><img style="max-width: 756px; width: 100%; position: static;" src="https://github.com/Wildhoney/Keo/raw/master/media/screenshot.png" alt="https://github.com/Wildhoney/Keo/raw/master/media/screenshot.png"></p>
+                                <p>If you are like me and don&#39;t like the ESnext syntactic sugar which gets used in most React examples nowadays, then you will like Keo.
+                                    Keo gives you a more functional approach to creating React components.
+                                </p>
+                                <p>The advantages gained by using Keo are:</p>
+                                <ul>
+                                    <li>Steer away from <code>class</code></li>
+                                    <li>Create referentially transparent, pure functions without this</li>
+                                    <li>Use <code>export</code> to export plain functions for simpler unit-testing</li>
+                                    <li>Simple composing of functions for mixin support</li>
+                                    <li>Avoid functions being littered with React specific method calls</li>
+                                </ul>
+                                <p>Keo&#39;s philosophy is that you should not have to worry about the <code>this</code> keyword (even though scoping has became a lot better since ES2015). As such, Keo takes a more <a href="https://github.com/dekujs/deku">Deku</a> approach in that items such as props, state, setState, et cetera are passed in to some <a href="https://facebook.github.io/react/docs/component-specs.html">React lifecycle functions</a>.</p>
+                                <p>The React lifecycle functions such as: <code>componentWillMount</code>, <code>componentDidMount</code>, <code>componentWillUnmount</code>, <code>render</code> will receive props, state, setState and dispatch as an object which can be destructured.</p>
+                                <p>When you have created your component, Keo encourages you to <code>export</code> all functions so that you can test each one individually, but <strong>demands</strong> that you export the lifecycle functions by invoking keo.stitch like this:</p>
+                                <pre class="editor-colors lang-javascript"><div class="line"><span class="source js"><span class="meta import js"><span class="keyword control js"><span>import</span></span><span>&nbsp;</span><span class="meta brace curly js"><span>{</span></span><span>stitch</span><span class="meta brace curly js"><span>}</span></span><span>&nbsp;</span><span class="keyword control js"><span>from</span></span><span>&nbsp;</span><span class="string quoted single js"><span class="punctuation definition string begin js"><span>&#39;</span></span><span>keo</span><span class="punctuation definition string end js"><span>&#39;</span></span></span><span class="punctuation terminator statement js"><span>;</span></span></span></span></div><div class="line"><span class="source js"><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>&nbsp;...</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span class="storage modifier js"><span>export</span></span><span>&nbsp;</span><span class="keyword control js"><span>default</span></span><span>&nbsp;stitch</span><span class="meta brace round js"><span>(</span></span><span class="meta brace curly js"><span>{</span></span><span>&nbsp;componentDidMount</span><span class="meta delimiter object comma js"><span>,</span></span><span>&nbsp;render&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="meta brace round js"><span>)</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div></pre>
+                                <p>You could still use Redux with Keo. Keo provides a <code>keo/redux</code> adapter for handling Redux in a more succinct fashion. Instead of importing keo you can import the keo/redux adapter and use the <code>stitch</code> function from there instead like this:</p>
+                                <pre class="editor-colors lang-javascript"><div class="line"><span class="source js"><span class="meta import js"><span class="keyword control js"><span>import</span></span><span>&nbsp;</span><span class="meta brace curly js"><span>{</span></span><span>stitch</span><span class="meta brace curly js"><span>}</span></span><span>&nbsp;</span><span class="keyword control js"><span>from</span></span><span>&nbsp;</span><span class="string quoted single js"><span class="punctuation definition string begin js"><span>&#39;</span></span><span>keo/redux</span><span class="punctuation definition string end js"><span>&#39;</span></span></span><span class="punctuation terminator statement js"><span>;</span></span></span></span></div><div class="line"><span class="source js"><span class="comment line double-slash js"><span class="punctuation definition comment js"><span>//</span></span><span>&nbsp;...</span><span>&nbsp;</span></span></span></div><div class="line"><span class="source js"><span class="storage modifier js"><span>export</span></span><span>&nbsp;</span><span class="keyword control js"><span>default</span></span><span>&nbsp;stitch</span><span class="meta brace round js"><span>(</span></span><span class="meta brace curly js"><span>{</span></span><span>&nbsp;componentWillMount</span><span class="meta delimiter object comma js"><span>,</span></span><span>&nbsp;render&nbsp;</span><span class="meta brace curly js"><span>}</span></span><span class="meta delimiter object comma js"><span>,</span></span><span>&nbsp;state&nbsp;</span><span class="storage type arrow js"><span>=&gt;</span></span><span>&nbsp;state</span><span class="meta delimiter method period js"><span>.</span></span><span>zombies</span><span class="meta brace round js"><span>)</span></span><span class="punctuation terminator statement js"><span>;</span></span></span></div></pre>
+
+                            </div>
+                            <time datetime="2015-11-02" class="post__moment">2 Nov 2015</time>
+                            <div class="post__author">Authored by Ramon Gebben</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-68072930-1', 'auto');ga('send', 'pageview');</script>
+        </div>
+    </body>
+</html>
