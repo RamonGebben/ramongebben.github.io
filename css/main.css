@@ -463,7 +463,7 @@ code.lang-markdown .bullet {
 .social-btn:before {
     font-family: 'daily-javascript';
     color: #F8F8F8;
-    font-size: 2em;
+    font-size: 30px;
 }
 
 .social-btn.facebook:before { content: "\e903"; }
