@@ -14,7 +14,8 @@
       <pubDate>Mon, 23 Nov 2015 01:00:00 +0100</pubDate>
       <guid isPermaLink="true">http://daily-javascript.com/articles/psdjs/</guid>
       <author></author>
-      <description>&lt;p&gt;PSD.js is a general purpose PSD parser written in Coffeescript. I was inspired by PSD.rb which allows you to work with a Photoshop document in a manageable tree structure and find out data such as:&lt;/p&gt;
+      <description>&lt;p&gt;PSD.js (GitHub: &lt;a href=&quot;https://github.com/meltingice/psd.js&quot;&gt;meltingice/psd.js&lt;/a&gt;, License: MIT, npm: psd)&lt;/p&gt;
+&lt;p&gt;PSD.js is a general purpose PSD parser written in Coffeescript. I was inspired by PSD.rb which allows you to work with a Photoshop document in a manageable tree structure and find out data such as:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Document structure&lt;/li&gt;
 &lt;li&gt;Document size&lt;/li&gt;
