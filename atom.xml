@@ -5,9 +5,165 @@
     <atom:link href="http://localhost:8080/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://localhost:8080</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Thu, 19 Nov 2015 01:00:00 +0100</pubDate>
+    <pubDate>Mon, 23 Nov 2015 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>PSD.js</title>
+      <link>http://daily-javascript.com/articles/psdjs/</link>
+      <pubDate>Mon, 23 Nov 2015 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/psdjs/</guid>
+      <author></author>
+      <description>&lt;p&gt;PSD.js is a general purpose PSD parser written in Coffeescript. I was inspired by PSD.rb which allows you to work with a Photoshop document in a manageable tree structure and find out data such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Document structure&lt;/li&gt;
+&lt;li&gt;Document size&lt;/li&gt;
+&lt;li&gt;Layer/folder size + positioning&lt;/li&gt;
+&lt;li&gt;Layer/folder names&lt;/li&gt;
+&lt;li&gt;Layer/folder visibility and opacity&lt;/li&gt;
+&lt;li&gt;Font data (via psd-enginedata)&lt;ul&gt;
+&lt;li&gt;Text area contents&lt;/li&gt;
+&lt;li&gt;Font names, sizes, and colors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Color mode and bit-depth&lt;/li&gt;
+&lt;li&gt;Vector mask data&lt;/li&gt;
+&lt;li&gt;Flattened image data&lt;/li&gt;
+&lt;li&gt;Layer comps&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Although there are still some pieces missing that are present in PSD.rb, the eventual goal is to have all the features PSD.rb offers.
+So let’s look at an example for converting &lt;code&gt;.psd&lt;/code&gt; as a &lt;code&gt;.png&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; PSD &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'psd'&lt;/span&gt;;
+
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; psd = PSD.fromFile(&lt;span class=&quot;string&quot;&gt;'my/awesome/file.psd'&lt;/span&gt;);
+
+psd.parse();
+
+&lt;span class=&quot;comment&quot;&gt;// Log the tree structure of the .psd&lt;/span&gt;
+&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(psd.tree().export());
+
+&lt;span class=&quot;comment&quot;&gt;// You can use promises syntax for opening and parsing&lt;/span&gt;
+PSD.open(&lt;span class=&quot;string&quot;&gt;'my/awesome/file'&lt;/span&gt;)
+    .then(psd =&amp;gt; psd.image.saveAsPng(&lt;span class=&quot;string&quot;&gt;'./output.png'&lt;/span&gt;))
+    .then(() =&amp;gt; &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;'Finished!'&lt;/span&gt;));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is a very extensive API for traversing the document. If you would know the path to a group or layer within the tree, there is a way you can search by that path.
+That would look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;psd.tree().childrenAtPath(&lt;span class=&quot;string&quot;&gt;'Version A/Matte'&lt;/span&gt;);
+psd.tree().childrenAtPath([&lt;span class=&quot;string&quot;&gt;'Version A'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'Matte'&lt;/span&gt;]);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once you have the layer you are interested in you can access the data like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Get the first layer&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; node = psd.tree().descendants()[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];
+
+&lt;span class=&quot;comment&quot;&gt;// Read the name&lt;/span&gt;
+node.get(&lt;span class=&quot;string&quot;&gt;'name'&lt;/span&gt;);
+&lt;span class=&quot;comment&quot;&gt;// Read the width&lt;/span&gt;
+node.get(&lt;span class=&quot;string&quot;&gt;'width'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here is an example of the output &lt;code&gt;tree().export()&lt;/code&gt; would give you:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;{
+    children: [
+        {
+            type: &lt;span class=&quot;string&quot;&gt;'group'&lt;/span&gt;,
+            visible: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;,
+            opacity: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,
+            blendingMode: &lt;span class=&quot;string&quot;&gt;'normal'&lt;/span&gt;,
+            name: &lt;span class=&quot;string&quot;&gt;'VersionD'&lt;/span&gt;,
+            left: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+            right: &lt;span class=&quot;number&quot;&gt;900&lt;/span&gt;,
+            top: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+            bottom: &lt;span class=&quot;number&quot;&gt;600&lt;/span&gt;,
+            height: &lt;span class=&quot;number&quot;&gt;600&lt;/span&gt;,
+            width: &lt;span class=&quot;number&quot;&gt;900&lt;/span&gt;,
+            children: [
+                {
+                    type: &lt;span class=&quot;string&quot;&gt;'layer'&lt;/span&gt;,
+                    visible: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;,
+                    opacity: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,
+                    blendingMode: &lt;span class=&quot;string&quot;&gt;'normal'&lt;/span&gt;,
+                    name: &lt;span class=&quot;string&quot;&gt;'Makeachangeandsave.'&lt;/span&gt;,
+                    left: &lt;span class=&quot;number&quot;&gt;275&lt;/span&gt;,
+                    right: &lt;span class=&quot;number&quot;&gt;636&lt;/span&gt;,
+                    top: &lt;span class=&quot;number&quot;&gt;435&lt;/span&gt;,
+                    bottom: &lt;span class=&quot;number&quot;&gt;466&lt;/span&gt;,
+                    height: &lt;span class=&quot;number&quot;&gt;31&lt;/span&gt;,
+                    width: &lt;span class=&quot;number&quot;&gt;361&lt;/span&gt;,
+                    mask: {
+
+                    },
+                    text: {
+                        value: &lt;span class=&quot;string&quot;&gt;'Makeachangeandsave.'&lt;/span&gt;,
+                        font: {
+                            name: &lt;span class=&quot;string&quot;&gt;'HelveticaNeue-Light'&lt;/span&gt;,
+                            sizes: [
+                                &lt;span class=&quot;number&quot;&gt;33&lt;/span&gt;
+                            ],
+                            colors: [
+                                [
+                                    &lt;span class=&quot;number&quot;&gt;85&lt;/span&gt;,
+                                    &lt;span class=&quot;number&quot;&gt;96&lt;/span&gt;,
+                                    &lt;span class=&quot;number&quot;&gt;110&lt;/span&gt;,
+                                    &lt;span class=&quot;number&quot;&gt;255&lt;/span&gt;
+                                ]
+                            ],
+                            alignment: [
+                                &lt;span class=&quot;string&quot;&gt;'center'&lt;/span&gt;
+                            ]
+                        },
+                        left: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+                        top: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+                        right: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+                        bottom: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+                        transform: {
+                            xx: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,
+                            xy: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+                            yx: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+                            yy: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,
+                            tx: &lt;span class=&quot;number&quot;&gt;456&lt;/span&gt;,
+                            ty: &lt;span class=&quot;number&quot;&gt;459&lt;/span&gt;
+                        }
+                    },
+                    image: {
+
+                    }
+                }
+            ]
+        }
+    ],
+    &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;: {
+        width: &lt;span class=&quot;number&quot;&gt;900&lt;/span&gt;,
+        height: &lt;span class=&quot;number&quot;&gt;600&lt;/span&gt;,
+        resources: {
+            layerComps: [
+                {
+                    id: &lt;span class=&quot;number&quot;&gt;692243163&lt;/span&gt;,
+                    name: &lt;span class=&quot;string&quot;&gt;'VersionA'&lt;/span&gt;,
+                    capturedInfo: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+                },
+                {
+                    id: &lt;span class=&quot;number&quot;&gt;725235304&lt;/span&gt;,
+                    name: &lt;span class=&quot;string&quot;&gt;'VersionB'&lt;/span&gt;,
+                    capturedInfo: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+                },
+                {
+                    id: &lt;span class=&quot;number&quot;&gt;730932877&lt;/span&gt;,
+                    name: &lt;span class=&quot;string&quot;&gt;'VersionC'&lt;/span&gt;,
+                    capturedInfo: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+                }
+            ],
+            guides: [
+
+            ],
+            slices: [
+
+            ]
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     <item>
       <title>Node v5.1.0 Stable</title>
       <link>http://daily-javascript.com/articles/node-5-1-0/</link>
@@ -945,6 +1101,53 @@ program
 </description>
     </item>
     <item>
+      <title>Chiffon</title>
+      <link>http://daily-javascript.com/articles/chiffon/</link>
+      <pubDate>Wed, 14 Oct 2015 02:00:00 +0200</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/chiffon/</guid>
+      <author></author>
+      <description>&lt;p&gt;Chiffon (GitHub: &lt;a href=&quot;https://github.com/trueadm/Chiffon&quot;&gt;polygonplanet/Chiffon&lt;/a&gt;, License: MIT, npm: chiffon, bower: chiffon)&lt;/p&gt;
+&lt;p&gt;Chiffon is a very small ECMAScript parser, tokenizer and minifier.
+Sometimes we come across an idea where you will need to parse or tokenize Javascript files for, for instance to do analysis on the code.&lt;/p&gt;
+&lt;p&gt;When using Chiffon for tokenizing you will get an Array of each “element” of the input code like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; tokens = Chiffon.tokenize(&lt;span class=&quot;string&quot;&gt;'var a = 1'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which would then return:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;[ { type: &lt;span class=&quot;string&quot;&gt;'Keyword'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'var'&lt;/span&gt; },
+  { type: &lt;span class=&quot;string&quot;&gt;'Identifier'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt; },
+  { type: &lt;span class=&quot;string&quot;&gt;'Punctuator'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'='&lt;/span&gt; },
+  { type: &lt;span class=&quot;string&quot;&gt;'Numeric'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'1'&lt;/span&gt; } ]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here is a list of all possible tokens:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Comment&lt;/li&gt;
+&lt;li&gt;LineTerminator&lt;/li&gt;
+&lt;li&gt;Template&lt;/li&gt;
+&lt;li&gt;String&lt;/li&gt;
+&lt;li&gt;Punctuator&lt;/li&gt;
+&lt;li&gt;RegularExpression&lt;/li&gt;
+&lt;li&gt;Numeric&lt;/li&gt;
+&lt;li&gt;UnicodeEscapeSequence&lt;/li&gt;
+&lt;li&gt;Identifier&lt;/li&gt;
+&lt;li&gt;Null&lt;/li&gt;
+&lt;li&gt;Boolean&lt;/li&gt;
+&lt;li&gt;Keyword&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sadly JavaScript AST is not currently supported.&lt;/p&gt;
+&lt;p&gt;When you wish to “untokenize” the Array, you can pass it into the &lt;code&gt;untokenize&lt;/code&gt; method like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.untokenize
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you want to use the minification, you would do something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.minify(&lt;span class=&quot;string&quot;&gt;'var a = 1 + 1; // comment'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which is a simple implementation of &lt;code&gt;untokenize&lt;/code&gt; and &lt;code&gt;tokenize&lt;/code&gt; together like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;minify&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;code&lt;/span&gt;) &lt;/span&gt;{
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; untokenize(tokenize(code, { lineTerminator: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt; }));
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
       <title>Smartcrop.js</title>
       <link>http://daily-javascript.com/articles/smart-crop/</link>
       <pubDate>Wed, 14 Oct 2015 02:00:00 +0200</pubDate>
@@ -991,53 +1194,6 @@ SmartCrop.crop(img, options, result =&amp;gt; {
 smartcrop-cli --width &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt; --height &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt; photo.jpg square-thumbnail.jpg
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Smartcrop-cli does requires &lt;a href=&quot;https://github.com/Automattic/node-canvas&quot;&gt;node-canvas&lt;/a&gt; which requires local libraries to be installed. Refer to the &lt;a href=&quot;https://github.com/Automattic/node-canvas/wiki/_pages&quot;&gt;node-canvas wiki&lt;/a&gt; installation instructions.&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Chiffon</title>
-      <link>http://daily-javascript.com/articles/chiffon/</link>
-      <pubDate>Wed, 14 Oct 2015 02:00:00 +0200</pubDate>
-      <guid isPermaLink="true">http://daily-javascript.com/articles/chiffon/</guid>
-      <author></author>
-      <description>&lt;p&gt;Chiffon (GitHub: &lt;a href=&quot;https://github.com/trueadm/Chiffon&quot;&gt;polygonplanet/Chiffon&lt;/a&gt;, License: MIT, npm: chiffon, bower: chiffon)&lt;/p&gt;
-&lt;p&gt;Chiffon is a very small ECMAScript parser, tokenizer and minifier.
-Sometimes we come across an idea where you will need to parse or tokenize Javascript files for, for instance to do analysis on the code.&lt;/p&gt;
-&lt;p&gt;When using Chiffon for tokenizing you will get an Array of each “element” of the input code like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; tokens = Chiffon.tokenize(&lt;span class=&quot;string&quot;&gt;'var a = 1'&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which would then return:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;[ { type: &lt;span class=&quot;string&quot;&gt;'Keyword'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'var'&lt;/span&gt; },
-  { type: &lt;span class=&quot;string&quot;&gt;'Identifier'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt; },
-  { type: &lt;span class=&quot;string&quot;&gt;'Punctuator'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'='&lt;/span&gt; },
-  { type: &lt;span class=&quot;string&quot;&gt;'Numeric'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'1'&lt;/span&gt; } ]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here is a list of all possible tokens:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Comment&lt;/li&gt;
-&lt;li&gt;LineTerminator&lt;/li&gt;
-&lt;li&gt;Template&lt;/li&gt;
-&lt;li&gt;String&lt;/li&gt;
-&lt;li&gt;Punctuator&lt;/li&gt;
-&lt;li&gt;RegularExpression&lt;/li&gt;
-&lt;li&gt;Numeric&lt;/li&gt;
-&lt;li&gt;UnicodeEscapeSequence&lt;/li&gt;
-&lt;li&gt;Identifier&lt;/li&gt;
-&lt;li&gt;Null&lt;/li&gt;
-&lt;li&gt;Boolean&lt;/li&gt;
-&lt;li&gt;Keyword&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Sadly JavaScript AST is not currently supported.&lt;/p&gt;
-&lt;p&gt;When you wish to “untokenize” the Array, you can pass it into the &lt;code&gt;untokenize&lt;/code&gt; method like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.untokenize
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When you want to use the minification, you would do something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.minify(&lt;span class=&quot;string&quot;&gt;'var a = 1 + 1; // comment'&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which is a simple implementation of &lt;code&gt;untokenize&lt;/code&gt; and &lt;code&gt;tokenize&lt;/code&gt; together like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;minify&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;code&lt;/span&gt;) &lt;/span&gt;{
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; untokenize(tokenize(code, { lineTerminator: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt; }));
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     <item>
