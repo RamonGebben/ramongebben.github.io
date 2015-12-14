@@ -5,9 +5,33 @@
     <atom:link href="http://localhost:8080/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://localhost:8080</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Thu, 10 Dec 2015 01:00:00 +0100</pubDate>
+    <pubDate>Mon, 14 Dec 2015 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Shem</title>
+      <link>http://daily-javascript.com/articles/shem/</link>
+      <pubDate>Mon, 14 Dec 2015 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/shem/</guid>
+      <author></author>
+      <description>&lt;p&gt;Shem (GitHub: &lt;a href=&quot;https://github.com/xixixao/Shem&quot;&gt;xixixao/Shem&lt;/a&gt;, License: MIT)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://camo.githubusercontent.com/5bc68d66ae5953c7097414ac8a978271b11d7e2a/687474703a2f2f7368656d2e696f2f696d672f73637265656e2d73686f742d62696e6172797365617263682e706e67&quot; alt=&quot;demo&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Shem is a new “compiled-to-JS”, functional programming language which is statically typed.
+The semantics are based on &lt;a href=&quot;http://localhost:8080/articles/shem/&quot;&gt;Haskell&lt;/a&gt; but the language evaluates strictly in a similar way to &lt;a href=&quot;http://localhost:8080/articles/shem/&quot;&gt;PureScript&lt;/a&gt;. The syntax is S-expressions-based.
+This for allowing for a &lt;a href=&quot;http://localhost:8080/articles/shem/&quot;&gt;LISP&lt;/a&gt;-like macro system. Shem’s prelude includes a full-featured, highly-polymorphic collections library backed by &lt;a href=&quot;http://localhost:8080/articles/shem/&quot;&gt;ImmutableJS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It comes with an amazing IDE called “&lt;a href=&quot;https://github.com/xixixao/Golem&quot;&gt;Golem&lt;/a&gt;“. This IDE was designed with the language to make the integration seamlessly.
+The IDE is available at &lt;a href=&quot;http://shem.io/&quot;&gt;shem.io&lt;/a&gt; to work with in the browser. There are plan’s to make it also accessible as a local IDE for developing applications native platform such as desktop.&lt;/p&gt;
+&lt;p&gt;There is a video available of what I believe is one of the first presentations check it out to see Shem and Golem in action&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/HnZipJOan54&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;When this language interests you, you can go over to IDE and follow a small tutorial to give you a quick overview of how the language works.
+If you are familiar with languages such as LISP and Haskell you will feel right at home.&lt;/p&gt;
+&lt;p&gt;The owner of the project &lt;a href=&quot;https://github.com/xixixao&quot;&gt;Michal Srb&lt;/a&gt; also want you to know the following:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I am providing code in this repository to you under an open source license. Because this is my personal repository, the license you receive to my code is from me and not from my employer (Facebook).&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     <item>
       <title>Split.js</title>
       <link>http://daily-javascript.com/articles/splitjs/</link>
@@ -1635,6 +1659,53 @@ program
 </description>
     </item>
     <item>
+      <title>Chiffon</title>
+      <link>http://daily-javascript.com/articles/chiffon/</link>
+      <pubDate>Wed, 14 Oct 2015 02:00:00 +0200</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/chiffon/</guid>
+      <author></author>
+      <description>&lt;p&gt;Chiffon (GitHub: &lt;a href=&quot;https://github.com/trueadm/Chiffon&quot;&gt;polygonplanet/Chiffon&lt;/a&gt;, License: MIT, npm: chiffon, bower: chiffon)&lt;/p&gt;
+&lt;p&gt;Chiffon is a very small ECMAScript parser, tokenizer and minifier.
+Sometimes we come across an idea where you will need to parse or tokenize Javascript files for, for instance to do analysis on the code.&lt;/p&gt;
+&lt;p&gt;When using Chiffon for tokenizing you will get an Array of each “element” of the input code like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; tokens = Chiffon.tokenize(&lt;span class=&quot;string&quot;&gt;'var a = 1'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which would then return:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;[ { type: &lt;span class=&quot;string&quot;&gt;'Keyword'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'var'&lt;/span&gt; },
+  { type: &lt;span class=&quot;string&quot;&gt;'Identifier'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt; },
+  { type: &lt;span class=&quot;string&quot;&gt;'Punctuator'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'='&lt;/span&gt; },
+  { type: &lt;span class=&quot;string&quot;&gt;'Numeric'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'1'&lt;/span&gt; } ]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here is a list of all possible tokens:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Comment&lt;/li&gt;
+&lt;li&gt;LineTerminator&lt;/li&gt;
+&lt;li&gt;Template&lt;/li&gt;
+&lt;li&gt;String&lt;/li&gt;
+&lt;li&gt;Punctuator&lt;/li&gt;
+&lt;li&gt;RegularExpression&lt;/li&gt;
+&lt;li&gt;Numeric&lt;/li&gt;
+&lt;li&gt;UnicodeEscapeSequence&lt;/li&gt;
+&lt;li&gt;Identifier&lt;/li&gt;
+&lt;li&gt;Null&lt;/li&gt;
+&lt;li&gt;Boolean&lt;/li&gt;
+&lt;li&gt;Keyword&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sadly JavaScript AST is not currently supported.&lt;/p&gt;
+&lt;p&gt;When you wish to “untokenize” the Array, you can pass it into the &lt;code&gt;untokenize&lt;/code&gt; method like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.untokenize
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you want to use the minification, you would do something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.minify(&lt;span class=&quot;string&quot;&gt;'var a = 1 + 1; // comment'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which is a simple implementation of &lt;code&gt;untokenize&lt;/code&gt; and &lt;code&gt;tokenize&lt;/code&gt; together like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;minify&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;code&lt;/span&gt;) &lt;/span&gt;{
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; untokenize(tokenize(code, { lineTerminator: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt; }));
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
       <title>Smartcrop.js</title>
       <link>http://daily-javascript.com/articles/smart-crop/</link>
       <pubDate>Wed, 14 Oct 2015 02:00:00 +0200</pubDate>
@@ -1681,53 +1752,6 @@ SmartCrop.crop(img, options, result =&amp;gt; {
 smartcrop-cli --width &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt; --height &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt; photo.jpg square-thumbnail.jpg
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Smartcrop-cli does requires &lt;a href=&quot;https://github.com/Automattic/node-canvas&quot;&gt;node-canvas&lt;/a&gt; which requires local libraries to be installed. Refer to the &lt;a href=&quot;https://github.com/Automattic/node-canvas/wiki/_pages&quot;&gt;node-canvas wiki&lt;/a&gt; installation instructions.&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>Chiffon</title>
-      <link>http://daily-javascript.com/articles/chiffon/</link>
-      <pubDate>Wed, 14 Oct 2015 02:00:00 +0200</pubDate>
-      <guid isPermaLink="true">http://daily-javascript.com/articles/chiffon/</guid>
-      <author></author>
-      <description>&lt;p&gt;Chiffon (GitHub: &lt;a href=&quot;https://github.com/trueadm/Chiffon&quot;&gt;polygonplanet/Chiffon&lt;/a&gt;, License: MIT, npm: chiffon, bower: chiffon)&lt;/p&gt;
-&lt;p&gt;Chiffon is a very small ECMAScript parser, tokenizer and minifier.
-Sometimes we come across an idea where you will need to parse or tokenize Javascript files for, for instance to do analysis on the code.&lt;/p&gt;
-&lt;p&gt;When using Chiffon for tokenizing you will get an Array of each “element” of the input code like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; tokens = Chiffon.tokenize(&lt;span class=&quot;string&quot;&gt;'var a = 1'&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which would then return:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;[ { type: &lt;span class=&quot;string&quot;&gt;'Keyword'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'var'&lt;/span&gt; },
-  { type: &lt;span class=&quot;string&quot;&gt;'Identifier'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt; },
-  { type: &lt;span class=&quot;string&quot;&gt;'Punctuator'&lt;/span&gt;, value: &lt;span class=&quot;string&quot;&gt;'='&lt;/span&gt; },
-  { type: &lt;span class=&quot;string&quot;&gt;'Numeric'&lt;/span&gt;,    value: &lt;span class=&quot;string&quot;&gt;'1'&lt;/span&gt; } ]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here is a list of all possible tokens:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Comment&lt;/li&gt;
-&lt;li&gt;LineTerminator&lt;/li&gt;
-&lt;li&gt;Template&lt;/li&gt;
-&lt;li&gt;String&lt;/li&gt;
-&lt;li&gt;Punctuator&lt;/li&gt;
-&lt;li&gt;RegularExpression&lt;/li&gt;
-&lt;li&gt;Numeric&lt;/li&gt;
-&lt;li&gt;UnicodeEscapeSequence&lt;/li&gt;
-&lt;li&gt;Identifier&lt;/li&gt;
-&lt;li&gt;Null&lt;/li&gt;
-&lt;li&gt;Boolean&lt;/li&gt;
-&lt;li&gt;Keyword&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Sadly JavaScript AST is not currently supported.&lt;/p&gt;
-&lt;p&gt;When you wish to “untokenize” the Array, you can pass it into the &lt;code&gt;untokenize&lt;/code&gt; method like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.untokenize
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When you want to use the minification, you would do something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;Chiffon.minify(&lt;span class=&quot;string&quot;&gt;'var a = 1 + 1; // comment'&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which is a simple implementation of &lt;code&gt;untokenize&lt;/code&gt; and &lt;code&gt;tokenize&lt;/code&gt; together like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;minify&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;code&lt;/span&gt;) &lt;/span&gt;{
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; untokenize(tokenize(code, { lineTerminator: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt; }));
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     <item>
