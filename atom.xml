@@ -5,9 +5,163 @@
     <atom:link href="http://localhost:8080/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://localhost:8080</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Mon, 14 Dec 2015 01:00:00 +0100</pubDate>
+    <pubDate>Tue, 15 Dec 2015 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Runjs</title>
+      <link>http://daily-javascript.com/articles/runjs/</link>
+      <pubDate>Tue, 15 Dec 2015 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/runjs/</guid>
+      <author></author>
+      <description>&lt;p&gt;Runjs (GitHub: &lt;a href=&quot;https://github.com/pawelgalazka/runjs&quot;&gt;pawelgalazka/runjs&lt;/a&gt;, License: MIT, npm: runjs)&lt;/p&gt;
+&lt;p&gt;Back in the days we used to do everything with Makefile’s now we have Gulpfile’s, Gruntfile’s and probably too much to put in a list.
+Now there is a new friend in the build family, Runjs, which is a minimalistic framework for executing build tasks.&lt;/p&gt;
+&lt;p&gt;It’s API consists of just a few functions run, watch, generate and call. With these functions you would create a runfile.js.
+A simple runfile would look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; {run} &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'runjs'&lt;/span&gt;;
+
+&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;showFiles&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;{
+    run(&lt;span class=&quot;string&quot;&gt;'ls'&lt;/span&gt;);
+}
+
+&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;mkdir&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;name&lt;/span&gt;)&lt;/span&gt;{
+    run(&lt;span class=&quot;string&quot;&gt;`mkdir &lt;span class=&quot;subst&quot;&gt;${name}&lt;/span&gt;`&lt;/span&gt;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;These tasks can be executed via the Runjs cli like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;run showFiles
+run mkdir someDirName
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It can do everything from watching files to generating new files based on configured templates etc.
+What I like about this little framework is that it does not require plugins but just Node packages for extra functionality. This in contrast to Gulp where most plugins are wrapped as a gulp-plugin and using libraries that do not have this is as hassle.&lt;/p&gt;
+&lt;p&gt;To help you get started this is what full runfile would look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; {run, generate, watch} &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'runjs'&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; fs &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'fs'&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; crypto &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'crypto'&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; {sleep} &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'sleep'&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; express &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'express'&lt;/span&gt;;
+
+&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; task = {};
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;timeHash&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;{
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; time = &lt;span class=&quot;built_in&quot;&gt;Date&lt;/span&gt;.now();
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; crypto.createHash(&lt;span class=&quot;string&quot;&gt;'sha1'&lt;/span&gt;).update(time.toString()).digest(&lt;span class=&quot;string&quot;&gt;'hex'&lt;/span&gt;);
+}
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;exist&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;path&lt;/span&gt;)&lt;/span&gt;{
+    &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; {
+        fs.accessSync(path, fs.F_OK);
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;;
+    } &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt;(e){
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;;
+    }
+}
+
+task.echo = () =&amp;gt; {
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;'echo'&lt;/span&gt;);
+};
+
+task.install = () =&amp;gt; {
+    run(&lt;span class=&quot;string&quot;&gt;'npm install'&lt;/span&gt;);
+    run(&lt;span class=&quot;string&quot;&gt;'jspm install'&lt;/span&gt;);
+    task[&lt;span class=&quot;string&quot;&gt;'build:dev:configure'&lt;/span&gt;](&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);
+};
+
+task.uninstall = () =&amp;gt; {
+    task[&lt;span class=&quot;string&quot;&gt;'clean:dist'&lt;/span&gt;]();
+    task[&lt;span class=&quot;string&quot;&gt;'clean:cache'&lt;/span&gt;]();
+    run(&lt;span class=&quot;string&quot;&gt;'rm -rf node_modules'&lt;/span&gt;);
+};
+
+task.test = () =&amp;gt; {
+    run(&lt;span class=&quot;string&quot;&gt;'mocha'&lt;/span&gt;);
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'clean:dist'&lt;/span&gt;] = () =&amp;gt; {
+    run(&lt;span class=&quot;string&quot;&gt;'rm -rf dist/*'&lt;/span&gt;);
+};
+
+task.cmd = (...args) =&amp;gt; {
+    run(args.join(&lt;span class=&quot;string&quot;&gt;' '&lt;/span&gt;));
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'build:dev:configure'&lt;/span&gt;] = (force) =&amp;gt; {
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!exist(&lt;span class=&quot;string&quot;&gt;'dist/react.bundle.js'&lt;/span&gt;) || force){
+        run(&lt;span class=&quot;string&quot;&gt;'jspm bundle react + react-dom dist/react.bundle.js --inject'&lt;/span&gt;);
+    }
+};
+
+task.watch = () =&amp;gt; {
+    watch(&lt;span class=&quot;string&quot;&gt;'src/app.less'&lt;/span&gt;, () =&amp;gt; {
+        run(&lt;span class=&quot;string&quot;&gt;'lessc src/app.less dist/app.css --source-map'&lt;/span&gt;);
+    });
+
+    watch(&lt;span class=&quot;string&quot;&gt;'src/*.jsx'&lt;/span&gt;, (path) =&amp;gt; {
+        &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; outPath = path.split(&lt;span class=&quot;string&quot;&gt;'/'&lt;/span&gt;);
+        outPath.shift();
+        outPath.unshift(&lt;span class=&quot;string&quot;&gt;'dist'&lt;/span&gt;);
+        outPath = outPath.join(&lt;span class=&quot;string&quot;&gt;'/'&lt;/span&gt;);
+        outPath = outPath.split(&lt;span class=&quot;string&quot;&gt;'.'&lt;/span&gt;);
+        outPath.pop();
+        outPath.push(&lt;span class=&quot;string&quot;&gt;'js'&lt;/span&gt;);
+        outPath = outPath.join(&lt;span class=&quot;string&quot;&gt;'.'&lt;/span&gt;);
+        run(&lt;span class=&quot;string&quot;&gt;`babel &lt;span class=&quot;subst&quot;&gt;${path}&lt;/span&gt; --out-file &lt;span class=&quot;subst&quot;&gt;${outPath}&lt;/span&gt; --source-maps inline`&lt;/span&gt;);
+    });
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'build:template'&lt;/span&gt;] = (src, dst, context) =&amp;gt; {
+    generate(src, dst, context);
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'build:dev'&lt;/span&gt;] = () =&amp;gt; {
+    run(&lt;span class=&quot;string&quot;&gt;'lessc src/app.less dist/app.css --source-map-map-inline'&lt;/span&gt;);
+    run(&lt;span class=&quot;string&quot;&gt;'babel src --out-dir dist --source-maps inline'&lt;/span&gt;);
+    run(&lt;span class=&quot;string&quot;&gt;'rm dist/config.js'&lt;/span&gt;);
+    task[&lt;span class=&quot;string&quot;&gt;'build:template'&lt;/span&gt;](&lt;span class=&quot;string&quot;&gt;'src/index.tpl.html'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'dist/index.html'&lt;/span&gt;, {compiled: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;});
+    task[&lt;span class=&quot;string&quot;&gt;'build:dev:configure'&lt;/span&gt;]();
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'build:dist'&lt;/span&gt;] = () =&amp;gt; {
+    task[&lt;span class=&quot;string&quot;&gt;'clean:dist'&lt;/span&gt;]();
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; fingerprint = timeHash();
+    task[&lt;span class=&quot;string&quot;&gt;'build:template'&lt;/span&gt;](&lt;span class=&quot;string&quot;&gt;'src/index.tpl.html'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'dist/index.html'&lt;/span&gt;, {compiled: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;, fingerprint: fingerprint});
+    run(&lt;span class=&quot;string&quot;&gt;`jspm bundle-sfx app dist/app.&lt;span class=&quot;subst&quot;&gt;${fingerprint}&lt;/span&gt;.js --minify`&lt;/span&gt;);
+    run(&lt;span class=&quot;string&quot;&gt;`cleancss src/app.css -o dist/app.&lt;span class=&quot;subst&quot;&gt;${fingerprint}&lt;/span&gt;.css`&lt;/span&gt;);
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'serve:express'&lt;/span&gt;] = (prod) =&amp;gt; {
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; port = &lt;span class=&quot;number&quot;&gt;9090&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; app = express();
+    app.use(express.static(&lt;span class=&quot;string&quot;&gt;'dist'&lt;/span&gt;, {etag: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;}));
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!prod){
+        app.use(express.static(&lt;span class=&quot;string&quot;&gt;'src'&lt;/span&gt;, {etag: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;}));
+    }
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; server = app.listen(port);
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;'Express static server listening at http://localhost:%s'&lt;/span&gt;, port);
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'serve:dev'&lt;/span&gt;] = () =&amp;gt; {
+    task[&lt;span class=&quot;string&quot;&gt;'build:dev'&lt;/span&gt;]();
+    task[&lt;span class=&quot;string&quot;&gt;'serve:express'&lt;/span&gt;]();
+    run(&lt;span class=&quot;string&quot;&gt;'live-reload --port 9091 dist'&lt;/span&gt;, {&lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;});
+    sleep(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);
+    run(&lt;span class=&quot;string&quot;&gt;'open -a &quot;Google Chrome&quot; http://localhost:9090'&lt;/span&gt;);
+    task.watch();
+};
+
+task[&lt;span class=&quot;string&quot;&gt;'serve:dist'&lt;/span&gt;] = () =&amp;gt; {
+    task[&lt;span class=&quot;string&quot;&gt;'build:dist'&lt;/span&gt;]();
+    task[&lt;span class=&quot;string&quot;&gt;'serve:express'&lt;/span&gt;](&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);
+    sleep(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);
+    run(&lt;span class=&quot;string&quot;&gt;'open -a &quot;Google Chrome&quot; http://localhost:9090'&lt;/span&gt;);
+};
+
+
+&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt; task;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     <item>
       <title>Shem</title>
       <link>http://daily-javascript.com/articles/shem/</link>
@@ -2178,50 +2332,6 @@ This weekend I will be trying to include this within this website so you will be
 </description>
     </item>
     <item>
-      <title>Rune.js and queryl</title>
-      <link>http://daily-javascript.com/articles/runejs-and-queryl/</link>
-      <pubDate>Mon, 28 Sep 2015 02:00:00 +0200</pubDate>
-      <guid isPermaLink="true">http://daily-javascript.com/articles/runejs-and-queryl/</guid>
-      <author></author>
-      <description>&lt;p&gt;Rune.js (GitHub: &lt;a href=&quot;https://github.com/runemadsen/rune.js&quot;&gt;runemadsen/rune.js&lt;/a&gt;, License: MIT )&lt;/p&gt;
-&lt;p&gt;Rune.js is a library for programming graphic design systems with SVG. It has a fluent drawing API, an unobtrusive scene graph, and a bunch of features designed specifically for graphic designers, such as: native support for color conversion, grid systems, typography, pixel iteration and an expanding set of computational geometry helpers. What peaked my interest is that it uses a &lt;a href=&quot;https://github.com/Matt-Esch/virtual-dom&quot;&gt;virtual-dom&lt;/a&gt; under the hood.&lt;/p&gt;
-&lt;p&gt;If you’re not familiar with the virtual-dom I suggest you take a break to take a look at that first.&lt;/p&gt;
-&lt;p&gt;Unfortunately I could not find any npm or bower install instructions, so I am hoping that the developer will add that soon.&lt;/p&gt;
-&lt;p&gt;Rune.js has all basic shapes in the API.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;r.line(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
-
-r.rect(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;);
-
-r.ellipse(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;);
-
-r.circle(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
-
-r.triangle(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And for more complex shapes it fluent API makes drawing with SVG very readable and familiar.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;r.polygon(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
-
-r.path(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).curveTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Since this library is packed with features and concepts, I will only give you the tip of the iceberg right now. If you want to know more, consult the &lt;a href=&quot;http://runemadsen.github.io/rune.js/&quot;&gt;amazing documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;queryl&quot;&gt;queryl&lt;/h3&gt;
-&lt;p&gt;queryl (GitHub: &lt;a href=&quot;https://github.com/issuetrackapp/queryl&quot;&gt;issuetrackapp/queryl&lt;/a&gt;, License: MIT, npm: queryl)&lt;/p&gt;
-&lt;p&gt;queryl is a query language to preform complex object searches. The purpose of this “language” is to allow the developer to build very complex queries to e.g. search a collection of objects, to validate objects before you dump it in a db or even to make assertions in tests.&lt;/p&gt;
-&lt;p&gt;queryl comes with a very simple API. &lt;code&gt;queryl.match&lt;/code&gt; is the main entry at this point this will always return a boolean and expects an object to match. For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;queryl.match({
-  $contain: {
-    foo: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
-  }
-}, {
-  foo: [ &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt; ]
-});
-&amp;gt; &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is just a very basic example of what it can do. The full API docs shows the entire power of this “language”.&lt;/p&gt;
-&lt;p&gt;I can see this working very well for matching and parsing certain objects like the ones you would receive from, for instance, the Google spreadsheet API.&lt;/p&gt;
-</description>
-    </item>
-    <item>
       <title>Clipboard.js</title>
       <link>http://daily-javascript.com/articles/clipboardjs/</link>
       <pubDate>Mon, 28 Sep 2015 02:00:00 +0200</pubDate>
@@ -2303,6 +2413,50 @@ clipboard.on(&lt;span class=&quot;string&quot;&gt;'error'&lt;/span&gt;, &lt;span
 &lt;/table&gt;
 &lt;p&gt;Although copy/cut operations with execCommand aren’t supported in Safari yet (including mobile), it gracefully degrades, because Selection is supported.&lt;/p&gt;
 &lt;p&gt;This means you could show a tooltip saying Copied! when success event is called and Press Ctrl+C to copy when error event is called because the text is already selected.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Rune.js and queryl</title>
+      <link>http://daily-javascript.com/articles/runejs-and-queryl/</link>
+      <pubDate>Mon, 28 Sep 2015 02:00:00 +0200</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/runejs-and-queryl/</guid>
+      <author></author>
+      <description>&lt;p&gt;Rune.js (GitHub: &lt;a href=&quot;https://github.com/runemadsen/rune.js&quot;&gt;runemadsen/rune.js&lt;/a&gt;, License: MIT )&lt;/p&gt;
+&lt;p&gt;Rune.js is a library for programming graphic design systems with SVG. It has a fluent drawing API, an unobtrusive scene graph, and a bunch of features designed specifically for graphic designers, such as: native support for color conversion, grid systems, typography, pixel iteration and an expanding set of computational geometry helpers. What peaked my interest is that it uses a &lt;a href=&quot;https://github.com/Matt-Esch/virtual-dom&quot;&gt;virtual-dom&lt;/a&gt; under the hood.&lt;/p&gt;
+&lt;p&gt;If you’re not familiar with the virtual-dom I suggest you take a break to take a look at that first.&lt;/p&gt;
+&lt;p&gt;Unfortunately I could not find any npm or bower install instructions, so I am hoping that the developer will add that soon.&lt;/p&gt;
+&lt;p&gt;Rune.js has all basic shapes in the API.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;r.line(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
+
+r.rect(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;);
+
+r.ellipse(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;50&lt;/span&gt;);
+
+r.circle(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
+
+r.triangle(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And for more complex shapes it fluent API makes drawing with SVG very readable and familiar.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;r.polygon(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;);
+
+r.path(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).lineTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).curveTo(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since this library is packed with features and concepts, I will only give you the tip of the iceberg right now. If you want to know more, consult the &lt;a href=&quot;http://runemadsen.github.io/rune.js/&quot;&gt;amazing documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;queryl&quot;&gt;queryl&lt;/h3&gt;
+&lt;p&gt;queryl (GitHub: &lt;a href=&quot;https://github.com/issuetrackapp/queryl&quot;&gt;issuetrackapp/queryl&lt;/a&gt;, License: MIT, npm: queryl)&lt;/p&gt;
+&lt;p&gt;queryl is a query language to preform complex object searches. The purpose of this “language” is to allow the developer to build very complex queries to e.g. search a collection of objects, to validate objects before you dump it in a db or even to make assertions in tests.&lt;/p&gt;
+&lt;p&gt;queryl comes with a very simple API. &lt;code&gt;queryl.match&lt;/code&gt; is the main entry at this point this will always return a boolean and expects an object to match. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;queryl.match({
+  $contain: {
+    foo: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;
+  }
+}, {
+  foo: [ &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt; ]
+});
+&amp;gt; &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is just a very basic example of what it can do. The full API docs shows the entire power of this “language”.&lt;/p&gt;
+&lt;p&gt;I can see this working very well for matching and parsing certain objects like the ones you would receive from, for instance, the Google spreadsheet API.&lt;/p&gt;
 </description>
     </item>
     <item>
