@@ -5,9 +5,51 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Tue, 22 Dec 2015 01:00:00 +0100</pubDate>
+    <pubDate>Wed, 23 Dec 2015 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Shipit</title>
+      <link>http://daily-javascript.com/articles/shipit/</link>
+      <pubDate>Wed, 23 Dec 2015 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/shipit/</guid>
+      <author></author>
+      <description>&lt;p&gt;Shipit (GitHub: &lt;a href=&quot;https://github.com/shipitjs/shipit&quot;&gt;shipitjs/shipit&lt;/a&gt;, License: MIT, npm: shipit)&lt;/p&gt;
+&lt;p&gt;Shipit is an automation engine and a deployment tool written for Node.&lt;/p&gt;
+&lt;p&gt;Shipit is an alternative for &lt;a href=&quot;http://capistranorb.com/&quot;&gt;Capistrano&lt;/a&gt;. If you are not familiar Capistrano, it is a remote server automation and deployment tool written in Ruby.
+Since Capistrano was written in Ruby, you needed to be comfortable working in Ruby and be familiar with the tooling that comes with it.
+Nowadays we are using Javascript for everything. Web servers, build tooling, bot’s you can even control a drone using Javascript.
+So it makes sense to do deployment in Javascript as well.&lt;/p&gt;
+&lt;p&gt;Shipit’s task structure is very similar to that of &lt;a href=&quot;http://gulpjs.com/&quot;&gt;Gulp&lt;/a&gt;. Since they are both based on &lt;a href=&quot;https://github.com/orchestrator/orchestrator&quot;&gt;orchestrator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Besides the main API for handling remote work, there is also a dedicated deploy package based on git and rsync commands.
+With which you can deploy tag, branch or commit. Add additional behavior using hooks, build your project locally or remotely and you can do easy rollback.&lt;/p&gt;
+&lt;p&gt;A simple &lt;code&gt;shipitfile.js&lt;/code&gt; would look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;.exports = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;shipit&lt;/span&gt;) &lt;/span&gt;{
+  &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'shipit-deploy'&lt;/span&gt;)(shipit);
+
+  shipit.initConfig({
+    &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt;: {
+      workspace: &lt;span class=&quot;string&quot;&gt;'/tmp/github-monitor'&lt;/span&gt;,
+      deployTo: &lt;span class=&quot;string&quot;&gt;'/tmp/deploy_to'&lt;/span&gt;,
+      repositoryUrl: &lt;span class=&quot;string&quot;&gt;'https://github.com/user/repo.git'&lt;/span&gt;,
+      ignores: [&lt;span class=&quot;string&quot;&gt;'.git'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'node_modules'&lt;/span&gt;],
+      rsync: [&lt;span class=&quot;string&quot;&gt;'--del'&lt;/span&gt;],
+      keepReleases: &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,
+      key: &lt;span class=&quot;string&quot;&gt;'/path/to/key'&lt;/span&gt;,
+      shallowClone: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+    },
+    staging: {
+      servers: &lt;span class=&quot;string&quot;&gt;'user@myserver.com'&lt;/span&gt;
+    }
+  });
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The CLI structure works like: &lt;code&gt;shipit &amp;lt;environment&amp;gt; &amp;lt;tasks ...&amp;gt;&lt;/code&gt;.
+So with a &lt;code&gt;shipitfile.js&lt;/code&gt; like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-bash&quot;&gt;shipit staging deploy
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     <item>
       <title>Siphon</title>
       <link>http://daily-javascript.com/articles/siphon/</link>
@@ -22,6 +64,47 @@ This would mean that you do not need to be on an Apple system to develop for iOS
 There is no Windows support &lt;em&gt;yet&lt;/em&gt;. If you were wondering, but the team is working on this.&lt;/p&gt;
 &lt;p&gt;Because the project is still in alpha it is missing support for a lot of things, such as the entire Android platform, but they will be rolling out plenty more features over coming weeks.&lt;/p&gt;
 &lt;p&gt;On the Siphon website are some wonderful tutorials on how to use their cli and sandbox. If I peaked your interest take a look at the &lt;a href=&quot;https://getsiphon.com/docs/quickstart/&quot;&gt;Getting Started&lt;/a&gt; guide.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Inspire Tree</title>
+      <link>http://daily-javascript.com/articles/inspire-tree/</link>
+      <pubDate>Mon, 21 Dec 2015 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/inspire-tree/</guid>
+      <author></author>
+      <description>&lt;p&gt;Inspire Tree (GitHub: &lt;a href=&quot;https://github.com/helion3/inspire-tree&quot;&gt;helion3/inspire-tree&lt;/a&gt;, License: MIT, npm: inspire-tree)&lt;/p&gt;
+&lt;p&gt;First of all I would like to thank everybody that took the time to look at the &lt;a href=&quot;http://daily-javascript.com/challenges&quot;&gt;Weekly Challenges&lt;/a&gt; over the weekend. If you have not looked at the challenge of last week you can still submit until Thursday night.&lt;/p&gt;
+&lt;p&gt;Now to business, &lt;a href=&quot;https://github.com/viveleroi&quot;&gt;Mike Botsko&lt;/a&gt; sent in Inspire Tree which is a un-opinionated collapsable tree UI library.
+The need for the library grew with the developers because the alternatives already out there where not extensive enough or just took to much hacking to make it listen to what they wanted.&lt;/p&gt;
+&lt;p&gt;Some of the features that jumped out to me are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Events everywhere&lt;/li&gt;
+&lt;li&gt;~40k minified, uncompressed&lt;/li&gt;
+&lt;li&gt;No external dependencies&lt;/li&gt;
+&lt;li&gt;Load data directly, via promises, callbacks, etc&lt;/li&gt;
+&lt;li&gt;Load child nodes upfront or dynamically (or a mix of both)&lt;/li&gt;
+&lt;li&gt;Tri-state checkboxes (optional)&lt;/li&gt;
+&lt;li&gt;Multiselect (optional)&lt;/li&gt;
+&lt;li&gt;Search by plain string, RegExp, custom matcher, or external resources (optional)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The renderer used by the library can be replaced with a custom renderer for framework support.
+Sadly there is only one example listed within the docs but it will be easy it would be to include it within React or Riot due to the Virtual DOM.&lt;/p&gt;
+&lt;p&gt;To work with this library you need to have an element on the page to target:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;myTree&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can init tree functionality and fetch the data at the same time like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; tree = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; InspireTree({
+    target: &lt;span class=&quot;string&quot;&gt;'.tree'&lt;/span&gt;,
+    data: $.getJSON(&lt;span class=&quot;string&quot;&gt;'http://example.com/some-data.json'&lt;/span&gt;)
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When custom behavior is needed you can attach this to be fired when curtain events are emitted. There is a list of events present on the Github page for reference. This is an example of how a click handler would look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;tree.on(&lt;span class=&quot;string&quot;&gt;'node.click'&lt;/span&gt;, (evt, node) =&amp;gt; {
+    &lt;span class=&quot;comment&quot;&gt;// node clicked!&lt;/span&gt;
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log([&lt;span class=&quot;string&quot;&gt;'node clicked'&lt;/span&gt;, evt, node]);
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The rest of the API is very well documented so I would suggest you browse through it if you need more convincing that this is one of the most extensive UI tree library out there.&lt;/p&gt;
 </description>
     </item>
     <item>

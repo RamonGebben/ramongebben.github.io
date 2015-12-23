@@ -36,6 +36,124 @@
       <div class="content-wrap">
         <article class="article intro">
           <header>
+            <p class="date"><span>07. December 2015</span></p>
+            <h2><a href="/articles/iframe-resizer/">iFrame Resizer</a></h2>
+          </header>
+          <section class="content"><p>iFrame Resizer (GitHub: <a href="https://github.com/davidjbradshaw/iFrame-resizer">davidjbradshaw/iFrame-resizer</a>, License: <span class="caps">MIT</span>, npm:&nbsp;iframe-resizer)</p>
+<p><a href="https://github.com/davidjbradshaw">David Bradshaw</a> sent in iFrame-resizer. Which is a library to make working with the <code>&lt;iframe&gt;</code> tag a lot easier.
+It hides a lot of the stuff you need to change sizes, authorize domains or messaging. I suspect that this project started out as a simple library to help with resizing of an iframe which grew to a full fletched iframe utility&nbsp;belt.</p>
+<p>So let’s take a look how it works. The package consists of two files. The first one needs to be included on the <em>parent</em> page and the second one need to be within all the <em>child</em> frames. The child-script does not do anything unless when called by the parent. So a typical setup would look something like&nbsp;this:</p>
+<pre><code class="lang-html"><span class="doctype">&lt;!<span class="caps">DOCTYPE</span> html&gt;</span>
+<span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Parent page<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>This is the parent page<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">src</span>=<span class="value">"http://example.com/child-page"</span> <span class="attribute">id</span>=<span class="value">"my-frame"</span> <span class="attribute">scrolling</span>=<span class="value">"no"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">scr</span>=<span class="value">"/path/to/iframeResizer.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/path/to/your/script.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-html"><span class="doctype">&lt;!<span class="caps">DOCTYPE</span> html&gt;</span>
+<span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Child page<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>This is the child page<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">scr</span>=<span class="value">"/path/to/iframeResizer.contentWindow.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre>
+<p>Then to active auto-resize for instance, we can work with it from our script like&nbsp;so:</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> options = {
+    log: <span class="literal">true</span>,
+    autoResize: <span class="literal">true</span>
+}
+iFrameResize( options, <span class="string">'#my-frame'</span> );
+</code></pre>
+<p>As said before this is only the basic usage for more extensive usage you should check the <a href="http://davidjbradshaw.github.io/iframe-resizer">project page</a>.</p>
+
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
+            <p class="date"><span>03. December 2015</span></p>
+            <h2><a href="/articles/matreshka/">Matreshka</a></h2>
+          </header>
+          <section class="content"><p>Matreshka (GitHub: <a href="https://github.com/matreshkajs/matreshka">matreshkajs/matreshka</a>, License: <span class="caps">MIT</span>, npm: matreshka, bower:&nbsp;matreshka)</p>
+<p><img src="https://camo.githubusercontent.com/27ecdbde13a34ee2555f36ba3e3ee9363413d6f0/687474703a2f2f6d6174726573686b612e696f2f696d672f6d6b352d6c6f676f5f66756c6c2d766572742e737667" alt="http://matreshka.io/"></p>
+<p>Matreshka is small but powerful client-side framework that allows you to build single page applications.
+It describes it self as a event driven framework, which means that you put listeners on objects and elements to which you can react with configured handler functions.
+Besides it’s event system it comes with features such as: two-way data-binding, custom objects and custom&nbsp;arrays.</p>
+<p>Let’s say we would be making a simple <span class="caps">SPA</span> then this would be our markup would look something like&nbsp;this</p>
+<pre><code class="lang-html"><span class="doctype">&lt;!<span class="caps">DOCTYPE</span> html&gt;</span>
+<span class="tag">&lt;<span class="title">html</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">head</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">title</span>&gt;</span>My first Matreshka application<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">class</span>=<span class="value">"my-input"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"my-output"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.jsdelivr.net/matreshka/latest/matreshka.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="undefined">
+
+        </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre>
+<p>As you can see we import the Matreshka via a script tag but it’s also possible to install via npm.
+Nothing new here right? So let’s put some code in our <code>script</code> tag. Let’s make an “class” called&nbsp;Application:</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> Application = Class({
+    <span class="string">'extends'</span>: Matreshka,
+    constructor: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+
+        <span class="comment">// bind the property x and the text field</span>
+        <span class="keyword">this</span>.bindNode(<span class="string">'x'</span>, <span class="string">'.my-input'</span>);
+
+        <span class="comment">// bind the property x and the ".my-output" block</span>
+        <span class="keyword">this</span>.bindNode(<span class="string">'x'</span>, <span class="string">'.my-output'</span>, {
+            setValue: <span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>{
+                <span class="keyword">this</span>.innerHTML = v;
+            }
+        });
+        <span class="keyword">this</span>.on(<span class="string">'change:x'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+            <span class="built_in">console</span>.log(<span class="string">'x changed to '</span> + <span class="keyword">this</span>.x);
+        });
+    }
+});
+
+<span class="keyword">var</span> app = <span class="keyword">new</span> Application();
+</code></pre>
+<p>Or the same code in&nbsp;<span class="caps">ES2015</span>:</p>
+<pre><code class="lang-javascript"><span class="class"><span class="keyword">class</span> <span class="title">Application</span> <span class="keyword">extends</span> <span class="title">Matreshka</span> </span>{
+    constructor() {
+        <span class="keyword">this</span>.bindNode(<span class="string">'x'</span>, <span class="string">'.my-input'</span>);
+        <span class="keyword">this</span>.bindNode(<span class="string">'x'</span>, <span class="string">'.my-output'</span>, {
+            setValue(v) {
+                <span class="keyword">this</span>.innerHTML = v;
+            }
+        });
+        <span class="keyword">this</span>.on(<span class="string">'change:x'</span>, () =&gt;
+            <span class="built_in">console</span>.log(<span class="string">'x changed to '</span> + <span class="keyword">this</span>.x));
+    }
+}
+</code></pre>
+<p>Now when something happens we can change the value <code>x</code> like&nbsp;this:</p>
+<pre><code class="lang-javascript">app.x = <span class="string">'Hello Daily Javascript'</span>;
+</code></pre>
+<p>This will fill the <code>input</code> and the <code>#output</code> elements with the string <code>&#39;Hello Daily Javascript&#39;</code>.</p>
+<p>Nowadays we are not impressed by data-binding any more. It comes with a lot more, but for that I would refer you to the <a href="http://matreshka.io/">full documentation</a>. The <span class="caps">API</span> is very small and easy to reason about, so if you have a new POC project coming up I would suggest you give it a&nbsp;try.</p>
+
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
             <p class="date"><span>02. December 2015</span></p>
             <h2><a href="/articles/allyjs/">ally.js</a></h2>
           </header>
@@ -124,100 +242,6 @@ We can use the events emitted by the library to present the user with&nbsp;feedb
 <pre><code class="lang-javascript">microm.on(<span class="string">'timeupdate'</span>, updateCurrentTime);
 <span class="function"><span class="keyword">function</span> <span class="title">updateCurrentTime</span>(<span class="params">time</span>) </span>{ <span class="built_in">console</span>.log(time); }
 </code></pre>
-
-          </section>
-        </article>
-        <article class="article intro">
-          <header>
-            <p class="date"><span>26. November 2015</span></p>
-            <h2><a href="/articles/react-pull-to-refresh/">react-pull-to-refresh</a></h2>
-          </header>
-          <section class="content"><p>react-pull-to-refresh (GitHub: <a href="https://github.com/bryaneaton13/react-pull-to-refresh">bryaneaton13/react-pull-to-refresh</a>, License: <span class="caps">MIT</span>, npm:&nbsp;react-pull-to-refresh)</p>
-<p>react-pull-to-refresh is a library that does exactly what the name implies. It gives the pull to refresh behavior.
-<img src="https://github.com/bryaneaton13/react-pull-to-refresh/raw/master/docs/demo.gif" alt="demo"></p>
-<p>It is based on the <a href="https://github.com/apeatling/web-pull-to-refresh">library</a> that Andy Peatling made and wrote a post about. You can find that <a href="https://github.com/apeatling/web-pull-to-refresh">here</a>.
-So let’s take a look at how it works, your refresh handler takes in <code>resolve</code> and <code>reject</code> to tell the component when it’s finished. That would look something like&nbsp;this:</p>
-<pre><code class="lang-javascript">handleRefresh(resolve, reject) {
-    <span class="comment">// do some async code here</span>
-    <span class="keyword">let</span> success = <span class="literal">false</span>;
-    <span class="keyword">if</span> (success) {
-        resolve();
-    } <span class="keyword">else</span> {
-        reject();
-    }
-}
-</code></pre>
-<p>And this is what the component would look&nbsp;like:</p>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">ReactPullToRefresh</span>
-    <span class="attribute">onRefresh</span>=<span class="value">{this.handleRefresh}</span>
-    <span class="attribute">className</span>=<span class="value">"your-own-class-if-you-want"</span>
-    <span class="attribute">style</span>=<span class="value">{{</span> <span class="attribute">textAlign:</span> '<span class="attribute">center</span>' }}&gt;</span>
-        <span class="tag">&lt;<span class="title">h3</span>&gt;</span>Pull down to refresh<span class="tag">&lt;/<span class="title">h3</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">div</span>&gt;</span>{items}<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">div</span>&gt;</span>etc.<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ReactPullToRefresh</span>&gt;</span>
-</code></pre>
-<p>Basically that is all that there is to it. For the American readers I hope you have a nice&nbsp;Thanksgiving.</p>
-
-          </section>
-        </article>
-        <article class="article intro">
-          <header>
-            <p class="date"><span>25. November 2015</span></p>
-            <h2><a href="/articles/vuejs/">Vue.js</a></h2>
-          </header>
-          <section class="content"><p>Vue.js (GitHub: <a href="https://github.com/vuejs/vue">vuejs/vue</a>, License: <span class="caps">MIT</span>, npm:&nbsp;vue</p>
-<p>Vue.js is a library for building web interfaces. Because it works together with some other tools, you can also call it a “framework”. Now, if you’ve never heard of or used Vue before, you are probably thinking: great, yet another JavaScript framework! I get it. That was my first thought as well, that is why I never looked at it with a serious eye. Vue isn’t particularly new, it has being in the making for almost two years now, and the first public release was in February 2014. Over time it has evolving into a great engine to build beautiful production ready app&nbsp;with.</p>
-<p>What makes it so awesome? Well, it supports all the features we are used to from libraries such as React, Ember and Angular but it’s size and api are a lot simpler.
-A thing I love in libraries,&nbsp;simplicity.</p>
-<p>So let’s take a look at a few small examples and let’s start with data&nbsp;binding.</p>
-<p>This is how we define the <code>template</code> which we are gonna&nbsp;use:</p>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"binding"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span>&gt;</span>{{message}}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-model</span>=<span class="value">"message"</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</code></pre>
-<p>And here we give it some&nbsp;data:</p>
-<pre><code class="lang-javascript">
-<span class="keyword">let</span> binding = <span class="keyword">new</span> Vue({
-  el: <span class="string">'#binding'</span>,
-  data: {
-    message: <span class="string">'Daily Javascript'</span>
-  }
-});
-</code></pre>
-<p>This would give is a <code>div</code> with an <code>input</code> field and a preview of the value it holds. When you start typing, Vue will take over from there.
-That’s cool right? Ok I get it data binding does not impress you anymore. Do you like working with components?
-Vue takes an approach that is very similar to React: it’s components all the way&nbsp;down.</p>
-<pre><code class="lang-javascript"><span class="keyword">const</span> Example = Vue.extend({
-    template: <span class="string">'&lt;div&gt;{{ message }}&lt;/div&gt;'</span>,
-    data () {
-        <span class="keyword">return</span> {
-            message: <span class="string">'Daily Javascript!'</span>
-        }
-    }
-});
-
-<span class="comment">// register it with the tag &lt;example&gt;</span>
-Vue.component(<span class="string">'example'</span>, Example);
-</code></pre>
-<p>Now we can use it like&nbsp;this:</p>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">example</span>&gt;</span><span class="tag">&lt;/<span class="title">example</span>&gt;</span>
-</code></pre>
-<p>Because modularity is key nowadays it comes with the opportunity to <code>scope</code> styles to a component.
-That would look something like&nbsp;this:</p>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">scoped</span> &gt;</span><span class="css">
-<span class="class">.message</span> <span class="rules">{
-  <span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;
-}</span>
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-</code></pre>
-<p>Here is a full example component of how it would look when you would have it setup with a combination of <a href="https://github.com/webpack/webpack">Webpack</a> and <a href="https://github.com/vuejs/vue-loader">vue-loader</a>.</p>
-<p><img src="http://blog.evanyou.me/images/vue-hot.gif" alt="demo"></p>
-<p>It comes with a lot of more features that I will not go into such as routing and a build-in transition&nbsp;system.</p>
-<p>There is a demo for the transition system which demonstrates state-based tweening with&nbsp;Vue:</p>
-<p><p data-height="268" data-theme-id="0" data-slug-hash="XmZNOG" data-default-tab="result" data-user="yyx990803" class='codepen'>See the Pen <a href='http://codepen.io/yyx990803/pen/XmZNOG/'>Vue.js elastic header component</a> by Evan You (<a href='http://codepen.io/yyx990803'>@yyx990803</a>) on <a href='http://codepen.io'>CodePen</a>.</p></p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
           </section>
         </article>
