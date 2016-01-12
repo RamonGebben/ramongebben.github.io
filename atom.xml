@@ -5,9 +5,64 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Mon, 11 Jan 2016 01:00:00 +0100</pubDate>
+    <pubDate>Tue, 12 Jan 2016 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Catbee</title>
+      <link>http://daily-javascript.com/articles/catbee/</link>
+      <pubDate>Tue, 12 Jan 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/catbee/</guid>
+      <author></author>
+      <description>&lt;p&gt;Catbee (GitHub: &lt;a href=&quot;https://github.com/markuplab/catbee&quot;&gt;markuplab/catbee&lt;/a&gt;, License: MIT, npm: little-loader)&lt;/p&gt;
+&lt;p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/markuplab/catbee-todomvc/master/logo.png&quot; alt=&quot;logo&quot;&gt;
+&lt;/p&gt;
+Catbee is an high level isomorphic framework inspired and based on best practices from &lt;a href=&quot;https://github.com/catberry/catberry&quot;&gt;Catberry&lt;/a&gt;, &lt;a href=&quot;https://github.com/Yomguithereal/baobab&quot;&gt;Baobab&lt;/a&gt; and &lt;a href=&quot;https://github.com/cerebral/cerebral&quot;&gt;Cerebral&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Catbee is Catberry little brother. Unlike Catberry, Catbee use “Single State Tree” conception.
+All state mutations run in signals, and powered by the &lt;a href=&quot;https://github.com/markuplab/appstate&quot;&gt;AppState&lt;/a&gt; module.&lt;/p&gt;
+&lt;p&gt;All data focused in Baobab tree, instead of distributed flux stores. The tree contains the full application state, and it has 2 interfaces: modify API also known as “Signals”, and read API also known as “Watchers”.&lt;/p&gt;
+&lt;p&gt;Signal is the only way to modify state tree. It looks like middleware, but it is way more flexible and adopted for sync/async operations.
+If you want to learn more about signals, checkout &lt;a href=&quot;http://cerebraljs.com/&quot;&gt;this&lt;/a&gt; and &lt;a href=&quot;https://github.com/markuplab/appstate&quot;&gt;this&lt;/a&gt;.
+The developers recommend running signal on each user action, when you need change application state, and also signal automatically run on every url change.&lt;/p&gt;
+&lt;p&gt;Signals use composition conception, and contains an array of independent functions. It’s very simple way to maintain big codebase. Here is an example of a Signal:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; signal = [
+  setLoading, &lt;span class=&quot;comment&quot;&gt;// Sync function&lt;/span&gt;
+  [ &lt;span class=&quot;comment&quot;&gt;// Here we run parallel functions&lt;/span&gt;
+    getUser, { &lt;span class=&quot;comment&quot;&gt;// Async function with 2 outputs success and error&lt;/span&gt;
+      success: [setUser], &lt;span class=&quot;comment&quot;&gt;// Run if we call output.success in getUser&lt;/span&gt;
+      error: [setUserError] &lt;span class=&quot;comment&quot;&gt;// Run if we call output.error in getUser&lt;/span&gt;
+    },
+    getNews, { &lt;span class=&quot;comment&quot;&gt;// It's function will run parallel with getUser, like Promise.all&lt;/span&gt;
+      loaded: [setNews],
+      error: [setNewsError]
+    }
+  ],
+  unsetLoading
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Components can access data by &lt;a href=&quot;https://github.com/Yomguithereal/baobab#specialized-getters&quot;&gt;watchers&lt;/a&gt;. There are two main reasons you should use watchers. You’ll need data context for template rendering, and you’ll also need state update events to rerender your component.
+You do not need bind watchers manually, it’s inside of Catbee.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Here we use simple Baobab.watch API&lt;/span&gt;
+&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;.exports = {
+  news: [&lt;span class=&quot;string&quot;&gt;'news'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'data'&lt;/span&gt;],
+  isVisible: [&lt;span class=&quot;string&quot;&gt;'news'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'UIState'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'isVisible'&lt;/span&gt;]
+};
+
+&lt;span class=&quot;comment&quot;&gt;// You can also use Baobab.watch dynamicly&lt;/span&gt;
+&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;.exports = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;attributes&lt;/span&gt;) &lt;/span&gt;{
+  &lt;span class=&quot;comment&quot;&gt;// Here attributes is &amp;lt;cat-component id=&quot;unique&quot; cat-id=&quot;1&quot; watcher= &quot;dynamic&quot;&amp;gt;&amp;lt;/cat-component&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; id = attributes[&lt;span class=&quot;string&quot;&gt;'cat-id'&lt;/span&gt;];
+
+  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; {
+    title: [&lt;span class=&quot;string&quot;&gt;'news'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'data'&lt;/span&gt;, { id: id }, &lt;span class=&quot;string&quot;&gt;'title'&lt;/span&gt;]
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I really like this library because of my associations with Baobab. My first encounter with it was via the post &lt;a href=&quot;http://christianalfoni.github.io/javascript/2015/02/06/plant-a-baobab-tree-in-your-flux-application.html&quot;&gt;“Plant a Baobab tree in your flux application”&lt;/a&gt; which was written by &lt;a href=&quot;https://twitter.com/christianalfoni&quot;&gt;Christian Alfoni&lt;/a&gt;. It lead me to think differently about flux and redux, I recommend you read it.&lt;/p&gt;
+&lt;p&gt;Don’t forget to challenge yourself this week. I prepared another weekly challenge which is: &lt;a href=&quot;http://daily-javascript.com/challenges/mandelbrot/&quot;&gt;“Implement the Mandelbrot set using Javascript”&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Little Loader</title>
       <link>http://daily-javascript.com/articles/little-loader/</link>
