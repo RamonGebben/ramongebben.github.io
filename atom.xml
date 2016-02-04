@@ -5,43 +5,13 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Wed, 03 Feb 2016 01:00:00 +0100</pubDate>
+    <pubDate>Thu, 04 Feb 2016 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
     <item>
-      <title>Microwork.js</title>
-      <link>http://daily-javascript.com/articles/microwork/</link>
-      <pubDate>Wed, 03 Feb 2016 01:00:00 +0100</pubDate>
-      <guid isPermaLink="true">http://daily-javascript.com/articles/microwork/</guid>
-      <author></author>
-      <description>&lt;p&gt;Microwork.js (GitHub: &lt;a href=&quot;https://github.com/yamalight/microwork&quot;&gt;yamalight/microwork&lt;/a&gt;, License: MIT, npm: microwork)&lt;/p&gt;
-&lt;p&gt;Microwork.js is a library for simple creation of distributed micro services using &lt;a href=&quot;https://www.rabbitmq.com&quot;&gt;RabbitMQ&lt;/a&gt;.
-If you are not familiar with RabbitMQ, it is a messaging server.
-Messaging enables applications to connect and scale.
-Applications can connect to each other, as components of a larger application.&lt;/p&gt;
-&lt;p&gt;An example service that subscribe to messages from &lt;code&gt;do.stuff&lt;/code&gt; topic and uses incoming data:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Microwork &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'microwork'&lt;/span&gt;;
-
-&lt;span class=&quot;comment&quot;&gt;// create task runner&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; runner = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Microwork({host: &lt;span class=&quot;string&quot;&gt;'my.rabbit.host'&lt;/span&gt;, exchange: &lt;span class=&quot;string&quot;&gt;'my.exchange'&lt;/span&gt;});
-
-&lt;span class=&quot;comment&quot;&gt;// add worker to specific topic&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; runner.subscribe(&lt;span class=&quot;string&quot;&gt;'do.stuff'&lt;/span&gt;, (msg, reply) =&amp;gt; {
-    &lt;span class=&quot;comment&quot;&gt;// Capitalize first letter of the message&lt;/span&gt;
-    reply(msg.charAt(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).toUpperCase() + msg.slice(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;));
-});
-
-&lt;span class=&quot;comment&quot;&gt;// after work is done - cleanup&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; runner.stop();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There are a few useful plugin already available such as: a hardware stats plugin which provides basic hardware stats about Node, a health plugin which provides basic keep-alive signal and a subscribers info plugin which provides basic information about subscribers.&lt;/p&gt;
-&lt;p&gt;For more examples and documentation check out the &lt;a href=&quot;http://yamalight.github.io/microwork/&quot;&gt;Github Page&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    <item>
       <title>SamsaraJS</title>
       <link>http://daily-javascript.com/articles/samsarajs/</link>
-      <pubDate>Wed, 03 Feb 2016 01:00:00 +0100</pubDate>
+      <pubDate>Thu, 04 Feb 2016 01:00:00 +0100</pubDate>
       <guid isPermaLink="true">http://daily-javascript.com/articles/samsarajs/</guid>
       <author></author>
       <description>&lt;p&gt;SamsaraJS (GitHub: &lt;a href=&quot;https://github.com/dmvaldman/samsara&quot;&gt;dmvaldman/samsara&lt;/a&gt;, License: MIT, npm: samsarajs)&lt;/p&gt;
@@ -82,6 +52,36 @@ context.mount(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.query
 Besides the amazing demo’s you can also find very expensive documentation about the API and some real helpful guides.&lt;/p&gt;
 &lt;p&gt;This is by far &lt;a href=&quot;http://samsarajs.org/demos/ParallaxCats/index.html&quot;&gt;my favorite demo&lt;/a&gt;&lt;/p&gt;
 &lt;iframe src=&quot;http://samsarajs.org/demos/ParallaxCats/index.html&quot; width=&quot;100%&quot; height=&quot;480px&quot;&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    <item>
+      <title>Microwork.js</title>
+      <link>http://daily-javascript.com/articles/microwork/</link>
+      <pubDate>Wed, 03 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/microwork/</guid>
+      <author></author>
+      <description>&lt;p&gt;Microwork.js (GitHub: &lt;a href=&quot;https://github.com/yamalight/microwork&quot;&gt;yamalight/microwork&lt;/a&gt;, License: MIT, npm: microwork)&lt;/p&gt;
+&lt;p&gt;Microwork.js is a library for simple creation of distributed micro services using &lt;a href=&quot;https://www.rabbitmq.com&quot;&gt;RabbitMQ&lt;/a&gt;.
+If you are not familiar with RabbitMQ, it is a messaging server.
+Messaging enables applications to connect and scale.
+Applications can connect to each other, as components of a larger application.&lt;/p&gt;
+&lt;p&gt;An example service that subscribe to messages from &lt;code&gt;do.stuff&lt;/code&gt; topic and uses incoming data:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Microwork &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'microwork'&lt;/span&gt;;
+
+&lt;span class=&quot;comment&quot;&gt;// create task runner&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; runner = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Microwork({host: &lt;span class=&quot;string&quot;&gt;'my.rabbit.host'&lt;/span&gt;, exchange: &lt;span class=&quot;string&quot;&gt;'my.exchange'&lt;/span&gt;});
+
+&lt;span class=&quot;comment&quot;&gt;// add worker to specific topic&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; runner.subscribe(&lt;span class=&quot;string&quot;&gt;'do.stuff'&lt;/span&gt;, (msg, reply) =&amp;gt; {
+    &lt;span class=&quot;comment&quot;&gt;// Capitalize first letter of the message&lt;/span&gt;
+    reply(msg.charAt(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;).toUpperCase() + msg.slice(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;));
+});
+
+&lt;span class=&quot;comment&quot;&gt;// after work is done - cleanup&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; runner.stop();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are a few useful plugin already available such as: a hardware stats plugin which provides basic hardware stats about Node, a health plugin which provides basic keep-alive signal and a subscribers info plugin which provides basic information about subscribers.&lt;/p&gt;
+&lt;p&gt;For more examples and documentation check out the &lt;a href=&quot;http://yamalight.github.io/microwork/&quot;&gt;Github Page&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     <item>

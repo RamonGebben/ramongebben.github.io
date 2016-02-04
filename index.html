@@ -36,37 +36,7 @@
       <div class="content-wrap">
         <article class="article intro">
           <header>
-            <p class="date"><span>03. February 2016</span></p>
-            <h2><a href="/articles/microwork/">Microwork.js</a></h2>
-          </header>
-          <section class="content"><p>Microwork.js (GitHub: <a href="https://github.com/yamalight/microwork">yamalight/microwork</a>, License: <span class="caps">MIT</span>, npm:&nbsp;microwork)</p>
-<p>Microwork.js is a library for simple creation of distributed micro services using <a href="https://www.rabbitmq.com">RabbitMQ</a>.
-If you are not familiar with RabbitMQ, it is a messaging server.
-Messaging enables applications to connect and scale.
-Applications can connect to each other, as components of a larger&nbsp;application.</p>
-<p>An example service that subscribe to messages from <code>do.stuff</code> topic and uses incoming&nbsp;data:</p>
-<pre><code class="lang-javascript"><span class="keyword">import</span> Microwork <span class="keyword">from</span> <span class="string">'microwork'</span>;
-
-<span class="comment">// create task runner</span>
-<span class="keyword">const</span> runner = <span class="keyword">new</span> Microwork({host: <span class="string">'my.rabbit.host'</span>, exchange: <span class="string">'my.exchange'</span>});
-
-<span class="comment">// add worker to specific topic</span>
-<span class="keyword">await</span> runner.subscribe(<span class="string">'do.stuff'</span>, (msg, reply) =&gt; {
-    <span class="comment">// Capitalize first letter of the message</span>
-    reply(msg.charAt(<span class="number">0</span>).toUpperCase() + msg.slice(<span class="number">1</span>));
-});
-
-<span class="comment">// after work is done - cleanup</span>
-<span class="keyword">await</span> runner.stop();
-</code></pre>
-<p>There are a few useful plugin already available such as: a hardware stats plugin which provides basic hardware stats about Node, a health plugin which provides basic keep-alive signal and a subscribers info plugin which provides basic information about&nbsp;subscribers.</p>
-<p>For more examples and documentation check out the <a href="http://yamalight.github.io/microwork/">Github Page</a>.</p>
-
-          </section>
-        </article>
-        <article class="article intro">
-          <header>
-            <p class="date"><span>03. February 2016</span></p>
+            <p class="date"><span>04. February 2016</span></p>
             <h2><a href="/articles/samsarajs/">SamsaraJS</a></h2>
           </header>
           <section class="content"><p>SamsaraJS (GitHub: <a href="https://github.com/dmvaldman/samsara">dmvaldman/samsara</a>, License: <span class="caps">MIT</span>, npm:&nbsp;samsarajs)</p>
@@ -107,6 +77,36 @@ context.mount(<span class="built_in">document</span>.querySelector(<span class="
 Besides the amazing demo’s you can also find very expensive documentation about the <span class="caps">API</span> and some real helpful&nbsp;guides.</p>
 <p>This is by far <a href="http://samsarajs.org/demos/ParallaxCats/index.html">my favorite&nbsp;demo</a></p>
 <iframe src="http://samsarajs.org/demos/ParallaxCats/index.html" width="100%" height="480px"></iframe>
+
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
+            <p class="date"><span>03. February 2016</span></p>
+            <h2><a href="/articles/microwork/">Microwork.js</a></h2>
+          </header>
+          <section class="content"><p>Microwork.js (GitHub: <a href="https://github.com/yamalight/microwork">yamalight/microwork</a>, License: <span class="caps">MIT</span>, npm:&nbsp;microwork)</p>
+<p>Microwork.js is a library for simple creation of distributed micro services using <a href="https://www.rabbitmq.com">RabbitMQ</a>.
+If you are not familiar with RabbitMQ, it is a messaging server.
+Messaging enables applications to connect and scale.
+Applications can connect to each other, as components of a larger&nbsp;application.</p>
+<p>An example service that subscribe to messages from <code>do.stuff</code> topic and uses incoming&nbsp;data:</p>
+<pre><code class="lang-javascript"><span class="keyword">import</span> Microwork <span class="keyword">from</span> <span class="string">'microwork'</span>;
+
+<span class="comment">// create task runner</span>
+<span class="keyword">const</span> runner = <span class="keyword">new</span> Microwork({host: <span class="string">'my.rabbit.host'</span>, exchange: <span class="string">'my.exchange'</span>});
+
+<span class="comment">// add worker to specific topic</span>
+<span class="keyword">await</span> runner.subscribe(<span class="string">'do.stuff'</span>, (msg, reply) =&gt; {
+    <span class="comment">// Capitalize first letter of the message</span>
+    reply(msg.charAt(<span class="number">0</span>).toUpperCase() + msg.slice(<span class="number">1</span>));
+});
+
+<span class="comment">// after work is done - cleanup</span>
+<span class="keyword">await</span> runner.stop();
+</code></pre>
+<p>There are a few useful plugin already available such as: a hardware stats plugin which provides basic hardware stats about Node, a health plugin which provides basic keep-alive signal and a subscribers info plugin which provides basic information about&nbsp;subscribers.</p>
+<p>For more examples and documentation check out the <a href="http://yamalight.github.io/microwork/">Github Page</a>.</p>
 
           </section>
         </article>
