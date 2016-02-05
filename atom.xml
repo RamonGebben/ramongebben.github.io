@@ -5,9 +5,44 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Thu, 04 Feb 2016 01:00:00 +0100</pubDate>
+    <pubDate>Fri, 05 Feb 2016 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Weekly Challenge - Tetris bag</title>
+      <link>http://daily-javascript.com/articles/weekly-challenge-2016-05/</link>
+      <pubDate>Fri, 05 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/weekly-challenge-2016-05/</guid>
+      <author></author>
+      <description>&lt;p&gt;&lt;img style=&quot;width: 100%; display:block;&quot; src=&quot;http://daily-javascript.com/challenges/tetris-bag/header.jpg&quot; &gt;&lt;/p&gt;
+&lt;p&gt;Since I did not get any submissions for the Workshopper Challenge I will make this challenge a lot more technical, so you guys will actually feel challenged. Since all of you are probably nineteens kids, you all know Tetris.
+It is a popular belief that the “tetromino” pieces you are given in a game of Tetris are not randomly selected.
+What really happens is that all seven pieces are placed into a “bag”. A piece is randomly removed from the bag and presented to the player. This process is repeated until the bag is empty.&lt;/p&gt;
+&lt;p&gt;Your challenge is to reproduce this.
+For the first part of this challenge you will only need to focus on the algorithm of randomly removing elements from the bag and filling it once it’s empty.
+There is one limitation: Repetition of pieces will not be more then twice the same.
+So you can get twice the same piece but never 3 times the same.&lt;/p&gt;
+&lt;p&gt;For now you can make the output just &lt;code&gt;log&lt;/code&gt; the piece which needs to be dropped, next week we will explore the Tetris game some more.
+Output a string signifying 50 tetromino pieces given to the player using the random bag system. This will be printed on a single line.
+Some code to get you started can be found inside &lt;a href=&quot;http://codepen.io/DailyJavascript/pen/bEmqpK&quot;&gt;this codepen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The pieces will be represented by letters for now:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O&lt;/li&gt;
+&lt;li&gt;I&lt;/li&gt;
+&lt;li&gt;S&lt;/li&gt;
+&lt;li&gt;Z&lt;/li&gt;
+&lt;li&gt;L&lt;/li&gt;
+&lt;li&gt;J&lt;/li&gt;
+&lt;li&gt;T&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p data-height=&quot;460&quot; data-theme-id=&quot;21361&quot; data-slug-hash=&quot;bEmqpK&quot; data-default-tab=&quot;result&quot; data-user=&quot;DailyJavascript&quot; class='codepen'&gt;See the Pen &lt;a href='http://codepen.io/DailyJavascript/pen/bEmqpK/'&gt;bEmqpK&lt;/a&gt; by DailyJavascript (&lt;a href='http://codepen.io/DailyJavascript'&gt;@DailyJavascript&lt;/a&gt;) on &lt;a href='http://codepen.io'&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Submissions can be sent to this &lt;a href=&quot;http://goo.gl/forms/yBEvtgrO4K&quot;&gt;Google Form.&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Don’t forget to submit before next Friday.&lt;/p&gt;
+&lt;p&gt;Happy coding.&lt;/p&gt;
+&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+</description>
+    </item>
     <item>
       <title>SamsaraJS</title>
       <link>http://daily-javascript.com/articles/samsarajs/</link>
