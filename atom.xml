@@ -5,9 +5,63 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Tue, 09 Feb 2016 01:00:00 +0100</pubDate>
+    <pubDate>Wed, 10 Feb 2016 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>React Native SMS Listener</title>
+      <link>http://daily-javascript.com/articles/react-native-android-sms-listener/</link>
+      <pubDate>Wed, 10 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/react-native-android-sms-listener/</guid>
+      <author></author>
+      <description>&lt;p&gt;SmsListener (GitHub: &lt;a href=&quot;https://github.com/CentaurWarchief/react-native-android-sms-listener&quot;&gt;CentaurWarchief/react-native-android-sms-listener&lt;/a&gt;, License: MIT, npm: react-native-android-sms-listener)&lt;/p&gt;
+&lt;p&gt;When you are building an app which requires some form of account validation like Whats App and Telegram using React Native.
+There is gonna be a moment that you want to verify on bases of a text message.
+CentaurWarchief has created a module so you don’t need to worry about listening for incoming texts.&lt;/p&gt;
+&lt;p&gt;If works pretty straight forward, you attach an event listener and respond to incoming events like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; SmsListener &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'react-native-android-sms-listener'&lt;/span&gt;
+
+const mySubScription = SmsListener.addListener(myMessageHandler);
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;myMessageHandler&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;message&lt;/span&gt;)&lt;/span&gt;{
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(message);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This should not be unfamiliar.
+In contrast with the event listener API which get’s provided by the DOM, removing event listener works differently.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;mySubScription.remove()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is an example provided by the developer which demonstrates how to do authorization in the same manner as Whats App or Telegram do it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; subscription = SmsListener.addListener(message =&amp;gt; {
+  &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; verificationCodeRegex = &lt;span class=&quot;regexp&quot;&gt;/Your verification code: ([\d]{6})/&lt;/span&gt;;
+
+  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (verificationCodeRegex.test(message.body)) {
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; verificationCode = message.body.match(verificationCodeRegex)[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;];
+
+    YourPhoneVerificationApi.verifyPhoneNumber(
+      message.originatingAddress,
+      verificationCode
+    ).then(verifiedSuccessfully =&amp;gt; {
+      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (verifiedSuccessfully) {
+        subscription.remove();
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;;
+      }
+
+      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (__DEV__) {
+        &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.info(
+          &lt;span class=&quot;string&quot;&gt;'Failed to verify phone `%s` using code `%s`'&lt;/span&gt;,
+          message.originatingAddress,
+          verificationCode
+        );
+      }
+  });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Sadly it only has support for Android at this point, hopefully somebody will implement the same for iOS.
+For more API reference check the &lt;a href=&quot;https://github.com/CentaurWarchief/react-native-android-sms-listener&quot;&gt;README&lt;/a&gt; and don’t forget to &lt;a href=&quot;http://daily-javascript.com/challenges/tetris-bag/&quot;&gt;challenge yourself trying to duplicate the randomization algorithm used by Tetris&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>jHaml</title>
       <link>http://daily-javascript.com/articles/jhaml/</link>
