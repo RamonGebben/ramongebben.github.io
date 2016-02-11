@@ -5,9 +5,29 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Wed, 10 Feb 2016 01:00:00 +0100</pubDate>
+    <pubDate>Thu, 11 Feb 2016 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Deco</title>
+      <link>http://daily-javascript.com/articles/deco/</link>
+      <pubDate>Thu, 11 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/deco/</guid>
+      <author></author>
+      <description>&lt;p&gt;I would like to start out with saying that this is &lt;strong&gt;not&lt;/strong&gt; sponsored content.
+When I came across this I was so amazed that needed to share it with you all.&lt;/p&gt;
+&lt;p&gt;Normally when you develop apps, you use an IDE. When targeting iOS you use xCode and when Android is your platform you are most likely using Android Studio.
+This becomes a real problem when switching context, between platform and technologies.
+Especially when you are building a &lt;a href=&quot;https://facebook.github.io/react-native/&quot;&gt;React Native&lt;/a&gt; app.
+&lt;a href=&quot;http://l.aunch.us/h2fyV&quot;&gt;Deco&lt;/a&gt; is a solution for that. Not only is it the first IDE to come out tailored to React Native, but it also come with a registry off React Native components. These components are standardized and work very nicely together with Deco.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=DmZEWOumVIE&quot;&gt;This is a video&lt;/a&gt; by one of the developer demonstrating some of the features included in the IDE by building an Uber clone in less than 5 minutes.&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/DmZEWOumVIE&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Sadly there is still a waitlist for the beta, I myself am still waiting to get access to it.
+Go to the website for more information and sign up for &lt;a href=&quot;http://l.aunch.us/h2fyV&quot;&gt;beta access&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Don’t forget to send in your submission for this &lt;a href=&quot;http://daily-javascript.com/challenges/tetris-bag/&quot;&gt;weeks challenge&lt;/a&gt; before tomorrow afternoon, otherwise it will not be in the weekly results.&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>React Native SMS Listener</title>
       <link>http://daily-javascript.com/articles/react-native-android-sms-listener/</link>
