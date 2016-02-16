@@ -5,9 +5,38 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Fri, 12 Feb 2016 01:00:00 +0100</pubDate>
+    <pubDate>Tue, 16 Feb 2016 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Pollinate</title>
+      <link>http://daily-javascript.com/articles/pollinate/</link>
+      <pubDate>Tue, 16 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/pollinate/</guid>
+      <author></author>
+      <description>&lt;p&gt;Pollinate (GitHub: &lt;a href=&quot;https://github.com/everysquare/pollinate&quot;&gt;everysquare/pollinate&lt;/a&gt;, License: MIT, npm: pollinate)&lt;/p&gt;
+&lt;p&gt;Pollinate is for the best I can describe a scaffolding engine. It takes a template project and uses &lt;a href=&quot;http://mozilla.github.io/nunjucks/&quot;&gt;Nunjucks&lt;/a&gt; to generate the files with the names. The name comes from visualization a tree as a “Flower”.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Think of a tree of files as a &lt;code&gt;Flower&lt;/code&gt; and a source data as &lt;code&gt;Pollen&lt;/code&gt;; combined together they create a fertilized project seed. Pollinate will allow you to template a set of files and store them on GitHub. When you decide to use them later you can &lt;code&gt;pollinate&lt;/code&gt; them using an object of data. Each time you pollinate you can specify which files to &lt;code&gt;discard&lt;/code&gt;, &lt;code&gt;parse&lt;/code&gt;, or &lt;code&gt;move&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There are three components to a Pollinate boilerplate.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Flower&lt;/li&gt;
+&lt;li&gt;The Pollen&lt;/li&gt;
+&lt;li&gt;The Data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;code&gt;Flower&lt;/code&gt; is a GitHub repository which holds all of the files.
+These files can be passed through a template engine which uses the supplied data.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Pollen&lt;/code&gt; is just a vessel to get new data to the &lt;code&gt;Flower&lt;/code&gt;.
+It can be supplied as an HTTP JSON endpoint, as a local file or directly as a set of arguments.&lt;/p&gt;
+&lt;p&gt;The data can be considered as the DNA.
+Both sides can supply it, but the data from the Pollen takes precedence when merging the objects.
+The data supplies a list of files to act upon with the template engine along with the data to inject.
+The data can also supply file operations to move or delete files during the process.&lt;/p&gt;
+&lt;p&gt;The developer of this project has posted an example which is very easy to follow along when you want to set up your own Pollinate.&lt;/p&gt;
+&lt;p&gt;Don’t forget to to invest some time to rehash or practice your knowledge by checking this weeks challenge: &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge/&quot;&gt;Websocket Challenge&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Weekly Challenge - WebSocket Challenge</title>
       <link>http://daily-javascript.com/articles/weekly-challenge-2016-07/</link>
