@@ -36,178 +36,205 @@
       <div class="content-wrap">
         <article class="article intro">
           <header>
-            <p class="date"><span>15. January 2016</span></p>
-            <h2><a href="/articles/weekly-challenge-2016-03/">Weekly Challenge - Tic tac toe</a></h2>
+            <p class="date"><span>03. February 2016</span></p>
+            <h2><a href="/articles/microwork/">Microwork.js</a></h2>
           </header>
-          <section class="content"><p><img style="width: 100%; display:block;" src="http://i.imgur.com/AMfBBzl.png" ></p>
-<p>First of all here is a link to <a href="http://daily-javascript.com/challenges/mandelbrot/results">last weeks results</a> sadly the challenge was a bit to hard, so I heard in some direct feedback. So I will switch it up this week.
-No more fractals this time. This weeks challenge is create a Tic Tac Toe game using&nbsp;Javascript.</p>
-<p>You can go two ways for this&nbsp;implementation.</p>
-<p>The first one would be very naive. Simply switch between 2 users, the first user would be X the other would be O.
-The program should be able to detect when one of the players has won or if it is a&nbsp;tie.</p>
-<p>If you are feeling very confident implement <span class="caps">AI</span> for player O. Same rules would apply.
-Be mindful in your implementation because next week there will come some additional&nbsp;requirements.</p>
-<p>Again I’ve created <a href="http://codepen.io/DailyJavascript/pen/ZQXBaK">a Codepen for you to start with</a>.
-Please submit your solution to this <a href="http://goo.gl/forms/vM1b4oUXC6">Google Form</a> and happy&nbsp;coding.</p>
+          <section class="content"><p>Microwork.js (GitHub: <a href="https://github.com/yamalight/microwork">yamalight/microwork</a>, License: <span class="caps">MIT</span>, npm:&nbsp;microwork)</p>
+<p>Microwork.js is a library for simple creation of distributed micro services using <a href="https://www.rabbitmq.com">RabbitMQ</a>.
+If you are not familiar with RabbitMQ, it is a messaging server.
+Messaging enables applications to connect and scale.
+Applications can connect to each other, as components of a larger&nbsp;application.</p>
+<p>An example service that subscribe to messages from <code>do.stuff</code> topic and uses incoming&nbsp;data:</p>
+<pre><code class="lang-javascript"><span class="keyword">import</span> Microwork <span class="keyword">from</span> <span class="string">'microwork'</span>;
 
-          </section>
-        </article>
-        <article class="article intro">
-          <header>
-            <p class="date"><span>14. January 2016</span></p>
-            <h2><a href="/articles/chakracore-and-10-years-jquery/">ChakraCore and 10 years of jQuery</a></h2>
-          </header>
-          <section class="content"><p>ChakraCore (GitHub: <a href="https://github.com/Microsoft/ChakraCore">Microsoft/ChakraCore</a>, License:&nbsp;<span class="caps">MIT</span>)</p>
-<p>In case you did not see or hear it yet, Microsoft has open sourced the ChakraCore.
-ChakraCore is the Javascript engine that powers Microsoft&nbsp;Edge.</p>
-<p>The ChakraCore repository provides a fully supported and open-source standalone JavaScript engine, with the same  as the Microsoft Edge’s Chakra engine, to embed within your&nbsp;projects.</p>
-<p>For more in depth information I would refer you to the <a href="https://blogs.windows.com/msedgedev/2016/01/13/chakracore-now-open/">official post by Microsoft</a>. When you don’t feel like reading that, just watch this <a href="https://youtu.be/1bfDB3YPHFI">announcement video</a>.</p>
-<iframe width="100%" height="480" src="https://www.youtube.com/embed/1bfDB3YPHFI" frameborder="0" allowfullscreen></iframe>
+<span class="comment">// create task runner</span>
+<span class="keyword">const</span> runner = <span class="keyword">new</span> Microwork({host: <span class="string">'my.rabbit.host'</span>, exchange: <span class="string">'my.exchange'</span>});
 
-<p>Besides the great news coming from Microsoft, jQuery has a special day to celebrate. The ten year existence of the most used library on the web.
-The first release was at 14<span class="ord">th</span> of January 2006. Since then it has changed a lot and helped evolve the web to the great platform it is&nbsp;nowadays.</p>
-<p>Go over to the <a href="http://blog.jquery.com/2016/01/14/ten-years-of-jquery-and-beyond/">jQuery blog</a> to read a little bit about the journey to&nbsp;today.</p>
-<p>Don’t forget to submit your implementation of this weeks challenge. If you need a refresher on what the assignment was head over the <a href="http://daily-javascript.com/challenges/mandelbrot/">challenge&nbsp;page</a></p>
+<span class="comment">// add worker to specific topic</span>
+<span class="keyword">await</span> runner.subscribe(<span class="string">'do.stuff'</span>, (msg, reply) =&gt; {
+    <span class="comment">// Capitalize first letter of the message</span>
+    reply(msg.charAt(<span class="number">0</span>).toUpperCase() + msg.slice(<span class="number">1</span>));
+});
 
-          </section>
-        </article>
-        <article class="article intro">
-          <header>
-            <p class="date"><span>13. January 2016</span></p>
-            <h2><a href="/articles/featurejs/">Feature.js</a></h2>
-          </header>
-          <section class="content"><p>Feature.js (GitHub: <a href="https://github.com/viljamis/feature.js/">viljamis/feature.js</a>, License:&nbsp;<span class="caps">MIT</span>)</p>
-<p>Feature.js is a very fast, simple and lightweight browser feature detection library. I received this from a ex-colleage of mine and I was amazed I did not stumble upon this before, since it has more than 1200 stars on Github.
-There are several features you can test with this library, here is a list of&nbsp;them:</p>
-<ul>
-<li>AddEventListener</li>
-<li>Async&nbsp;attribute</li>
-<li>Canvas</li>
-<li>ClassList&nbsp;<span class="caps">API</span></li>
-<li><span class="caps">CORS</span>&nbsp;API</li>
-<li>Context&nbsp;Menu</li>
-<li><span class="caps">CSS</span> 3D&nbsp;transform</li>
-<li><span class="caps">CSS</span>&nbsp;transform</li>
-<li><span class="caps">CSS</span>&nbsp;transition</li>
-<li>Defer&nbsp;attribute</li>
-<li>DeviceOrientation</li>
-<li>DeviceMotion</li>
-<li>Geolocation</li>
-<li>History&nbsp;<span class="caps">API</span></li>
-<li>Input&nbsp;Placeholder</li>
-<li>LocalStorage</li>
-<li>MatchMedia</li>
-<li>Picture&nbsp;element</li>
-<li>QuerySelectorAll</li>
-<li><span class="caps">REM</span>&nbsp;Units</li>
-<li>Service&nbsp;Worker</li>
-<li>Sizes&nbsp;attribute</li>
-<li>Srcset&nbsp;attribute</li>
-<li><span class="caps">SVG</span></li>
-<li>Touch</li>
-<li>Viewport&nbsp;Units</li>
-<li>WebGL</li>
-</ul>
-<p>Since the tests it uses are pretty straight forward I will not go into this al to much. The most used test is done by simply checking if the requested feature is within the object in needs to be&nbsp;in.</p>
-<p>You use it with simple <code>if</code> statements like&nbsp;so:</p>
-<pre><code class="lang-javascript"><span class="keyword">if</span> (feature.webGL) {
-    <span class="built_in">console</span>.log(<span class="string">'WebGL supported'</span>);
-} <span class="keyword">else</span> {
-    <span class="built_in">console</span>.log(<span class="string">'WebGL not supported'</span>);
-}
+<span class="comment">// after work is done - cleanup</span>
+<span class="keyword">await</span> runner.stop();
 </code></pre>
-<p>If you want to see it in action head over to the <a href="http://featurejs.com/">project page</a> where the developer has implemented a nice&nbsp;demo.</p>
+<p>There are a few useful plugin already available such as: a hardware stats plugin which provides basic hardware stats about Node, a health plugin which provides basic keep-alive signal and a subscribers info plugin which provides basic information about&nbsp;subscribers.</p>
+<p>For more examples and documentation check out the <a href="http://yamalight.github.io/microwork/">Github Page</a>.</p>
 
           </section>
         </article>
         <article class="article intro">
           <header>
-            <p class="date"><span>12. January 2016</span></p>
-            <h2><a href="/articles/catbee/">Catbee</a></h2>
+            <p class="date"><span>02. February 2016</span></p>
+            <h2><a href="/articles/houdini/">Houdini</a></h2>
           </header>
-          <section class="content"><p>Catbee (GitHub: <a href="https://github.com/markuplab/catbee">markuplab/catbee</a>, License: <span class="caps">MIT</span>, npm:&nbsp;little-loader)</p>
-<p><p style="text-align: center; display: block;">
-<img src="https://raw.githubusercontent.com/markuplab/catbee-todomvc/master/logo.png" style="max-width: 300px; width: 100%;">
-</p>
-Catbee is an high level isomorphic framework inspired and based on best practices from <a href="https://github.com/catberry/catberry">Catberry</a>, <a href="https://github.com/Yomguithereal/baobab">Baobab</a> and <a href="https://github.com/cerebral/cerebral">Cerebral</a>.</p>
-<p>Catbee is Catberry little brother. Unlike Catberry, Catbee use “Single State Tree” conception.
-All state mutations run in signals, and powered by the <a href="https://github.com/markuplab/appstate">AppState</a>&nbsp;module.</p>
-<p>All data focused in Baobab tree, instead of distributed flux stores. The tree contains the full application state, and it has 2 interfaces: modify <span class="caps">API</span> also known as “Signals”, and read API also known as&nbsp;“Watchers”.</p>
-<p>Signal is the only way to modify state tree. It looks like middleware, but it is way more flexible and adopted for sync/async operations.
-If you want to learn more about signals, checkout <a href="http://cerebraljs.com/">this</a> and <a href="https://github.com/markuplab/appstate">this</a>.
-The developers recommend running signal on each user action, when you need change application state, and also signal automatically run on every url&nbsp;change.</p>
-<p>Signals use composition conception, and contains an array of independent functions. It’s very simple way to maintain big codebase. Here is an example of a&nbsp;Signal:</p>
-<pre><code class="lang-javascript"><span class="keyword">let</span> signal = [
-  setLoading, <span class="comment">// Sync function</span>
-  [ <span class="comment">// Here we run parallel functions</span>
-    getUser, { <span class="comment">// Async function with 2 outputs success and error</span>
-      success: [setUser], <span class="comment">// Run if we call output.success in getUser</span>
-      error: [setUserError] <span class="comment">// Run if we call output.error in getUser</span>
+          <section class="content"><p>During my daily browse I came across <a href="https://surma.link/things/houdini-intro/">“New ways to make your web app jank with Houdini – An introduction”</a>. Which made me curious. After the first paragraph I was hooked.
+The author Surma make the point that as developers we can only observe what the magic <span class="caps">CSS</span> does.
+Even when we are animating using Javascript we are still animating the CSS properties of the animated&nbsp;element.</p>
+<p>This way of thinking is actually backward. What if there was a way you could access the magic <span class="caps">CSS</span> does?
+Define your own properties for doing layout, scroll behavior or position. The possibilities are endless.
+No longer will we be limited to what is implemented in the spec. That is where Houdini comes&nbsp;in.</p>
+<p>The Houdini task force is a collection of engineers from Mozilla, Apple, Microsoft, <span class="caps">HP</span>, Intel and Google working together to expose certain parts of the CSS engine. This task force is working on a <a href="https://drafts.css-houdini.org/">collection of drafts</a> with the goal to get them accepted by the <span class="caps">W3C</span> and become part of the actual web&nbsp;standards.</p>
+<p>I would strongly recommend you take a look at <a href="https://surma.link/things/houdini-intro/">Surma’s post</a> and check out <a href="https://drafts.css-houdini.org/">the drafts already created</a>.</p>
+<p>Surma also posted a small demo of what Compositor Worklet can do in a very early implementation he got to play&nbsp;with.</p>
+<iframe width="100%" height="480" src="https://www.youtube.com/embed/EUlIxr8mk7s" frameborder="0" allowfullscreen></iframe>
+
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
+            <p class="date"><span>01. February 2016</span></p>
+            <h2><a href="/articles/conflux/">Conflux</a></h2>
+          </header>
+          <section class="content"><p>Conflux (GitHub: <a href="https://github.com/ben-ng/conflux">ben-ng/conflux</a>, License: <span class="caps">MIT</span>, npm:&nbsp;conflux)</p>
+<p>Conflux is Redux implantation for distributed systems.
+As the developer says: Distributed systems are hard. Conflux tries to make distributed systems more understandable.
+It aims to do what <a href="http://redux.js.org/">Redux</a> did for <a href="https://facebook.github.io/flux">Flux</a>, and what <a href="http://raft.github.io/">Raft</a> did for <a href="http://www.wikiwand.com/en/Paxos_%28computer_science%29">Paxos</a>.
+Natrually, it does this by composing the two&nbsp;ideas.</p>
+<h3 id="so-what-does-it-really-do-">So what does it really&nbsp;do?</h3>
+<p>You can build serverless applications. Which does not mean <a href="https://github.com/serverless/serverless">“serverless”</a> as in it uses <span class="caps">AWS</span> <a href="https://github.com/serverless/serverless">Lambda</a>.
+Serverless as in there is no central server, like how BitTorrent works just a cluster of nodes that coordinate with each other.
+The developer let’s know that he is working an a few example applications to help you get&nbsp;going.</p>
+<p>A quick example provided by the&nbsp;developer:</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> node = conflux({
+    id: uuid.v4(),
+    <span class="comment">// how many nodes are in the cluster?</span>
+    clusterSize: <span class="number">5</span>,
+    <span class="comment">// how should nodes communicate?</span>
+    channel: {
+        name: <span class="string">'redis'</span>
     },
-    getNews, { <span class="comment">// It's function will run parallel with getUser, like Promise.all</span>
-      loaded: [setNews],
-      error: [setNewsError]
-    }
-  ],
-  unsetLoading
-];
-</code></pre>
-<p>Components can access data by <a href="https://github.com/Yomguithereal/baobab#specialized-getters">watchers</a>. There are two main reasons you should use watchers. You’ll need data context for template rendering, and you’ll also need state update events to rerender your component.
-You do not need bind watchers manually, it’s inside of&nbsp;Catbee.</p>
-<pre><code class="lang-javascript"><span class="comment">// Here we use simple Baobab.watch <span class="caps">API</span></span>
-<span class="built_in">module</span>.exports = {
-  news: [<span class="string">'news'</span>, <span class="string">'data'</span>],
-  isVisible: [<span class="string">'news'</span>, <span class="string">'UIState'</span>, <span class="string">'isVisible'</span>]
-};
+    <span class="comment">// define your action creators</span>
+    methods: {
+        append(thing){
+            <span class="keyword">return</span> thing;
+        }
+    },
+    <span class="comment">// define your reducer</span>
+    reduce(state, action) {
+        state = state == <span class="literal">null</span> ? [] : state;
+        <span class="keyword">return</span> state.concat(action);
+    },
+});
 
-<span class="comment">// You can also use Baobab.watch dynamicly</span>
-<span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">attributes</span>) </span>{
-  <span class="comment">// Here attributes is &lt;cat-component id="unique" cat-id="1" watcher= "dynamic"&gt;&lt;/cat-component&gt;</span>
-  <span class="keyword">var</span> id = attributes[<span class="string">'cat-id'</span>];
+<span class="comment">// subscribe to changes</span>
+node.subscribe(() =&gt; {
+    <span class="built_in">console</span>.log(nodeB.getState().log.join(<span class="string">' '</span>));
+});
 
-  <span class="keyword">return</span> {
-    title: [<span class="string">'news'</span>, <span class="string">'data'</span>, { id: id }, <span class="string">'title'</span>]
-  };
-}
+<span class="comment">// perform an action</span>
+node.perform(<span class="string">'append'</span>, [<span class="string">'foo'</span>]);
 </code></pre>
-<p>I really like this library because of my associations with Baobab. My first encounter with it was via the post <a href="http://christianalfoni.github.io/javascript/2015/02/06/plant-a-baobab-tree-in-your-flux-application.html">“Plant a Baobab tree in your flux application”</a> which was written by <a href="https://twitter.com/christianalfoni">Christian Alfoni</a>. It lead me to think differently about flux and redux, I recommend you read&nbsp;it.</p>
-<p>Don’t forget to challenge yourself this week. I prepared another weekly challenge which is: <a href="http://daily-javascript.com/challenges/mandelbrot/">“Implement the Mandelbrot set using Javascript”</a>.</p>
+<p>When you have worked with Redux before Conflux should feel very familiar.
+You <code>subscribe()</code> to a Conflux instance, and call <code>getState()</code> inside to get the current state.
+Instead of dispatching actions directly, you <code>perform()</code> methods that <code>dispatch()</code> them.
+The methods are declared when you construct a Conflux instance which is the equivalent to how Action Creators work in&nbsp;Redux.</p>
 
           </section>
         </article>
         <article class="article intro">
           <header>
-            <p class="date"><span>11. January 2016</span></p>
-            <h2><a href="/articles/little-loader/">Little Loader</a></h2>
+            <p class="date"><span>27. January 2016</span></p>
+            <h2><a href="/articles/marsdb/">MarsDB</a></h2>
           </header>
-          <section class="content"><p>Little Loader (GitHub: <a href="https://github.com/walmartlabs/little-loader">walmartlabs/little-loader</a>, License: <span class="caps">MIT</span>, npm:&nbsp;little-loader)</p>
-<p>Little Loader is a lightweight JavaScript loader which is advertised as “The Only Correct Script Loader Ever Made”.
-It was developed by <a href="http://formidable.com">Formidable</a> for a project they did for&nbsp;Mallmart.</p>
-<p>The need for this library grew from the lack of browser support for the which the team needed.
-To give an example look at the overview made by the&nbsp;team.</p>
-<p><img src="https://cdn-images-1.medium.com/max/600/1*NUr1sQqkxQ8mdAcrWWLvjg.png" alt="https://cdn-images-1.medium.com/max/600/1*NUr1sQqkxQ8mdAcrWWLvjg.png"></p>
-<p>I’m already using it in one of my projects because after watching the introduction video I was convinced this is the best library for dynamically loading remote JavaScript&nbsp;files.</p>
-<iframe width="100%" height="480" src="https://www.youtube.com/embed/F080X3Tp6_8" frameborder="0" allowfullscreen></iframe>
+          <section class="content"><p>MarsDB (GitHub: <a href="https://github.com/c58/marsdb">c58/marsdb</a>, License: <span class="caps">MIT</span>, npm:&nbsp;mardb)</p>
+<p>MarsDB is a very lightweight client-side database.
+It is inspired by a Meteor’s <a href="https://atmospherejs.com/meteor/minimongo">minimongo</a> matching/modifying implementation.
+The library has a Promise based interface and can be backed with any storage implementation such&nbsp;as:</p>
+<ul>
+<li>In-memory storage (built-in&nbsp;default)</li>
+<li><a href="https://github.com/c58/marsdb-localforage">LocalForage storage</a> – fastest in-browser storage (InexedDB, WebSQL and fallback to&nbsp;localStorage)</li>
+<li><a href="https://github.com/c58/marsdb-localstorage">LocalStorage storage</a> – not recommended, better prefer&nbsp;LocalForage</li>
+<li><a href="https://github.com/c58/marsdb-levelup">LevelUP storage</a> – lightweight server-less Node.js&nbsp;storage</li>
+<li><a href="https://github.com/c58/marsdb-mongo">MongoDB wrapper</a> – use MarsDB for comfortable work with&nbsp;MongoDB</li>
+</ul>
+<p>Besides all of this MarsDB supports observable cursors which is very nice addition to the toolbelt.
+The database supports any kind of find/update/remove operations that Meteor’s minimongo would also support.
+When you need a reference on how theses queries work go to the Meteor docs for supported <a href="https://atmospherejs.com/meteor/minimongo">query/modifier operations</a>.</p>
+<p>Let’s first create a collection of <code>posts</code>.</p>
+<pre><code class="lang-javascript"><span class="keyword">import</span> Collection <span class="keyword">from</span> <span class="string">'marsdb'</span>;
+<span class="keyword">import</span> LocalStorageManager <span class="keyword">from</span> <span class="string">'marsdb-localstorage'</span>;
 
-<p>So how do we work with it?
-First of all make use it is installed by&nbsp;running:</p>
-<pre><code class="lang-bash">npm i little-loader -S
+<span class="comment">// Setup different id generator and storage managers</span>
+<span class="comment">// Default storage is in-memory</span>
+Collection.defaultStorageManager(LocalStorageManager);
+Collection.defaultIdGenerator(() =&gt; {
+  <span class="keyword">return</span> {
+    value: <span class="built_in">Math</span>.random(),
+    seed: <span class="number">0</span>,
+  };
+});
+
+<span class="keyword">const</span> posts = <span class="keyword">new</span> Collection(<span class="string">'posts'</span>);
 </code></pre>
-<p>Now we can require it within our app like&nbsp;so:</p>
-<pre><code class="lang-javascript"><span class="keyword">const</span> load = <span class="built_in">require</span>(<span class="string">"little-loader"</span>);
+<p>Now we can populate it with some&nbsp;data:</p>
+<pre><code class="lang-javascript"><span class="comment">// To insert one</span>
+posts.insert({text: <span class="string">'MarsDB is awesome'</span>}).then(docId =&gt; {
+  <span class="comment">// Invoked after persisting document</span>
+});
 
-load(<span class="string">"http://example.com/foo.js"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>{
-  <span class="comment">// .. This is where you continue with your app.</span>
+<span class="comment">// To insert a bulk</span>
+posts.insertAll(
+  {text: <span class="string">'MarsDB'</span>},
+  {text: <span class="string">'is'</span>},
+  {text: <span class="string">'awesome'</span>}
+).then(docsIds =&gt; {
+    <span class="built_in">console</span>.log(<span class="string">'---&gt;&gt;'</span>, docsIds);
 });
 </code></pre>
-<p>That’s all actually. There are multiple ways to include Little Loader. You can get it from a <span class="caps">CDN</span>, from npm and it is compatible with AMD loaders such as&nbsp;RequireJS.</p>
-<p>When including Little Loader via a normal script tag, it will attach it self to the <code>window</code> Object and can be accessed via <code>window._lload</code> like&nbsp;so:</p>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
-  <span class="built_in">window</span>._lload(<span class="string">"http://example.com/foo.js"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>{
-    <span class="comment">// .. Your code....</span>
+<p>And we can retrieve one of the saved item like&nbsp;so:</p>
+<pre><code class="lang-javascript">posts.find({text: <span class="string">'MarsDB'</span>})
+  .sort([<span class="string">'createdAt'</span>])
+  .then(docs =&gt; {
+      <span class="built_in">console</span>.log(<span class="string">'--&gt;&gt;'</span>, docs);
   });
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 </code></pre>
+<p>For more in depth examples and documentation check the <a href="https://github.com/c58/marsdb"><span class="caps">README</span> file</a>.</p>
+<p>A small reminder to challenge yourself. This week we will be focusing on transferring knowledge using the <a href="http://daily-javascript.com/articles/workshopper">workshopper framework</a> head over to the <a href="http://daily-javascript.com/challenges/workshopper">challenge page</a> for more&nbsp;details.</p>
+
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
+            <p class="date"><span>26. January 2016</span></p>
+            <h2><a href="/articles/preact/">Preact</a></h2>
+          </header>
+          <section class="content"><p>Preact (GitHub: <a href="https://github.com/developit/preact">developit/preact</a>, License: <span class="caps">MIT</span>, npm:&nbsp;preact)</p>
+<p>Preact is an attempt to recreate the core value proposition of React using as little code as possible.
+It is far to say that the developers succeeded in this, since it’s only around 3kb when minified and&nbsp;gzipped.</p>
+<p>The library retains a large amount of compatibility with React. Note that only the <a href="https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components">stateless functional components</a> and <a href="https://facebook.github.io/react/docs/reusable-components.html#es6-classes"><span class="caps">ES6</span> Classes interface</a> are available for&nbsp;use.</p>
+<p>It already has a few add-ons such as <a href="http://git.io/preact-router">a router</a>, <a href="http://git.io/preact-render-to-string">an universal renderer</a> and <a href="https://github.com/developit/preact-compat">a compatibility layer for other React modules</a>.</p>
+<p>A full list of demo’s, add-ons and libraries can be found on the <a href="http://developit.github.io/preact/">Github Page</a>.</p>
+<p>Let’s take a look on how we work with&nbsp;it.</p>
+<pre><code class="lang-javascript"><span class="comment">// import the stuff we want to use</span>
+<span class="keyword">import</span> { h, render, Component } <span class="keyword">from</span> <span class="string">'preact'</span>;
+
+<span class="comment">// Tell Babel to transform <span class="caps">JSX</span> into h() calls:</span>
+<span class="comment">/** @jsx h */</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>{
+    render() {
+        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>My Super Awesome App<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>;</span>
+    }
+}
+
+<span class="comment">// render an instance of App into &lt;body&gt;:</span>
+render(<span class="xml"><span class="tag">&lt;<span class="title">App</span> /&gt;</span>, document.body);</span>
+</code></pre>
+<p>As you can see it’s very similar to React but only 3kb.
+It comes with the same set of lifecycle&nbsp;events:</p>
+<ul>
+<li>componentWillMount</li>
+<li>componentDidMount</li>
+<li>componentWillUnmount</li>
+<li>componentDidUnmount</li>
+<li>componentWillReceiveProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>componentDidUpdate</li>
+</ul>
+<p>For more examples check the <a href="https://github.com/developit/preact-compat"><span class="caps">README</span></a> or the <a href="http://developit.github.io/preact/">Github Page</a> where you can find some amazing examples posted by the&nbsp;developer.</p>
 
           </section>
         </article>

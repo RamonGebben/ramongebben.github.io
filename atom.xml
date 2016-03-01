@@ -5,9 +5,538 @@
     <atom:link href="http://daily-javascript.com/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://daily-javascript.com</link>
     <description>For your daily dose of Javascript libraries.</description>
-    <pubDate>Wed, 10 Feb 2016 01:00:00 +0100</pubDate>
+    <pubDate>Tue, 01 Mar 2016 01:00:00 +0100</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>React Web Animations</title>
+      <link>http://daily-javascript.com/articles/react-web-animations/</link>
+      <pubDate>Tue, 01 Mar 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/react-web-animations/</guid>
+      <author></author>
+      <description>&lt;p&gt;react-web-animations (GitHub: &lt;a href=&quot;https://github.com/RinconStrategies/react-web-animation&quot;&gt;RinconStrategies/react-web-animation&lt;/a&gt;, License: MIT, npm: react-web-animation)&lt;/p&gt;
+&lt;p&gt;In every web application we are animating stuff nowadays. We do this using libraries like &lt;a href=&quot;http://julian.com/research/velocity/&quot;&gt;Velocity&lt;/a&gt;, &lt;a href=&quot;https://greensock.com/&quot;&gt;Greensock&lt;/a&gt;, &lt;a href=&quot;https://jquery.com/&quot;&gt;jQuery&lt;/a&gt; or we do this with keyframe animating and appending classes to trigger the animations.
+If you haven’t heard about the &lt;a href=&quot;https://w3c.github.io/web-animations/&quot;&gt;Web animation spec&lt;/a&gt;, it is an API to animate elements without any libraries.
+There is already a &lt;a href=&quot;https://github.com/web-animations/web-animations-js&quot;&gt;Polyfill&lt;/a&gt; available. So you can start using it today.&lt;/p&gt;
+&lt;p&gt;Now I came across a library which implements this polyfill as a React component called &lt;code&gt;react-web-animations&lt;/code&gt;.
+Why use this over other animation libraries for React? Since react-web-animation uses the Web Animations API polyfill it will eventually use the native browser implementation.
+Chrome already has the support for these features today. The rest of the browsers how ever are a bit sad, luckily the polyfill takes care of that for us.&lt;/p&gt;
+&lt;p&gt;A simple example of how you would use the &lt;code&gt;Animation&lt;/code&gt; component would look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; {Component} &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'react'&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; {Animation} &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'react-web-animation'&lt;/span&gt;;
+
+
+&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Basic&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Component&lt;/span&gt; &lt;/span&gt;{
+
+    getKeyFrames() {
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; [
+            { transform: &lt;span class=&quot;string&quot;&gt;'scale(1)'&lt;/span&gt;,    opacity: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,     offset: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; },
+            { transform: &lt;span class=&quot;string&quot;&gt;'scale(.5)'&lt;/span&gt;,   opacity: &lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;,   offset: &lt;span class=&quot;number&quot;&gt;0.3&lt;/span&gt; },
+            { transform: &lt;span class=&quot;string&quot;&gt;'scale(.667)'&lt;/span&gt;, opacity: &lt;span class=&quot;number&quot;&gt;0.667&lt;/span&gt;, offset: &lt;span class=&quot;number&quot;&gt;0.7875&lt;/span&gt; },
+            { transform: &lt;span class=&quot;string&quot;&gt;'scale(.6)'&lt;/span&gt;,   opacity: &lt;span class=&quot;number&quot;&gt;0.6&lt;/span&gt;,   offset: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; }
+        ];
+    }
+
+    getTiming( duration ) {
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; {
+            duration,
+            easing: &lt;span class=&quot;string&quot;&gt;'ease-in-out'&lt;/span&gt;,
+            delay: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,
+            iterations: &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,
+            direction: &lt;span class=&quot;string&quot;&gt;'alternate'&lt;/span&gt;,
+            fill: &lt;span class=&quot;string&quot;&gt;'forwards'&lt;/span&gt;
+        };
+    }
+
+    render() {
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;(
+            &lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;keyframes&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;{this.getKeyFrames()}&lt;/span&gt;
+                       &lt;span class=&quot;attribute&quot;&gt;timing&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;{this.getTiming(2500)}&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                    Web Animations API Rocks
+                &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;Animation&lt;/span&gt;&amp;gt;&lt;/span&gt;)&lt;/span&gt;;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For advanced usage you need to check the &lt;a href=&quot;https://github.com/RinconStrategies/react-web-animation/tree/master/src&quot;&gt;great documentation&lt;/a&gt; which the developer has provided.&lt;/p&gt;
+&lt;p&gt;A small side note.&lt;/p&gt;
+&lt;p&gt;Since I haven’t received any submissions for the weekly challenges, I have decided to focus on finding great libraries for you guys instead of trying to come up with new challenges to do.
+Thanks to the people who did participate, when you still want to be challenged I would suggest you take a look at &lt;a href=&quot;https://www.reddit.com/r/dailyprogrammer&quot;&gt;/r/DailyProgrammer&lt;/a&gt;, &lt;a href=&quot;http://codegolf.stackexchange.com/&quot;&gt;Code Golf&lt;/a&gt; or &lt;a href=&quot;https://www.hackerrank.com/&quot;&gt;HackerRank&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Cash</title>
+      <link>http://daily-javascript.com/articles/cash/</link>
+      <pubDate>Wed, 24 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/cash/</guid>
+      <author></author>
+      <description>&lt;p&gt;Cash (GitHub: &lt;a href=&quot;https://github.com/dthree/cash&quot;&gt;dthree/cash&lt;/a&gt;, License: MIT, npm: cash)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://camo.githubusercontent.com/31404520899c0f1fd55308746fa804a8bc89e4e3/687474703a2f2f692e67697068792e636f6d2f785430424b4e7755504668466a32676c72792e676966&quot; style=&quot;max-width: 756px; width: 100%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Cash is a project to implement most used Unix-based commands in pure Javascript and with no external dependencies.
+The reason for this is to make them available cross platform.
+So if you find yourself stuck on using Windows because your business used it, you can just &lt;code&gt;npm i cash -g; cash&lt;/code&gt; and be back in Unix land.&lt;/p&gt;
+&lt;p&gt;The developer’s goal is to expose to the Javascript community to these commands, and to provide a cleaner, simpler and flexible alternative to applications like Cygwin for those wanting the Linux feel on Windows.&lt;/p&gt;
+&lt;p&gt;While writing this the project supports the following commands:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;alias&lt;/li&gt;
+&lt;li&gt;cat&lt;/li&gt;
+&lt;li&gt;cd&lt;/li&gt;
+&lt;li&gt;cp&lt;/li&gt;
+&lt;li&gt;echo&lt;/li&gt;
+&lt;li&gt;grep&lt;/li&gt;
+&lt;li&gt;kill&lt;/li&gt;
+&lt;li&gt;less&lt;/li&gt;
+&lt;li&gt;ls&lt;/li&gt;
+&lt;li&gt;mkdir&lt;/li&gt;
+&lt;li&gt;mv&lt;/li&gt;
+&lt;li&gt;pwd&lt;/li&gt;
+&lt;li&gt;rm&lt;/li&gt;
+&lt;li&gt;sort&lt;/li&gt;
+&lt;li&gt;touch&lt;/li&gt;
+&lt;li&gt;unalias&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For additional commands the developer has decided to let the community decide.
+You can vote on new commands in the &lt;a href=&quot;https://github.com/dthree/cash/wiki/Roadmap&quot;&gt;Road map&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For more information on check out the &lt;a href=&quot;https://github.com/dthree/cash&quot;&gt;Github Project&lt;/a&gt; where the developer has also posted a &lt;a href=&quot;https://github.com/dthree/cash/wiki&quot;&gt;wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Don’t forget to submit you solution for the &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge-part-two&quot;&gt;Websocket Challenge - part two&lt;/a&gt;, since there are only two days left before submission closes.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Pointing Fingers</title>
+      <link>http://daily-javascript.com/articles/pointing-fingers/</link>
+      <pubDate>Tue, 23 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/pointing-fingers/</guid>
+      <author></author>
+      <description>&lt;p&gt;pointing-fingers (GitHub: &lt;a href=&quot;https://github.com/jareware/pointing-fingers&quot;&gt;jareware/pointing-fingers&lt;/a&gt;, License: MIT, npm: pointing-fingers)&lt;/p&gt;
+&lt;p&gt;A interest of mine is testing. Sadly there are not that many changes in the Javascript community in the field of testing.
+But then I found &lt;code&gt;pointing-fingers&lt;/code&gt; over the weekend, which is a tool for testing upstream API’s.
+Since “Software doesn’t exist in a vacuum” we need to take unexpected API changes into account.
+But thoroughly testing third party API’s is of course not what we want to do.
+This tool offers you a sensible middle ground, and a convenient workflow for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Documenting the upstream API format, as not all API’s are perfectly documented&lt;/li&gt;
+&lt;li&gt;Versioning that documentation, as API’s tend to change over time&lt;/li&gt;
+&lt;li&gt;Automatically alerting you to API changes, as sometimes upstream vendors won’t&lt;/li&gt;
+&lt;li&gt;Explicitly accepting those API changes, as your app will likely need to be changed accordingly&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An example test with all the optional options using Mocha and Chai’s &lt;code&gt;assert&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; { assert } &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'chai'&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; { testUpstreamChanges } &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'pointing-fingers'&lt;/span&gt;;
+
+describe(&lt;span class=&quot;string&quot;&gt;'GitHub API'&lt;/span&gt;, () =&amp;gt; {
+  testUpstreamChanges({
+    learn: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;// turn this on to update your fixtures (defaults to false)&lt;/span&gt;
+    fixtures: &lt;span class=&quot;string&quot;&gt;'test/fixtures/'&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;// fixtures will be written here (defaults to &quot;/dev/null&quot;)&lt;/span&gt;
+    runner: it, &lt;span class=&quot;comment&quot;&gt;// run each test in a separate Mocha it() block (defaults to running everything together)&lt;/span&gt;
+    assert: assert.deepEqual, &lt;span class=&quot;comment&quot;&gt;// which assert(actual, expected) to use (defaults to simple string comparison)&lt;/span&gt;
+    placeholder: &lt;span class=&quot;string&quot;&gt;'(IGNORED IN TEST SUITE)'&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;// ignored fields are replaced with this (defaults to null)&lt;/span&gt;
+    ignores: [ &lt;span class=&quot;comment&quot;&gt;// these are simply delegated to lodash's _.set() (defaults to [])&lt;/span&gt;
+      &lt;span class=&quot;string&quot;&gt;'data.documentation_url'&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;// we don't care if the doc URL changes, so ignore that field&lt;/span&gt;
+      &lt;span class=&quot;string&quot;&gt;'headers.content-length'&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;// this could also change spontaneously, and we're not interested&lt;/span&gt;
+      &lt;span class=&quot;string&quot;&gt;'headers.date'&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;// ^ ditto&lt;/span&gt;
+    ],
+    transforms: [ &lt;span class=&quot;comment&quot;&gt;// these are invoked with the response object to allow arbitrary checks/ignores (defaults to [])&lt;/span&gt;
+      res =&amp;gt; res.status = (res.status &amp;gt;= &lt;span class=&quot;number&quot;&gt;400&lt;/span&gt; &amp;amp;&amp;amp; res.status &amp;lt; &lt;span class=&quot;number&quot;&gt;500&lt;/span&gt;) &lt;span class=&quot;comment&quot;&gt;// ensure it's 4xx, but tolerate small changes&lt;/span&gt;
+      &lt;span class=&quot;comment&quot;&gt;/*
+      // transforms which throw an Error are ignored, so it's safe to traverse/iterate complex objects without
+      // littering the transform function with key existence checks. also, the res object is always an isolated
+      // clone, so in-place mutation is fine.
+      res =&amp;gt; res.data.Teams.forEach(x =&amp;gt; x.TeamRankingPoints = isNumber(x.TeamRankingPoints)),
+      */&lt;/span&gt;
+    ],
+    headers: { &lt;span class=&quot;comment&quot;&gt;// these are attached to outgoing requests (defaults to {})&lt;/span&gt;
+      &lt;span class=&quot;string&quot;&gt;'X-Api-Key'&lt;/span&gt;: process.env.MY_SECRET_KEY
+    },
+    method: &lt;span class=&quot;string&quot;&gt;'GET'&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;// (defaults to &quot;GET&quot;)&lt;/span&gt;
+    base: &lt;span class=&quot;string&quot;&gt;'https://api.github.com'&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;// all URL's are prefixed with this (defaults to &quot;&quot;)&lt;/span&gt;
+    urls: [ &lt;span class=&quot;comment&quot;&gt;// these are the actual URL's that will be tested (defaults to [])&lt;/span&gt;
+      &lt;span class=&quot;string&quot;&gt;'/user'&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;// the URL's can be listed as simple strings&lt;/span&gt;
+      &lt;span class=&quot;comment&quot;&gt;/*
+      { // ...but also as objects
+        url: '/something-else',
+        headers: { // all options (ignores, transforms, etc) can be overridden per-URL
+          'X-Api-Key': 'some other key'
+        }
+      }
+      */&lt;/span&gt;
+    ]
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Head over to the challenge page of &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge-part-two/&quot;&gt;Websocket Challenge - part two&lt;/a&gt; and see what you need to do in order to make on to this weeks Hall of Hero’s.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Realm React Native</title>
+      <link>http://daily-javascript.com/articles/realm-react-native/</link>
+      <pubDate>Mon, 22 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/realm-react-native/</guid>
+      <author></author>
+      <description>&lt;p&gt;Realm (GitHub: &lt;a href=&quot;https://github.com/realm/realm-js&quot;&gt;realm/realm-js&lt;/a&gt;, License: Apache-2.0, npm: realm)&lt;/p&gt;
+&lt;p&gt;Today at Facebook’s React.js Conference, The Realm team launched a new Realm mobile database designed for React Native.
+This database should offers easy object persistence and full query capabilities.
+The performance profile is usually 2–10x faster than existing options such as SQLite and CoreData.&lt;/p&gt;
+&lt;p&gt;When you are not familiar with Realm then you don’t know that, it was designed from the ground up to enable reactive app development.
+This is possible via live objects, change events, and support for &lt;a href=&quot;https://realm.io/news/unidirectional-data-flow-in-swift/&quot;&gt;unidirectional data flows&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;By example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; Realm = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'realm'&lt;/span&gt;);
+
+&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Person&lt;/span&gt; &lt;/span&gt;{}
+Person.schema = {
+    name: &lt;span class=&quot;string&quot;&gt;'Person'&lt;/span&gt;,
+    primaryKey: &lt;span class=&quot;string&quot;&gt;'name'&lt;/span&gt;,
+    properties: {
+        name: &lt;span class=&quot;string&quot;&gt;'string'&lt;/span&gt;,
+        age: {type: &lt;span class=&quot;string&quot;&gt;'int'&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;},
+    },
+};
+
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; realm = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Realm({schema: [Person]});
+
+&lt;span class=&quot;comment&quot;&gt;// Query&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; people = realm.objects(&lt;span class=&quot;string&quot;&gt;'Person'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'age &amp;gt;= 17'&lt;/span&gt;);
+people.length &lt;span class=&quot;comment&quot;&gt;// =&amp;gt; 0&lt;/span&gt;
+
+&lt;span class=&quot;comment&quot;&gt;// Write&lt;/span&gt;
+realm.write(() =&amp;gt; {
+    savedPerson = realm.create(&lt;span class=&quot;string&quot;&gt;'Person'&lt;/span&gt;, {
+        name: &lt;span class=&quot;string&quot;&gt;'Hal Incandenza'&lt;/span&gt;,
+        age: &lt;span class=&quot;number&quot;&gt;17&lt;/span&gt;,
+    });
+});
+
+&lt;span class=&quot;comment&quot;&gt;// Queries are updated in real-time&lt;/span&gt;
+people.length &lt;span class=&quot;comment&quot;&gt;// =&amp;gt; 1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For more information and full documentation check the &lt;a href=&quot;https://realm.io/&quot;&gt;Realm website&lt;/a&gt; where the developer have posted a lot of amazing examples to help you get started.&lt;/p&gt;
+&lt;p&gt;Don’t forget to check out the challenge section. &lt;a href=&quot;http://http://daily-javascript.com/challenges/websocket-challenge-part-two&quot;&gt;This weeks challenge&lt;/a&gt; extends on last weeks challenge so if you didn’t do that challenge you have some catching up to do. If you have great ideas for next challenges please reach out to me on twitter &lt;a href=&quot;http://twitter.com/DailyJavascript&quot;&gt;@DailyJavascript&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Weekly Challenge - WebSocket Challenge part two</title>
+      <link>http://daily-javascript.com/articles/weekly-challenge-2016-08/</link>
+      <pubDate>Fri, 19 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/weekly-challenge-2016-08/</guid>
+      <author></author>
+      <description>&lt;p&gt;&lt;img style=&quot;width: 100%; display:block;&quot; src=&quot;http://daily-javascript.com/challenges/websocket-challenge/header.png&quot; &gt;&lt;/p&gt;
+&lt;p&gt;This week I only got one submission and sadly that did not past the test.
+This probably has nothing to do with the code but with the way I tried to run the project. So I’d like to ask you to include a small readme when submitting a repository.
+Check out the efforts Pablo Osso did this week trying to make the tests pass on the &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge/results&quot;&gt;Results page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For the second part of this challenge series we are going to implement the basic UI to go with the server which we created in the last challenge.
+If you did not complete last &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge&quot;&gt;weeks challenge&lt;/a&gt; you can find the &lt;a href=&quot;https://github.com/Daily-Javascript/WebSocket-Challenge&quot;&gt;unit test in this repo&lt;/a&gt; but you will have some catching up to do.
+The User interface should include all the test scenario’s.
+This means that you need to build page on which a user can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pick a username&lt;/li&gt;
+&lt;li&gt;See when a new user has joined&lt;/li&gt;
+&lt;li&gt;Send messages to the whole group&lt;/li&gt;
+&lt;li&gt;Send private messages between another user&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After getting some feedback on the challenges I will use a point system to rank the results.
+I do not think it is my place to criticize anybody on their ability to code, that is why you can earn points by completing curtain aspects of the challenge. For this challenge it will be features working.
+Each of the features completed and running on &lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt; is worth one point.
+When you want to earn more points you could add more features such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;List the online users&lt;/li&gt;
+&lt;li&gt;Avatars&lt;/li&gt;
+&lt;li&gt;Channels instead of one big group&lt;/li&gt;
+&lt;li&gt;Private groups within a channel&lt;/li&gt;
+&lt;li&gt;Implementing magic links&lt;ul&gt;
+&lt;li&gt;Youtube embed video&lt;/li&gt;
+&lt;li&gt;Images&lt;/li&gt;
+&lt;li&gt;Website description&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once again completed challenges can be submitted to this &lt;a href=&quot;http://goo.gl/forms/D8waO3FuFT&quot;&gt;Google Form&lt;/a&gt;.
+When you submit before Friday next week your implementation will be featured in the weekly results which will be called Hall of Hero’s from now on.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Tip: You don’t have to make the user interface for the web. You can make it run in terminal for instance.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    <item>
+      <title>CLog.js</title>
+      <link>http://daily-javascript.com/articles/clog/</link>
+      <pubDate>Thu, 18 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/clog/</guid>
+      <author></author>
+      <description>&lt;p&gt;CLog.js (GitHub: &lt;a href=&quot;https://github.com/CVarisco/CLog.js&quot;&gt;CVarisco/CLog.js&lt;/a&gt;, License: MIT, npm: clog_js bower: clog)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://camo.githubusercontent.com/c4884bc7f9b88f02a4043a997a50bb50f6a01171/687474703a2f2f7777772e636976692e63687269737469616e7661726973636f2e636f6d2f646f776e6c6f61642f6e6f726d616c436c6f672e706e67&quot; style=&quot;max-width: 756px; width: 100%;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;CLog.js is a very lightweight library create custom colored log messages for the browser.
+Sadly this feature is only available in Google Chrome. In other browsers it falls back to the default console.log.&lt;/p&gt;
+&lt;p&gt;The problem this library tries to solve is the same problem &lt;a href=&quot;https://www.npmjs.com/package/chalk&quot;&gt;Chalk&lt;/a&gt; and &lt;a href=&quot;https://github.com/marak/colors.js/&quot;&gt;Colors.js&lt;/a&gt; are trying to solve. But this library is only focused on the browser.&lt;/p&gt;
+&lt;p&gt;I hope to see more options to style with such as background-color, underline and maybe strike-through, right now it only supports colors.
+You can install it using bower, npm or &lt;a href=&quot;https://github.com/CVarisco/CLog.js/blob/master/clog.js&quot;&gt;downloading it here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Then you can instantiate it like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; options = {
+    group: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;,
+    colors: {
+        log: &lt;span class=&quot;string&quot;&gt;&quot;#31f095&quot;&lt;/span&gt;,
+        debug: &lt;span class=&quot;string&quot;&gt;&quot;#e86024&quot;&lt;/span&gt;,
+        data: &lt;span class=&quot;string&quot;&gt;&quot;#DDDDDD&quot;&lt;/span&gt;
+        error: &lt;span class=&quot;string&quot;&gt;&quot;#e22f2f&quot;&lt;/span&gt;,
+        network: &lt;span class=&quot;string&quot;&gt;&quot;#08bce9&quot;&lt;/span&gt;,
+    }
+}
+
+&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; CLog = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; CLog(options);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can use it within our code like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;CLog(&lt;span class=&quot;string&quot;&gt;'debug'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'Pizza is awesome!!'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And it will log it in the color assigned to &lt;code&gt;debug&lt;/code&gt;. In this same place we can give it a HEX color and it will use it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;CLog(&lt;span class=&quot;string&quot;&gt;'#FFCFFF'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'Pizza is awesome!!'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Today is normally the last day you can submit your solution for this weeks challenge. Since I have only received one submission up till now, I will leave the submissions open until tomorrow night around 8PM Amsterdam time, which would be 2PM New York time.
+Be sure you send in what you got before that time. When it’s not finished yet, hurry up. If you need a reminder on what the challenge was head over to the challenge page of: &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge/&quot;&gt;Websocket Challenge&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Superhero.js</title>
+      <link>http://daily-javascript.com/articles/superhero-js/</link>
+      <pubDate>Wed, 17 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/superhero-js/</guid>
+      <author></author>
+      <description>&lt;p&gt;&lt;a href=&quot;http://superherojs.com/&quot;&gt;Superhero.js&lt;/a&gt; is a great gathering of articles, videos and presentations to help you become a better JavaScript developer.
+This is a real outcome for people who feel overwhelmed by the amount of articles appearing across the web.
+It is hard to distinguish between the relevant and the irrelevant stuff out there.&lt;/p&gt;
+&lt;p&gt;The collection is split up in categories so you have some context on why you should read it, or you can easily find a relevant resource to your problem.
+The categories are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understanding JavaScript: Syntax, style and gotchas&lt;/li&gt;
+&lt;li&gt;Organizing your code: API design, patterns and frameworks&lt;/li&gt;
+&lt;li&gt;Testing your application: Testable code, readable tests&lt;/li&gt;
+&lt;li&gt;Tools of the trade: Workflow, developer tools and debugging&lt;/li&gt;
+&lt;li&gt;Performance and Profiling: Fast and memory-efficient code&lt;/li&gt;
+&lt;li&gt;Securing your app: Principles, access control and validation&lt;/li&gt;
+&lt;li&gt;Under the hood: Understanding the browser&lt;/li&gt;
+&lt;li&gt;On the horizon: Stuff to keep an eye on&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When you would follow them all down you have a very nice learning path. Even if you have being doing JavaScript for sometime now, I would still recommend you take a gander at this page cause it really highlights some amazing resources.&lt;/p&gt;
+&lt;p&gt;If you haven’t started on this weeks challenge yet, go to the challenge page of the &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge/&quot;&gt;Websocket Challenge&lt;/a&gt; since there are only two days remaining in the challenge.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Pollinate</title>
+      <link>http://daily-javascript.com/articles/pollinate/</link>
+      <pubDate>Tue, 16 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/pollinate/</guid>
+      <author></author>
+      <description>&lt;p&gt;Pollinate (GitHub: &lt;a href=&quot;https://github.com/everysquare/pollinate&quot;&gt;everysquare/pollinate&lt;/a&gt;, License: MIT, npm: pollinate)&lt;/p&gt;
+&lt;p&gt;Pollinate is for the best I can describe a scaffolding engine. It takes a template project and uses &lt;a href=&quot;http://mozilla.github.io/nunjucks/&quot;&gt;Nunjucks&lt;/a&gt; to generate the files with the names. The name comes from visualization a tree as a “Flower”.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Think of a tree of files as a &lt;code&gt;Flower&lt;/code&gt; and a source data as &lt;code&gt;Pollen&lt;/code&gt;; combined together they create a fertilized project seed. Pollinate will allow you to template a set of files and store them on GitHub. When you decide to use them later you can &lt;code&gt;pollinate&lt;/code&gt; them using an object of data. Each time you pollinate you can specify which files to &lt;code&gt;discard&lt;/code&gt;, &lt;code&gt;parse&lt;/code&gt;, or &lt;code&gt;move&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There are three components to a Pollinate boilerplate.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Flower&lt;/li&gt;
+&lt;li&gt;The Pollen&lt;/li&gt;
+&lt;li&gt;The Data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;code&gt;Flower&lt;/code&gt; is a GitHub repository which holds all of the files.
+These files can be passed through a template engine which uses the supplied data.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Pollen&lt;/code&gt; is just a vessel to get new data to the &lt;code&gt;Flower&lt;/code&gt;.
+It can be supplied as an HTTP JSON endpoint, as a local file or directly as a set of arguments.&lt;/p&gt;
+&lt;p&gt;The data can be considered as the DNA.
+Both sides can supply it, but the data from the Pollen takes precedence when merging the objects.
+The data supplies a list of files to act upon with the template engine along with the data to inject.
+The data can also supply file operations to move or delete files during the process.&lt;/p&gt;
+&lt;p&gt;The developer of this project has posted an example which is very easy to follow along when you want to set up your own Pollinate.&lt;/p&gt;
+&lt;p&gt;Don’t forget to to invest some time to rehash or practice your knowledge by checking this weeks challenge: &lt;a href=&quot;http://daily-javascript.com/challenges/websocket-challenge/&quot;&gt;Websocket Challenge&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Weekly Challenge - WebSocket Challenge</title>
+      <link>http://daily-javascript.com/articles/weekly-challenge-2016-07/</link>
+      <pubDate>Fri, 12 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/weekly-challenge-2016-07/</guid>
+      <author></author>
+      <description>&lt;p&gt;&lt;img style=&quot;width: 100%; display:block;&quot; src=&quot;http://daily-javascript.com/challenges/websocket-challenge/header.png&quot; &gt;&lt;/p&gt;
+&lt;p&gt;Sadly this weeks challenge did also not get a very good turn out. I know it should not have been to hard to complete this challenge, still I received two submissions for it. &lt;a href=&quot;http://daily-javascript.com/articles/weekly-challenge-2016-07/&quot;&gt;The results can be found here&lt;/a&gt;. If you have an idea how we could get more people to sent in their submissions, please reach out to me via twitter: &lt;a href=&quot;https://twitter.com/DailyJavascript&quot;&gt;@DailyJavascript&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For this weeks challenge you will be putting together a WebSocket server to handle chat messages.
+This is gonna be the first challenge in a three week series. The additions to the project will still be a surprise for now.
+To make sure you implement these challenges correctly I will provide you with some tests.&lt;/p&gt;
+&lt;p&gt;For this weeks challenge your server needs to pass the following tests:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;pi&quot;&gt;'use strict'&lt;/span&gt;;
+
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; should = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'should'&lt;/span&gt;);
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; io = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'socket.io-client'&lt;/span&gt;);
+
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; socketURL = &lt;span class=&quot;string&quot;&gt;'http://localhost:5000'&lt;/span&gt;;
+
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; options = {
+  transports: [&lt;span class=&quot;string&quot;&gt;'websocket'&lt;/span&gt;],
+  &lt;span class=&quot;string&quot;&gt;'force new connection'&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+};
+
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; chatUser1 = {&lt;span class=&quot;string&quot;&gt;'name'&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;'Tom'&lt;/span&gt;};
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; chatUser2 = {&lt;span class=&quot;string&quot;&gt;'name'&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;'Sally'&lt;/span&gt;};
+&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; chatUser3 = {&lt;span class=&quot;string&quot;&gt;'name'&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;'Dana'&lt;/span&gt;};
+
+describe(&lt;span class=&quot;string&quot;&gt;'Testing The Chat Server'&lt;/span&gt;, () =&amp;gt; {
+
+  it(&lt;span class=&quot;string&quot;&gt;'Should broadcast new user once they connect'&lt;/span&gt;, (done) =&amp;gt; {
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; client = io.connect(socketURL, options);
+
+    client.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+      client.emit(&lt;span class=&quot;string&quot;&gt;'connection name'&lt;/span&gt;,chatUser1);
+    });
+
+    client.on(&lt;span class=&quot;string&quot;&gt;'new user'&lt;/span&gt;, (usersName) =&amp;gt; {
+      usersName.should.be.type(&lt;span class=&quot;string&quot;&gt;'string'&lt;/span&gt;);
+      usersName.should.equal(chatUser1.name + &lt;span class=&quot;string&quot;&gt;' has joined.'&lt;/span&gt;);
+      client.disconnect();
+      done();
+    });
+  });
+
+
+  it(&lt;span class=&quot;string&quot;&gt;'Should broadcast new user to all users'&lt;/span&gt;, (done) =&amp;gt; {
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; client1 = io.connect(socketURL, options);
+
+    client1.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+      client1.emit(&lt;span class=&quot;string&quot;&gt;'connection name'&lt;/span&gt;, chatUser1);
+      &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; client2 = io.connect(socketURL, options);
+
+      client2.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+        client2.emit(&lt;span class=&quot;string&quot;&gt;'connection name'&lt;/span&gt;, chatUser2);
+      });
+
+      client2.on(&lt;span class=&quot;string&quot;&gt;'new user'&lt;/span&gt;, (usersName) =&amp;gt; {
+        usersName.should.equal(chatUser2.name + &lt;span class=&quot;string&quot;&gt;' has joined.'&lt;/span&gt;);
+        client2.disconnect();
+      });
+
+    });
+
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; numberOfUsers = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+    client1.on(&lt;span class=&quot;string&quot;&gt;'new user'&lt;/span&gt;, (usersName) =&amp;gt; {
+      numberOfUsers += &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;
+
+      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(numberOfUsers === &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;){
+        usersName.should.equal(chatUser2.name + &lt;span class=&quot;string&quot;&gt;' has joined.'&lt;/span&gt;);
+        client1.disconnect();
+        done();
+      }
+    });
+  });
+
+  it(&lt;span class=&quot;string&quot;&gt;'Should be able to broadcast messages'&lt;/span&gt;, (done) =&amp;gt; {
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; client1, client2, client3;
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; message = &lt;span class=&quot;string&quot;&gt;'Hello World'&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; messages = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; checkMessage = (client) =&amp;gt; {
+      client.on(&lt;span class=&quot;string&quot;&gt;'message'&lt;/span&gt;, (msg) =&amp;gt; {
+        message.should.equal(msg);
+        client.disconnect();
+        messages++;
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(messages === &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;){
+          done();
+        };
+      });
+    };
+
+    client1 = io.connect(socketURL, options);
+    checkMessage(client1);
+
+    client1.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+      client2 = io.connect(socketURL, options);
+      checkMessage(client2);
+
+      client2.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+        client3 = io.connect(socketURL, options);
+        checkMessage(client3);
+
+        client3.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+          client2.send(message);
+        });
+      });
+    });
+  });
+
+
+  it(&lt;span class=&quot;string&quot;&gt;'Should be able to send private messages'&lt;/span&gt;, (done) =&amp;gt; {
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; client1, client2, client3;
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; message = {to: chatUser1.name, txt:&lt;span class=&quot;string&quot;&gt;'Private Hello World'&lt;/span&gt;};
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; messages = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; completeTest = () =&amp;gt; {
+      messages.should.equal(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);
+      client1.disconnect();
+      client2.disconnect();
+      client3.disconnect();
+      done();
+    };
+
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; checkPrivateMessage = (client) =&amp;gt; {
+      client.on(&lt;span class=&quot;string&quot;&gt;'private message'&lt;/span&gt;, (msg) =&amp;gt; {
+        message.txt.should.equal(msg.txt);
+        msg.from.should.equal(chatUser3.name);
+        messages++;
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(client === client1){
+          setTimeout(completeTest, &lt;span class=&quot;number&quot;&gt;40&lt;/span&gt;);
+        };
+      });
+    };
+
+    client1 = io.connect(socketURL, options);
+    checkPrivateMessage(client1);
+
+    client1.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+      client1.emit(&lt;span class=&quot;string&quot;&gt;'connection name'&lt;/span&gt;, chatUser1);
+      client2 = io.connect(socketURL, options);
+      checkPrivateMessage(client2);
+
+      client2.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+        client2.emit(&lt;span class=&quot;string&quot;&gt;'connection name'&lt;/span&gt;, chatUser2);
+        client3 = io.connect(socketURL, options);
+        checkPrivateMessage(client3);
+
+        client3.on(&lt;span class=&quot;string&quot;&gt;'connect'&lt;/span&gt;, (data) =&amp;gt; {
+          client3.emit(&lt;span class=&quot;string&quot;&gt;'connection name'&lt;/span&gt;, chatUser3);
+          client3.emit(&lt;span class=&quot;string&quot;&gt;'private message'&lt;/span&gt;, message)
+        });
+      });
+    });
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The requirements for this challenge are pretty straight forward.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You need to be able to connect with a single user.&lt;/li&gt;
+&lt;li&gt;You need to be able to connect two users or more.&lt;/li&gt;
+&lt;li&gt;A user should be able to send a message to a chatroom&lt;/li&gt;
+&lt;li&gt;A user should be able to send private messages to other users&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The tests can be copied form this page but I also setup &lt;a href=&quot;https://github.com/Daily-Javascript/WebSocket-Challenge&quot;&gt;a repo which you can fork&lt;/a&gt;
+Please deploy your server to &lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt;. You can create a free account here and follow &lt;a href=&quot;https://devcenter.heroku.com/articles/getting-started-with-nodejs&quot;&gt;a very simple tutorial&lt;/a&gt; if you are not familiar with how to deploy on Heroku.
+Submit the URL where your server is running to this &lt;a href=&quot;https://docs.google.com/forms/d/13RzwE7HJmLyv-UaxdJqq7PGQGp82xAk9HyTyNKVLmdw/viewform?c=0&amp;amp;w=1&quot;&gt;Google Form&lt;/a&gt; before Friday next week.&lt;/p&gt;
+&lt;p&gt;I hope you guys will find this more challenging then last week. Happy coding.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Deco</title>
+      <link>http://daily-javascript.com/articles/deco/</link>
+      <pubDate>Thu, 11 Feb 2016 01:00:00 +0100</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/deco/</guid>
+      <author></author>
+      <description>&lt;p&gt;I would like to start out with saying that this is &lt;strong&gt;not&lt;/strong&gt; sponsored content.
+When I came across this I was so amazed that needed to share it with you all.&lt;/p&gt;
+&lt;p&gt;Normally when you develop apps, you use an IDE. When targeting iOS you use xCode and when Android is your platform you are most likely using Android Studio.
+This becomes a real problem when switching context, between platform and technologies.
+Especially when you are building a &lt;a href=&quot;https://facebook.github.io/react-native/&quot;&gt;React Native&lt;/a&gt; app.
+&lt;a href=&quot;http://l.aunch.us/h2fyV&quot;&gt;Deco&lt;/a&gt; is a solution for that. Not only is it the first IDE to come out tailored to React Native, but it also come with a registry off React Native components. These components are standardized and work very nicely together with Deco.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=DmZEWOumVIE&quot;&gt;This is a video&lt;/a&gt; by one of the developer demonstrating some of the features included in the IDE by building an Uber clone in less than 5 minutes.&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/DmZEWOumVIE&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Sadly there is still a waitlist for the beta, I myself am still waiting to get access to it.
+Go to the website for more information and sign up for &lt;a href=&quot;http://l.aunch.us/h2fyV&quot;&gt;beta access&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Don’t forget to send in your submission for this &lt;a href=&quot;http://daily-javascript.com/challenges/tetris-bag/&quot;&gt;weeks challenge&lt;/a&gt; before tomorrow afternoon, otherwise it will not be in the weekly results.&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>React Native SMS Listener</title>
       <link>http://daily-javascript.com/articles/react-native-android-sms-listener/</link>
@@ -1183,9 +1712,9 @@ For more options and list of supported services check the &lt;a href=&quot;http:
     </item>
     <item>
       <title>iFrame Resizer</title>
-      <link>http://daily-javascript.com/articles/iframe-resizer/</link>
+      <link>http://daily-javascript.com/articles/iFrame-Resizer/</link>
       <pubDate>Mon, 07 Dec 2015 01:00:00 +0100</pubDate>
-      <guid isPermaLink="true">http://daily-javascript.com/articles/iframe-resizer/</guid>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/iFrame-Resizer/</guid>
       <author></author>
       <description>&lt;p&gt;iFrame Resizer (GitHub: &lt;a href=&quot;https://github.com/davidjbradshaw/iFrame-resizer&quot;&gt;davidjbradshaw/iFrame-resizer&lt;/a&gt;, License: MIT, npm: iframe-resizer)&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/davidjbradshaw&quot;&gt;David Bradshaw&lt;/a&gt; sent in iFrame-resizer. Which is a library to make working with the &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; tag a lot easier.
@@ -3202,90 +3731,6 @@ This weekend I will be trying to include this within this website so you will be
 </description>
     </item>
     <item>
-      <title>Clipboard.js</title>
-      <link>http://daily-javascript.com/articles/clipboardjs/</link>
-      <pubDate>Mon, 28 Sep 2015 02:00:00 +0200</pubDate>
-      <guid isPermaLink="true">http://daily-javascript.com/articles/clipboardjs/</guid>
-      <author></author>
-      <description>&lt;p&gt;After writing this blog for a few days now I noticed that the bar of two libraries a day is hard to do when you have a day job next to it.
-Because I want to give each library a fair shot, I will be reducing it to one library a day on workdays so I can work on updates for the website as well.&lt;/p&gt;
-&lt;p&gt;Clipboard.js (GitHub: &lt;a href=&quot;https://github.com/zenorocha/clipboard.js&quot;&gt;zenorocha/clipboard.js&lt;/a&gt;, License: MIT, npm: clipboard, bower: clipboard )&lt;/p&gt;
-&lt;p&gt;During my daily browse I came across Clipboard.js which is a library to put given content to the users clipboard from Javascript.
-Normally we are used to implementing this behavior using Flash or some bloated framework. Luckley now there is Clipboard.js which is an 2kb implementation of “Copy to clipboard”.&lt;/p&gt;
-&lt;p&gt;To use it we need to require it first. If you are using &lt;a href=&quot;http://browserify.org/&quot;&gt;Browersify&lt;/a&gt; or &lt;a href=&quot;https://webpack.github.io/&quot;&gt;Webpack&lt;/a&gt; then use:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; * &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; Clipboard &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'clipboard'&lt;/span&gt;;
-
-&lt;span class=&quot;comment&quot;&gt;// Or the old way&lt;/span&gt;
-&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; Clipboard = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'clipboard'&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When including it in your html do it like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;dist/clipboard.min.js&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now we can instantiate it using a DOM selector. For instance&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Clipboard(&lt;span class=&quot;string&quot;&gt;'.btn'&lt;/span&gt;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Internally, it needs to fetch all elements that match the selector and attach event listeners for each one. But what if you have hundreds of matches? Then this operation can consume a lot of memory.
-Because of this it uses event delegation which replaces multiple event listeners with just a single listener.&lt;/p&gt;
-&lt;p&gt;The most common usage of this library would be to copy the text value of an &lt;code&gt;input&lt;/code&gt; field or &lt;code&gt;textarea&lt;/code&gt;. This is how:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Target --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;foo&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;value&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;https://github.com/zenorocha/clipboard.js.git&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Trigger --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;btn&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;data-clipboard-target&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#foo&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;assets/clippy.svg&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;alt&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;Copy to clipboard&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It also has the ability to cut to clipboard. You would do this by attaching the &lt;code&gt;data-clipboard-action&lt;/code&gt; attribute to the trigger element like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Target --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;textarea&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;bar&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Mussum ipsum cacilds...&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;textarea&lt;/span&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Trigger --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;btn&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;data-clipboard-action&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;cut&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;data-clipboard-target&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#bar&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    Cut to clipboard
-&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When you find yourself in a situation where you would like to show some feedback to the user or capture what has been selected after a copy/cut operation, you can make use of the &lt;code&gt;success&lt;/code&gt; and &lt;code&gt;error&lt;/code&gt; events that are being sent. You would use that like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; clipboard = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Clipboard(&lt;span class=&quot;string&quot;&gt;'.btn'&lt;/span&gt;);
-
-clipboard.on(&lt;span class=&quot;string&quot;&gt;'success'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;{
-    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.info(&lt;span class=&quot;string&quot;&gt;'Action:'&lt;/span&gt;, e.action);
-    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.info(&lt;span class=&quot;string&quot;&gt;'Text:'&lt;/span&gt;, e.text);
-    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.info(&lt;span class=&quot;string&quot;&gt;'Trigger:'&lt;/span&gt;, e.trigger);
-
-    e.clearSelection();
-});
-
-clipboard.on(&lt;span class=&quot;string&quot;&gt;'error'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;{
-    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.error(&lt;span class=&quot;string&quot;&gt;'Action:'&lt;/span&gt;, e.action);
-    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.error(&lt;span class=&quot;string&quot;&gt;'Trigger:'&lt;/span&gt;, e.trigger);
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The browser support on this project superised me, it relies on both Selection and execCommand APIs. The second one is supported in the following browsers.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/chrome.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Chrome logo&quot;&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/firefox.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Firefox logo&quot;&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/ie.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Internet Explorer logo&quot;&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/opera.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Opera logo&quot;&gt;&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/safari.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Safari logo&quot;&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;42+ ✔&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;41+ ✔&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;9+ ✔&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;29+ ✔&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Nope ✘&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Although copy/cut operations with execCommand aren’t supported in Safari yet (including mobile), it gracefully degrades, because Selection is supported.&lt;/p&gt;
-&lt;p&gt;This means you could show a tooltip saying Copied! when success event is called and Press Ctrl+C to copy when error event is called because the text is already selected.&lt;/p&gt;
-</description>
-    </item>
-    <item>
       <title>Levi</title>
       <link>http://daily-javascript.com/articles/levi/</link>
       <pubDate>Mon, 28 Sep 2015 02:00:00 +0200</pubDate>
@@ -3392,6 +3837,90 @@ r.path(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is just a very basic example of what it can do. The full API docs shows the entire power of this “language”.&lt;/p&gt;
 &lt;p&gt;I can see this working very well for matching and parsing certain objects like the ones you would receive from, for instance, the Google spreadsheet API.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Clipboard.js</title>
+      <link>http://daily-javascript.com/articles/clipboardjs/</link>
+      <pubDate>Mon, 28 Sep 2015 02:00:00 +0200</pubDate>
+      <guid isPermaLink="true">http://daily-javascript.com/articles/clipboardjs/</guid>
+      <author></author>
+      <description>&lt;p&gt;After writing this blog for a few days now I noticed that the bar of two libraries a day is hard to do when you have a day job next to it.
+Because I want to give each library a fair shot, I will be reducing it to one library a day on workdays so I can work on updates for the website as well.&lt;/p&gt;
+&lt;p&gt;Clipboard.js (GitHub: &lt;a href=&quot;https://github.com/zenorocha/clipboard.js&quot;&gt;zenorocha/clipboard.js&lt;/a&gt;, License: MIT, npm: clipboard, bower: clipboard )&lt;/p&gt;
+&lt;p&gt;During my daily browse I came across Clipboard.js which is a library to put given content to the users clipboard from Javascript.
+Normally we are used to implementing this behavior using Flash or some bloated framework. Luckley now there is Clipboard.js which is an 2kb implementation of “Copy to clipboard”.&lt;/p&gt;
+&lt;p&gt;To use it we need to require it first. If you are using &lt;a href=&quot;http://browserify.org/&quot;&gt;Browersify&lt;/a&gt; or &lt;a href=&quot;https://webpack.github.io/&quot;&gt;Webpack&lt;/a&gt; then use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; * &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; Clipboard &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'clipboard'&lt;/span&gt;;
+
+&lt;span class=&quot;comment&quot;&gt;// Or the old way&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; Clipboard = &lt;span class=&quot;built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'clipboard'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When including it in your html do it like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;dist/clipboard.min.js&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can instantiate it using a DOM selector. For instance&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Clipboard(&lt;span class=&quot;string&quot;&gt;'.btn'&lt;/span&gt;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Internally, it needs to fetch all elements that match the selector and attach event listeners for each one. But what if you have hundreds of matches? Then this operation can consume a lot of memory.
+Because of this it uses event delegation which replaces multiple event listeners with just a single listener.&lt;/p&gt;
+&lt;p&gt;The most common usage of this library would be to copy the text value of an &lt;code&gt;input&lt;/code&gt; field or &lt;code&gt;textarea&lt;/code&gt;. This is how:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Target --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;foo&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;value&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;https://github.com/zenorocha/clipboard.js.git&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Trigger --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;btn&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;data-clipboard-target&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#foo&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;assets/clippy.svg&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;alt&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;Copy to clipboard&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It also has the ability to cut to clipboard. You would do this by attaching the &lt;code&gt;data-clipboard-action&lt;/code&gt; attribute to the trigger element like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Target --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;textarea&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;bar&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Mussum ipsum cacilds...&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;textarea&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Trigger --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;btn&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;data-clipboard-action&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;cut&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;data-clipboard-target&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#bar&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    Cut to clipboard
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you find yourself in a situation where you would like to show some feedback to the user or capture what has been selected after a copy/cut operation, you can make use of the &lt;code&gt;success&lt;/code&gt; and &lt;code&gt;error&lt;/code&gt; events that are being sent. You would use that like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; clipboard = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Clipboard(&lt;span class=&quot;string&quot;&gt;'.btn'&lt;/span&gt;);
+
+clipboard.on(&lt;span class=&quot;string&quot;&gt;'success'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;{
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.info(&lt;span class=&quot;string&quot;&gt;'Action:'&lt;/span&gt;, e.action);
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.info(&lt;span class=&quot;string&quot;&gt;'Text:'&lt;/span&gt;, e.text);
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.info(&lt;span class=&quot;string&quot;&gt;'Trigger:'&lt;/span&gt;, e.trigger);
+
+    e.clearSelection();
+});
+
+clipboard.on(&lt;span class=&quot;string&quot;&gt;'error'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;{
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.error(&lt;span class=&quot;string&quot;&gt;'Action:'&lt;/span&gt;, e.action);
+    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.error(&lt;span class=&quot;string&quot;&gt;'Trigger:'&lt;/span&gt;, e.trigger);
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The browser support on this project superised me, it relies on both Selection and execCommand APIs. The second one is supported in the following browsers.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/chrome.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Chrome logo&quot;&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/firefox.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Firefox logo&quot;&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/ie.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Internet Explorer logo&quot;&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/opera.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Opera logo&quot;&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;http://zenorocha.github.io/clipboard.js/assets/images/safari.png&quot; style=&quot;width:auto; left: auto;&quot; width=&quot;48px&quot; height=&quot;48px&quot; alt=&quot;Safari logo&quot;&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;42+ ✔&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;41+ ✔&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;9+ ✔&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;29+ ✔&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Nope ✘&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Although copy/cut operations with execCommand aren’t supported in Safari yet (including mobile), it gracefully degrades, because Selection is supported.&lt;/p&gt;
+&lt;p&gt;This means you could show a tooltip saying Copied! when success event is called and Press Ctrl+C to copy when error event is called because the text is already selected.&lt;/p&gt;
 </description>
     </item>
     <item>

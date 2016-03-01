@@ -36,182 +36,249 @@
       <div class="content-wrap">
         <article class="article intro">
           <header>
-            <p class="date"><span>10. February 2016</span></p>
-            <h2><a href="/articles/react-native-android-sms-listener/">React Native SMS Listener</a></h2>
+            <p class="date"><span>01. March 2016</span></p>
+            <h2><a href="/articles/react-web-animations/">React Web Animations</a></h2>
           </header>
-          <section class="content"><p>SmsListener (GitHub: <a href="https://github.com/CentaurWarchief/react-native-android-sms-listener">CentaurWarchief/react-native-android-sms-listener</a>, License: <span class="caps">MIT</span>, npm:&nbsp;react-native-android-sms-listener)</p>
-<p>When you are building an app which requires some form of account validation like Whats App and Telegram using React Native.
-There is gonna be a moment that you want to verify on bases of a text message.
-CentaurWarchief has created a module so you don’t need to worry about listening for incoming&nbsp;texts.</p>
-<p>If works pretty straight forward, you attach an event listener and respond to incoming events like&nbsp;so:</p>
-<pre><code class="lang-javascript"><span class="keyword">import</span> SmsListener <span class="keyword">from</span> <span class="string">'react-native-android-sms-listener'</span>
+          <section class="content"><p>react-web-animations (GitHub: <a href="https://github.com/RinconStrategies/react-web-animation">RinconStrategies/react-web-animation</a>, License: <span class="caps">MIT</span>, npm:&nbsp;react-web-animation)</p>
+<p>In every web application we are animating stuff nowadays. We do this using libraries like <a href="http://julian.com/research/velocity/">Velocity</a>, <a href="https://greensock.com/">Greensock</a>, <a href="https://jquery.com/">jQuery</a> or we do this with keyframe animating and appending classes to trigger the animations.
+If you haven’t heard about the <a href="https://w3c.github.io/web-animations/">Web animation spec</a>, it is an <span class="caps">API</span> to animate elements without any libraries.
+There is already a <a href="https://github.com/web-animations/web-animations-js">Polyfill</a> available. So you can start using it&nbsp;today.</p>
+<p>Now I came across a library which implements this polyfill as a React component called <code>react-web-animations</code>.
+Why use this over other animation libraries for React? Since react-web-animation uses the Web Animations <span class="caps">API</span> polyfill it will eventually use the native browser implementation.
+Chrome already has the support for these features today. The rest of the browsers how ever are a bit sad, luckily the polyfill takes care of that for&nbsp;us.</p>
+<p>A simple example of how you would use the <code>Animation</code> component would look like&nbsp;this:</p>
+<pre><code class="lang-javascript"><span class="keyword">import</span> {Component} <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> {Animation} <span class="keyword">from</span> <span class="string">'react-web-animation'</span>;
 
-const mySubScription = SmsListener.addListener(myMessageHandler);
 
-<span class="function"><span class="keyword">function</span> <span class="title">myMessageHandler</span>(<span class="params">message</span>)</span>{
-    <span class="built_in">console</span>.log(message);
+<span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Basic</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>{
+
+    getKeyFrames() {
+        <span class="keyword">return</span> [
+            { transform: <span class="string">'scale(1)'</span>,    opacity: <span class="number">1</span>,     offset: <span class="number">0</span> },
+            { transform: <span class="string">'scale(.5)'</span>,   opacity: <span class="number">0.5</span>,   offset: <span class="number">0.3</span> },
+            { transform: <span class="string">'scale(.667)'</span>, opacity: <span class="number">0.667</span>, offset: <span class="number">0.7875</span> },
+            { transform: <span class="string">'scale(.6)'</span>,   opacity: <span class="number">0.6</span>,   offset: <span class="number">1</span> }
+        ];
+    }
+
+    getTiming( duration ) {
+        <span class="keyword">return</span> {
+            duration,
+            easing: <span class="string">'ease-in-out'</span>,
+            delay: <span class="number">0</span>,
+            iterations: <span class="number">2</span>,
+            direction: <span class="string">'alternate'</span>,
+            fill: <span class="string">'forwards'</span>
+        };
+    }
+
+    render() {
+        <span class="keyword">return</span>(
+            <span class="xml"><span class="tag">&lt;<span class="title">Animation</span> <span class="attribute">keyframes</span>=<span class="value">{this.getKeyFrames()}</span>
+                       <span class="attribute">timing</span>=<span class="value">{this.getTiming(2500)}</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span>
+                    Web Animations <span class="caps">API</span> Rocks
+                <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+            <span class="tag">&lt;/<span class="title">Animation</span>&gt;</span>)</span>;
+    }
 }
 </code></pre>
-<p>This should not be unfamiliar.
-In contrast with the event listener <span class="caps">API</span> which get’s provided by the DOM, removing event listener works&nbsp;differently.</p>
-<pre><code class="lang-javascript">mySubScription.remove()
-</code></pre>
-<p>This is an example provided by the developer which demonstrates how to do authorization in the same manner as Whats App or Telegram do&nbsp;it:</p>
-<pre><code class="lang-javascript"><span class="keyword">let</span> subscription = SmsListener.addListener(message =&gt; {
-  <span class="keyword">let</span> verificationCodeRegex = <span class="regexp">/Your verification code: ([\d]{6})/</span>;
-
-  <span class="keyword">if</span> (verificationCodeRegex.test(message.body)) {
-    <span class="keyword">let</span> verificationCode = message.body.match(verificationCodeRegex)[<span class="number">1</span>];
-
-    YourPhoneVerificationApi.verifyPhoneNumber(
-      message.originatingAddress,
-      verificationCode
-    ).then(verifiedSuccessfully =&gt; {
-      <span class="keyword">if</span> (verifiedSuccessfully) {
-        subscription.remove();
-        <span class="keyword">return</span>;
-      }
-
-      <span class="keyword">if</span> (__DEV__) {
-        <span class="built_in">console</span>.info(
-          <span class="string">'Failed to verify phone `%s` using code `%s`'</span>,
-          message.originatingAddress,
-          verificationCode
-        );
-      }
-  });
-  }
-});
-</code></pre>
-<p>Sadly it only has support for Android at this point, hopefully somebody will implement the same for iOS.
-For more <span class="caps">API</span> reference check the <a href="https://github.com/CentaurWarchief/react-native-android-sms-listener"><span class="caps">README</span></a> and don’t forget to <a href="http://daily-javascript.com/challenges/tetris-bag/">challenge yourself trying to duplicate the randomization algorithm used by&nbsp;Tetris</a></p>
+<p>For advanced usage you need to check the <a href="https://github.com/RinconStrategies/react-web-animation/tree/master/src">great documentation</a> which the developer has&nbsp;provided.</p>
+<p>A small side&nbsp;note.</p>
+<p>Since I haven’t received any submissions for the weekly challenges, I have decided to focus on finding great libraries for you guys instead of trying to come up with new challenges to do.
+Thanks to the people who did participate, when you still want to be challenged I would suggest you take a look at <a href="https://www.reddit.com/r/dailyprogrammer">/r/DailyProgrammer</a>, <a href="http://codegolf.stackexchange.com/">Code Golf</a> or <a href="https://www.hackerrank.com/">HackerRank</a>.</p>
 
           </section>
         </article>
         <article class="article intro">
           <header>
-            <p class="date"><span>09. February 2016</span></p>
-            <h2><a href="/articles/jhaml/">jHaml</a></h2>
+            <p class="date"><span>24. February 2016</span></p>
+            <h2><a href="/articles/cash/">Cash</a></h2>
           </header>
-          <section class="content"><p>jHaml (GitHub: <a href="https://github.com/soyuka/jhaml">soyuka/jhaml</a>, License: <span class="caps">MIT</span>, npm:&nbsp;@soyuka/jhaml)</p>
-<p>jHaml is a Javascript implementation of the <a href="http://haml.info/">Haml</a> templating engine which was originally written in Ruby.
-When I was still doing a lot of Rails I first got introduced to Haml. I was able to change <code>erb</code> like&nbsp;this:</p>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">section</span> <span class="attribute">class</span>=<span class="value">”container”</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">h1</span>&gt;</span><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">post.title</span> %&gt;</span><span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">h2</span>&gt;</span><span class="tag">&lt;<span class="title">%=</span> <span class="attribute">post.subtitle</span> %&gt;</span><span class="tag">&lt;/<span class="title">h2</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">”content”</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">%=</span> <span class="attribute">post.content</span> %&gt;</span>
-  <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">section</span>&gt;</span>
-</code></pre>
-<p>Into:</p>
-<pre><code class="lang-haml"><span class="tag">%<span class="title">section</span><span class="value">.container</span></span>
-<span class="tag">  %<span class="title">h1</span></span>= post.title
-<span class="tag">  %<span class="title">h2</span></span>= post.subtitle
-  .content
-    =<span class="ruby"> post.content</span>
-</code></pre>
-<p>Now we use do the same for our Javascript applications. After searching a bit I noticed that there are a few implementations of this already.
-The reason why I like this library is that it’s based on streams and because of this it has great support for build tooling <a href="http://gulpjs.com/">Gulp</a>, which is also stream based.
-There also is a <a href="https://github.com/soyuka/jhaml/blob/master/test/express.js">nice example</a> of how to use it in frameworks like <a href="http://expressjs.com/">Express</a></p>
-<p>For more details and documentation check the <a href="https://github.com/soyuka/jhaml"><span class="caps">README</span></a> which thoroughly explains how it works and how to use&nbsp;it.</p>
-<p>Don’t forget the submit <a href="http://daily-javascript.com/challenges/tetris-bag/">this weeks challenge</a> before Friday on when I will post the&nbsp;results.</p>
-
-          </section>
-        </article>
-        <article class="article intro">
-          <header>
-            <p class="date"><span>08. February 2016</span></p>
-            <h2><a href="/articles/javascript-by-example/">Javascript by Example</a></h2>
-          </header>
-          <section class="content"><p>Javascript by Example (GitHub: <a href="https://github.com/bmkmanoj/js-by-examples">bmkmanoj/js-by-examples</a>, License:&nbsp;<span class="caps">MIT</span>)</p>
-<p>Manoj Kumar sent in Javascript by Example which is a GitHub repo which explains “nitty gritties” of Javascript by showing code snippets with some&nbsp;description.</p>
-<p>Currently there is no particular order in how you should read it. Some of the concepts already explained are: closures, operators, bind, call, apply, function scope, hoisting and many&nbsp;more.</p>
-<p>One of the first things the authors want to make clear is that this is <strong>not</strong> a replacement for conventional learning by books, blogs and countless experimentations, but rather an additional resource to the existing set of learning&nbsp;paths.</p>
-<p>This project started as a bit of in house documentation of curtain “lesser known” concepts in Javascript. After realizing the rest of the community could benefit from this as well, it was put on&nbsp;Github.</p>
-<p>For more information and a short brief on how you can contribute to this project checkout the <a href="https://github.com/bmkmanoj/js-by-examples"><span class="caps">README</span></a>.</p>
-<p>Don’t forget to submit this weeks challenge: <a href="http://daily-javascript.com/challenges/tetris-bag/">“Tetris Bag”</a> where you need to implement the same randomization algorithm as used in the popular nineties game&nbsp;Tetris.</p>
-
-          </section>
-        </article>
-        <article class="article intro">
-          <header>
-            <p class="date"><span>05. February 2016</span></p>
-            <h2><a href="/articles/weekly-challenge-2016-05/">Weekly Challenge - Tetris bag</a></h2>
-          </header>
-          <section class="content"><p><img style="width: 100%; display:block;" src="http://daily-javascript.com/challenges/tetris-bag/header.jpg" ></p>
-<p>Since I did not get any submissions for the Workshopper Challenge I will make this challenge a lot more technical, so you guys will actually feel challenged. Since all of you are probably nineteens kids, you all know Tetris.
-It is a popular belief that the “tetromino” pieces you are given in a game of Tetris are not randomly selected.
-What really happens is that all seven pieces are placed into a “bag”. A piece is randomly removed from the bag and presented to the player. This process is repeated until the bag is&nbsp;empty.</p>
-<p>Your challenge is to reproduce this.
-For the first part of this challenge you will only need to focus on the algorithm of randomly removing elements from the bag and filling it once it’s empty.
-There is one limitation: Repetition of pieces will not be more then twice the same.
-So you can get twice the same piece but never 3 times the&nbsp;same.</p>
-<p>For now you can make the output just <code>log</code> the piece which needs to be dropped, next week we will explore the Tetris game some more.
-Output a string signifying 50 tetromino pieces given to the player using the random bag system. This will be printed on a single line.
-Some code to get you started can be found inside <a href="http://codepen.io/DailyJavascript/pen/bEmqpK">this codepen</a>.</p>
-<p>The pieces will be represented by letters for&nbsp;now:</p>
+          <section class="content"><p>Cash (GitHub: <a href="https://github.com/dthree/cash">dthree/cash</a>, License: <span class="caps">MIT</span>, npm:&nbsp;cash)</p>
+<p><img src="https://camo.githubusercontent.com/31404520899c0f1fd55308746fa804a8bc89e4e3/687474703a2f2f692e67697068792e636f6d2f785430424b4e7755504668466a32676c72792e676966" style="max-width: 756px; width: 100%;"></p>
+<p>Cash is a project to implement most used Unix-based commands in pure Javascript and with no external dependencies.
+The reason for this is to make them available cross platform.
+So if you find yourself stuck on using Windows because your business used it, you can just <code>npm i cash -g; cash</code> and be back in Unix&nbsp;land.</p>
+<p>The developer’s goal is to expose to the Javascript community to these commands, and to provide a cleaner, simpler and flexible alternative to applications like Cygwin for those wanting the Linux feel on&nbsp;Windows.</p>
+<p>While writing this the project supports the following&nbsp;commands:</p>
 <ul>
-<li>O</li>
-<li>I</li>
-<li>S</li>
-<li>Z</li>
-<li>L</li>
-<li>J</li>
-<li>T</li>
+<li>alias</li>
+<li>cat</li>
+<li>cd</li>
+<li>cp</li>
+<li>echo</li>
+<li>grep</li>
+<li>kill</li>
+<li>less</li>
+<li>ls</li>
+<li>mkdir</li>
+<li>mv</li>
+<li>pwd</li>
+<li>rm</li>
+<li>sort</li>
+<li>touch</li>
+<li>unalias</li>
 </ul>
-<p data-height="460" data-theme-id="21361" data-slug-hash="bEmqpK" data-default-tab="result" data-user="DailyJavascript" class='codepen'>See the Pen <a href='http://codepen.io/DailyJavascript/pen/bEmqpK/'>bEmqpK</a> by DailyJavascript (<a href='http://codepen.io/DailyJavascript'>@DailyJavascript</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-
-<p>Submissions can be sent to this <a href="http://goo.gl/forms/yBEvtgrO4K">Google Form.</a>.</p>
-<p>Don’t forget to submit before next&nbsp;Friday.</p>
-<p>Happy&nbsp;coding.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<p>For additional commands the developer has decided to let the community decide.
+You can vote on new commands in the <a href="https://github.com/dthree/cash/wiki/Roadmap">Road map</a>.</p>
+<p>For more information on check out the <a href="https://github.com/dthree/cash">Github Project</a> where the developer has also posted a <a href="https://github.com/dthree/cash/wiki">wiki</a>.</p>
+<p>Don’t forget to submit you solution for the <a href="http://daily-javascript.com/challenges/websocket-challenge-part-two">Websocket Challenge - part two</a>, since there are only two days left before submission&nbsp;closes.</p>
 
           </section>
         </article>
         <article class="article intro">
           <header>
-            <p class="date"><span>04. February 2016</span></p>
-            <h2><a href="/articles/samsarajs/">SamsaraJS</a></h2>
+            <p class="date"><span>23. February 2016</span></p>
+            <h2><a href="/articles/pointing-fingers/">Pointing Fingers</a></h2>
           </header>
-          <section class="content"><p>SamsaraJS (GitHub: <a href="https://github.com/dmvaldman/samsara">dmvaldman/samsara</a>, License: <span class="caps">MIT</span>, npm:&nbsp;samsarajs)</p>
-<p>SamsaraJS is a functional reactive library for animating layout.
-It tries to provides a language for positioning, orienting and sizing <span class="caps">DOM</span> elements, and animating those properties over time.
-Everything within Samsara is based on streams. This means that can subscribe to for instance the user input and preform curtain actions when the input occurs. By&nbsp;example:</p>
-<pre><code class="lang-javascript"><span class="keyword">const</span> Surface = Samsara.<span class="caps">DOM</span>.Surface;
-<span class="keyword">const</span> Context = Samsara.<span class="caps">DOM</span>.Context;
-<span class="keyword">const</span> Transform = Samsara.Core.Transform;
-<span class="keyword">const</span> MouseInput = Samsara.Inputs.MouseInput;
+          <section class="content"><p>pointing-fingers (GitHub: <a href="https://github.com/jareware/pointing-fingers">jareware/pointing-fingers</a>, License: <span class="caps">MIT</span>, npm:&nbsp;pointing-fingers)</p>
+<p>A interest of mine is testing. Sadly there are not that many changes in the Javascript community in the field of testing.
+But then I found <code>pointing-fingers</code> over the weekend, which is a tool for testing upstream <span class="caps">API</span>’s.
+Since “Software doesn’t exist in a vacuum” we need to take unexpected API changes into account.
+But thoroughly testing third party API’s is of course not what we want to do.
+This tool offers you a sensible middle ground, and a convenient workflow&nbsp;for:</p>
+<ul>
+<li>Documenting the upstream <span class="caps">API</span> format, as not all API’s are perfectly&nbsp;documented</li>
+<li>Versioning that documentation, as <span class="caps">API</span>’s tend to change over&nbsp;time</li>
+<li>Automatically alerting you to <span class="caps">API</span> changes, as sometimes upstream vendors&nbsp;won’t</li>
+<li>Explicitly accepting those <span class="caps">API</span> changes, as your app will likely need to be changed&nbsp;accordingly</li>
+</ul>
+<p>An example test with all the optional options using Mocha and Chai’s <code>assert</code>:</p>
+<pre><code class="lang-javascript"><span class="keyword">import</span> { assert } <span class="keyword">from</span> <span class="string">'chai'</span>;
+<span class="keyword">import</span> { testUpstreamChanges } <span class="keyword">from</span> <span class="string">'pointing-fingers'</span>;
 
-<span class="keyword">const</span> surface = <span class="keyword">new</span> Surface({
-    content: <span class="string">'drag me'</span>,
-    size: [<span class="number">100</span>,<span class="number">100</span>],
-    properties : {
-        background : <span class="string">'#<span class="caps">FF0000</span>'</span>
-    }
+describe(<span class="string">'GitHub <span class="caps">API</span>'</span>, () =&gt; {
+  testUpstreamChanges({
+    learn: <span class="literal">false</span>, <span class="comment">// turn this on to update your fixtures (defaults to false)</span>
+    fixtures: <span class="string">'test/fixtures/'</span>, <span class="comment">// fixtures will be written here (defaults to "/dev/null")</span>
+    runner: it, <span class="comment">// run each test in a separate Mocha it() block (defaults to running everything together)</span>
+    assert: assert.deepEqual, <span class="comment">// which assert(actual, expected) to use (defaults to simple string comparison)</span>
+    placeholder: <span class="string">'(<span class="caps">IGNORED</span> IN TEST SUITE)'</span>, <span class="comment">// ignored fields are replaced with this (defaults to null)</span>
+    ignores: [ <span class="comment">// these are simply delegated to lodash's _.set() (defaults to [])</span>
+      <span class="string">'data.documentation_url'</span>, <span class="comment">// we don't care if the doc <span class="caps">URL</span> changes, so ignore that field</span>
+      <span class="string">'headers.content-length'</span>, <span class="comment">// this could also change spontaneously, and we're not interested</span>
+      <span class="string">'headers.date'</span> <span class="comment">// ^ ditto</span>
+    ],
+    transforms: [ <span class="comment">// these are invoked with the response object to allow arbitrary checks/ignores (defaults to [])</span>
+      res =&gt; res.status = (res.status &gt;= <span class="number">400</span> &amp;&amp; res.status &lt; <span class="number">500</span>) <span class="comment">// ensure it's 4xx, but tolerate small changes</span>
+      <span class="comment">/*
+      // transforms which throw an Error are ignored, so it's safe to traverse/iterate complex objects without
+      // littering the transform function with key existence checks. also, the res object is always an isolated
+      // clone, so in-place mutation is fine.
+      res =&gt; res.data.Teams.forEach(x =&gt; x.TeamRankingPoints = isNumber(x.TeamRankingPoints)),
+      */</span>
+    ],
+    headers: { <span class="comment">// these are attached to outgoing requests (defaults to {})</span>
+      <span class="string">'X-Api-Key'</span>: process.env.MY_SECRET_KEY
+    },
+    method: <span class="string">'<span class="caps">GET</span>'</span>, <span class="comment">// (defaults to "<span class="caps">GET</span>")</span>
+    base: <span class="string">'https://api.github.com'</span>, <span class="comment">// all <span class="caps">URL'</span>s are prefixed with this (defaults to "")</span>
+    urls: [ <span class="comment">// these are the actual <span class="caps">URL'</span>s that will be tested (defaults to [])</span>
+      <span class="string">'/user'</span> <span class="comment">// the <span class="caps">URL'</span>s can be listed as simple strings</span>
+      <span class="comment">/*
+      { // ...but also as objects
+        url: '/something-else',
+        headers: { // all options (ignores, transforms, etc) can be overridden per-<span class="caps">URL</span>
+          'X-Api-Key': 'some other key'
+        }
+      }
+      */</span>
+    ]
+  });
+});
+</code></pre>
+<p>Head over to the challenge page of <a href="http://daily-javascript.com/challenges/websocket-challenge-part-two/">Websocket Challenge - part two</a> and see what you need to do in order to make on to this weeks Hall of&nbsp;Hero’s.</p>
+
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
+            <p class="date"><span>22. February 2016</span></p>
+            <h2><a href="/articles/realm-react-native/">Realm React Native</a></h2>
+          </header>
+          <section class="content"><p>Realm (GitHub: <a href="https://github.com/realm/realm-js">realm/realm-js</a>, License: Apache-2.0, npm:&nbsp;realm)</p>
+<p>Today at Facebook’s React.js Conference, The Realm team launched a new Realm mobile database designed for React Native.
+This database should offers easy object persistence and full query capabilities.
+The performance profile is usually 2–10x faster than existing options such as SQLite and&nbsp;CoreData.</p>
+<p>When you are not familiar with Realm then you don’t know that, it was designed from the ground up to enable reactive app development.
+This is possible via live objects, change events, and support for <a href="https://realm.io/news/unidirectional-data-flow-in-swift/">unidirectional data flows</a>.</p>
+<p>By&nbsp;example:</p>
+<pre><code class="lang-javascript"><span class="keyword">const</span> Realm = <span class="built_in">require</span>(<span class="string">'realm'</span>);
+
+<span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>{}
+Person.schema = {
+    name: <span class="string">'Person'</span>,
+    primaryKey: <span class="string">'name'</span>,
+    properties: {
+        name: <span class="string">'string'</span>,
+        age: {type: <span class="string">'int'</span>, <span class="keyword">default</span>: <span class="number">0</span>},
+    },
+};
+
+<span class="keyword">const</span> realm = <span class="keyword">new</span> Realm({schema: [Person]});
+
+<span class="comment">// Query</span>
+<span class="keyword">let</span> people = realm.objects(<span class="string">'Person'</span>, <span class="string">'age &gt;= 17'</span>);
+people.length <span class="comment">// =&gt; 0</span>
+
+<span class="comment">// Write</span>
+realm.write(() =&gt; {
+    savedPerson = realm.create(<span class="string">'Person'</span>, {
+        name: <span class="string">'Hal Incandenza'</span>,
+        age: <span class="number">17</span>,
+    });
 });
 
-<span class="keyword">const</span> mouse = <span class="keyword">new</span> MouseInput();
-
-<span class="comment">// The mouse now listens to the <span class="caps">DOM</span> events originating from the surface</span>
-mouse.subscribe(surface);
-
-<span class="comment">// Map the mouse data to a translation</span>
-<span class="keyword">const</span> transform = mouse.map(data =&gt; Transform.translate(data.cumulate));
-
-<span class="keyword">const</span> context = <span class="keyword">new</span> Context();
-context.add({transform : transform}).add(surface);
-context.mount(<span class="built_in">document</span>.querySelector(<span class="string">'#myAwesomeApp'</span>));
+<span class="comment">// Queries are updated in real-time</span>
+people.length <span class="comment">// =&gt; 1</span>
 </code></pre>
-<p>A great thing about SamsaraJS is that it does not have any opinion about content. It’s only responsibility is&nbsp;presentation.</p>
+<p>For more information and full documentation check the <a href="https://realm.io/">Realm website</a> where the developer have posted a lot of amazing examples to help you get&nbsp;started.</p>
+<p>Don’t forget to check out the challenge section. <a href="http://http://daily-javascript.com/challenges/websocket-challenge-part-two">This weeks challenge</a> extends on last weeks challenge so if you didn’t do that challenge you have some catching up to do. If you have great ideas for next challenges please reach out to me on twitter <a href="http://twitter.com/DailyJavascript">@DailyJavascript</a>.</p>
+
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
+            <p class="date"><span>19. February 2016</span></p>
+            <h2><a href="/articles/weekly-challenge-2016-08/">Weekly Challenge - WebSocket Challenge part two</a></h2>
+          </header>
+          <section class="content"><p><img style="width: 100%; display:block;" src="http://daily-javascript.com/challenges/websocket-challenge/header.png" ></p>
+<p>This week I only got one submission and sadly that did not past the test.
+This probably has nothing to do with the code but with the way I tried to run the project. So I’d like to ask you to include a small readme when submitting a repository.
+Check out the efforts Pablo Osso did this week trying to make the tests pass on the <a href="http://daily-javascript.com/challenges/websocket-challenge/results">Results page</a>.</p>
+<p>For the second part of this challenge series we are going to implement the basic <span class="caps">UI</span> to go with the server which we created in the last challenge.
+If you did not complete last <a href="http://daily-javascript.com/challenges/websocket-challenge">weeks challenge</a> you can find the <a href="https://github.com/Daily-Javascript/WebSocket-Challenge">unit test in this repo</a> but you will have some catching up to do.
+The User interface should include all the test scenario’s.
+This means that you need to build page on which a user&nbsp;can:</p>
+<ul>
+<li>Pick a&nbsp;username</li>
+<li>See when a new user has&nbsp;joined</li>
+<li>Send messages to the whole&nbsp;group</li>
+<li>Send private messages between another&nbsp;user</li>
+</ul>
+<p>After getting some feedback on the challenges I will use a point system to rank the results.
+I do not think it is my place to criticize anybody on their ability to code, that is why you can earn points by completing curtain aspects of the challenge. For this challenge it will be features working.
+Each of the features completed and running on <a href="https://www.heroku.com/">Heroku</a> is worth one point.
+When you want to earn more points you could add more features such&nbsp;as:</p>
+<ul>
+<li>List the online&nbsp;users</li>
+<li>Avatars</li>
+<li>Channels instead of one big&nbsp;group</li>
+<li>Private groups within a&nbsp;channel</li>
+<li>Implementing magic links<ul>
+<li>Youtube embed&nbsp;video</li>
+<li>Images</li>
+<li>Website&nbsp;description</li>
+</ul>
+</li>
+</ul>
+<p>Once again completed challenges can be submitted to this <a href="http://goo.gl/forms/D8waO3FuFT">Google Form</a>.
+When you submit before Friday next week your implementation will be featured in the weekly results which will be called Hall of Hero’s from now&nbsp;on.</p>
 <blockquote>
-<p>It moves rectangles around the screen — what you do inside those rectangles is up to&nbsp;you.</p>
+<p>Tip: You don’t have to make the user interface for the web. You can make it run in terminal for&nbsp;instance.</p>
 </blockquote>
-<p>A sad thing about this library is that it does require a <span class="caps">CSS</span> sheet to be loaded, which can be found <code>node_modules/samsarajs/dist/samsara.css</code>.</p>
-<p>The developer has posted some really amazing examples on <a href="http://www.samsarajs.org/">samsarajs.org</a> which you should definitely check out.
-Besides the amazing demo’s you can also find very expensive documentation about the <span class="caps">API</span> and some real helpful&nbsp;guides.</p>
-<p>This is by far <a href="http://samsarajs.org/demos/ParallaxCats/index.html">my favorite&nbsp;demo</a></p>
-<iframe src="http://samsarajs.org/demos/ParallaxCats/index.html" width="100%" height="480px"></iframe>
 
           </section>
         </article>
